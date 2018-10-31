@@ -128,9 +128,16 @@ if($_POST) // Add && edit
 
             $path = "../onlinegames/".$folder_name;
             @mkdir($path);
+//            chmod("../onlinegames",0755);
+//            echo substr(sprintf('%o', fileperms("../onlinegames")), -4)."<br />";
+//            chmod($path,0755);
+//            echo substr(sprintf('%o', fileperms($path)), -4)."<br />";
 
             if(move_uploaded_file($source, $path."/".$filename))
             {
+//                chmod($path.'/'.$filename, octdec(755));
+//                echo $path.'/'.$filename." - ".substr(sprintf('%o', fileperms($path.'/'.$filename)), -4);
+
                 $zip = new ZipArchive();
                 $x = $zip->open($path."/".$filename);
                 if ($x === true)
