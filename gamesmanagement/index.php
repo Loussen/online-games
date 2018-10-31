@@ -28,12 +28,12 @@ if($checkboxes!=''){
 	elseif($active>0){
 		if($active==2) $active=0; else $active=1;
 		if($do=='mehsullar' && $active==1){
-			$sql=mysqli_query($db,"select id,xeber_id from sekiller2 where xeber_id in (".$checkboxes.") and aktivlik=1 ");
+			$sql=mysqli_query($db,"select id,xeber_id from sekiller2 where xeber_id in (".$checkboxes.") and active=1 ");
 			while($row=mysqli_fetch_assoc($sql)){
-				mysqli_query($db,"update $do set aktivlik='$active' where auto_id='$row[xeber_id]' ");
+				mysqli_query($db,"update $do set active='$active' where auto_id='$row[xeber_id]' ");
 			}
 		}
-		else mysqli_query($db,"update $do set aktivlik='$active' where $column in (".$checkboxes.") ");
+		else mysqli_query($db,"update $do set active='$active' where $column in (".$checkboxes.") ");
 	}
 }
 ?>

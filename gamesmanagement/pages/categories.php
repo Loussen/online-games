@@ -44,7 +44,7 @@ if($_POST) // Add && edit
     {
         $name="name_".$row["id"]; $name=mysqli_real_escape_string($db,htmlspecialchars($$name));
 
-        if($name=='' && $row["id"]!=$main_lang) {$c='name'; $$c=get_lang_val($do,$auto_id,$c);}
+//        if($name=='' && $row["id"]!=$main_lang) {$c='name'; $$c=get_lang_val($do,$auto_id,$c);}
 
         $time = time();
 
@@ -76,7 +76,7 @@ if($delete>0 && mysqli_num_rows(mysqli_query($db,"select id from $do where auto_
         $order_update.=" when auto_id='$row[auto_id]' then '$new_order' ";
         $new_order++;
     }
-    $query_update="update $do set sira=case".$order_update."else sira end;";
+    $query_update="update $do set order_number=case".$order_update."else order_number end;";
     if($order_update!='') mysqli_query($db,$query_update);
 }
 elseif($up>0 && mysqli_num_rows(mysqli_query($db,"select id from $do where auto_id='$up' "))>0)
@@ -88,7 +88,7 @@ elseif($up>0 && mysqli_num_rows(mysqli_query($db,"select id from $do where auto_
     {
         $previous_order=$current_order-1;
         mysqli_query($db,"update $do set order_number='-1' where order_number='$previous_order'");
-        mysqli_query($db,"update $do set order_number='$previous_order' where sira='$current_order'");
+        mysqli_query($db,"update $do set order_number='$previous_order' where order_number='$current_order'");
         mysqli_query($db,"update $do set order_number='$current_order' where order_number='-1'");
     }
 }

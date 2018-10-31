@@ -13,9 +13,9 @@
 <!--        <li><a href="index.php?do=news_gallery"><img src="images/sliders.png" alt="" width="25"/>Xəbərlər (Qalereya)</a></li>-->
 <!--		<li><a href="index.php?do=works"><img src="images/works.png" alt="" width="25"/>İşlərimiz</a></li>-->
 <!--        <li><a href="index.php?do=works_gallery"><img src="images/sliders.png" alt="" width="25"/>İşlərimiz (Qalereya)</a></li>-->
-		<li><a href="index.php?do=elaqe"><img src="images/contacts.png" alt="" width="25"/>Əlaqələr</a></li>
+		<li><a href="index.php?do=contacts"><img src="images/contacts.png" alt="" width="25"/>Contacts</a></li>
 
-		<li><a href="index.php?do=description"><img src="images/seoopt.png" alt="" width="25"/>Seo Opt.</a></li>
+		<li><a href="index.php?do=seo"><img src="images/seoopt.png" alt="" width="25"/>Seo Opt.</a></li>
 
 		<li><a href="javascript::void(0);">&nbsp;&nbsp;</a></li>
 

@@ -6,12 +6,14 @@ if(mysqli_num_rows(mysqli_query($db,"select id from categories where id='$catego
 $limit=intval($_GET["limit"]);
 if($limit!=15 && $limit!=25 && $limit!=50 && $limit!=100 && $limit!=999999) $limit=15;
 $query_count="select id from $do where lang_id='$main_lang' ";
-if($goster_cat>0) $query_count.=" and category_id='$category_id' ";
+if($category_id>0) $query_count.=" and category_id='$category_id' ";
 $count_rows=mysqli_num_rows(mysqli_query($db,$query_count));
 $max_page=ceil($count_rows/$limit);
 $page=intval($_GET["page"]); if($page<1) $page=1; if($page>$max_page) $page=$max_page; if($page<1) $page=1;
 $start=$page*$limit-$limit;
 //
+
+if($category_id>0) $add_information_sql = " and category_id='$category_id'";
 
 $add=intval($_GET["add"]);
 $edit=intval($_GET["edit"]);
@@ -46,6 +48,7 @@ if($_POST) // Add && edit
         $last_order=$info_edit["order_number"];
         $active=$info_edit["active"];
     }
+    else $add_where="";
 
     $sql=mysqli_query($db,"select * from diller where aktivlik=1 order by sira");
     while($row=mysqli_fetch_assoc($sql))
@@ -53,8 +56,8 @@ if($_POST) // Add && edit
         $name="name_".$row["id"]; $name=mysqli_real_escape_string($db,htmlspecialchars($$name));
         $text="text_".$row["id"]; $text=mysqli_real_escape_string($db,htmlspecialchars($$text));
 
-        if($name=='' && $row["id"]!=$main_lang) {$c='name'; $$c=get_lang_val($do,$auto_id,$c);}
-        if($text=='' && $row["id"]!=$main_lang) {$c='text'; $$c=get_lang_val($do,$auto_id,$c);}
+//        if($name=='' && $row["id"]!=$main_lang) {$c='name'; $$c=get_lang_val($do,$auto_id,$c);}
+//        if($text=='' && $row["id"]!=$main_lang) {$c='text'; $$c=get_lang_val($do,$auto_id,$c);}
 
         $time = time();
 
@@ -64,8 +67,16 @@ if($_POST) // Add && edit
         }
         else
         {
-            mysqli_query($db,"insert into $do values (0,'$name','','$category_id','$text','$last_order', '$active', '$row[id]', '$auto_id', '$time',0) ");
+            mysqli_query($db,"insert into $do values (0,'$name','','$category_id','$text','$last_order','', '$active', '$row[id]', '$auto_id', '$time',0) ");
         }
+    }
+
+    if($edit>0) $this_id=$edit;
+    else
+    {
+        $this_id=mysqli_insert_id($db);
+        $this_id=mysqli_fetch_assoc(mysqli_query($db,"select * from $do where id='$this_id' "));
+        $this_id=$this_id["auto_id"];
     }
 
     // Image upload
@@ -78,15 +89,14 @@ if($_POST) // Add && edit
         if($type=="jpg" || $type=="bmp"  || $type=="png" || $type=="gif" || $type=="jpeg") $image_access=true;
         if($image_access==true)
         {
-            if($edit>0) $this_id=$edit;
-            else
+            $image_upload_name = substr(sha1(mt_rand()),17,15)."-".$image_name.".".$type;
+
+            if($edit>0)
             {
-                $this_id=mysqli_insert_id($db);
-                $this_id=mysqli_fetch_assoc(mysqli_query($db,"select * from $do where id='$this_id' "));
-                $this_id=$this_id["auto_id"];
+                $old_image_name = mysqli_fetch_assoc(mysqli_query($db,"SELECT image_name FROM $do WHERE id='$this_id'"));
+                @unlink("../images/games/".$old_image_name['image_name']);
             }
 
-            $image_upload_name = substr(sha1(mt_rand()),17,15).".".$type;
             move_uploaded_file($image_tmp,'../images/games/'.$image_upload_name);
             mysqli_query($db,"update $do set image_name='$image_upload_name' where auto_id='$this_id'");
         }
@@ -109,8 +119,15 @@ if($_POST) // Add && edit
         {
             $folder_name = substr(sha1(mt_rand()),17,8);
 
+            if($edit>0)
+            {
+                $old_folder_path = mysqli_fetch_assoc(mysqli_query($db,"SELECT code FROM $do WHERE id='$this_id'"));
+                @rmdir_recursive("../onlinegames/".$old_folder_path['code']);
+                $folder_name = $old_folder_path['code'];
+            }
+
             $path = "../onlinegames/".$folder_name;
-            mkdir($path);
+            @mkdir($path);
 
             if(move_uploaded_file($source, $path."/".$filename))
             {
@@ -119,11 +136,12 @@ if($_POST) // Add && edit
                 if ($x === true)
                 {
                     $zip->extractTo($path);
-                    $zip->close();
 
                     mysqli_query($db,"update $do set code='$folder_name' where auto_id='$this_id'");
 
-                    unlink($path."/".$filename);
+                    @unlink($path."/".$filename);
+
+                    $zip->close();
                 }
             }
         }
@@ -136,8 +154,9 @@ if($_POST) // Add && edit
 if($delete>0 && mysqli_num_rows(mysqli_query($db,"select id from $do where auto_id='$delete' "))>0)
 {
     $data = mysqli_fetch_assoc(mysqli_query($db,"select * from $do where auto_id='$delete' "));
-    mysqli_query($db,"delete from $do where auto_id='$delete' ");
     @unlink('../images/games/'.$data["image_name"]);
+    @rmdir_recursive('../onlinegames/'.$data['code']);
+    mysqli_query($db,"delete from $do where auto_id='$delete' ");
     $ok="Data has been successfully deleted.";
     $new_order=1;
     $sql=mysqli_query($db,"select * from $do where lang_id='$main_lang' and category_id='$data[category_id]' order by order_number");
@@ -147,7 +166,7 @@ if($delete>0 && mysqli_num_rows(mysqli_query($db,"select id from $do where auto_
         $order_update.=" when auto_id='$row[auto_id]' then '$new_order' ";
         $new_order++;
     }
-    $query_update="update $do set sira=case".$order_update."else sira end;";
+    $query_update="update $do set order_number=case".$order_update."else order_number end;";
     if($order_update!='') mysqli_query($db,$query_update);
 }
 elseif($delete_img>0 && mysqli_num_rows(mysqli_query($db,"select id from $do where auto_id='$delete_img' and image_name!='' "))>0)
@@ -166,7 +185,7 @@ elseif($up>0 && mysqli_num_rows(mysqli_query($db,"select id from $do where auto_
     {
         $previous_order=$current_order-1;
         mysqli_query($db,"update $do set order_number='-1' where order_number='$previous_order' and category_id='$data[category_id]' ");
-        mysqli_query($db,"update $do set order_number='$previous_order' where sira='$current_order' and category_id='$data[category_id]'");
+        mysqli_query($db,"update $do set order_number='$previous_order' where order_number='$current_order' and category_id='$data[category_id]'");
         mysqli_query($db,"update $do set order_number='$current_order' where order_number='-1' and category_id='$data[category_id]' ");
     }
 }
@@ -222,7 +241,7 @@ elseif($down>0 && mysqli_num_rows(mysqli_query($db,"select id from $do where aut
         ?>
 
         <!-- Content start-->
-        <form action="index.php?do=<?php echo $do; ?>&page=<?php echo $page; ?>&category_id=<?php echo intval($category_id); ?><?php if($edit>0) echo '&edit='.$edit; ?>" method="post" id="form_login" name="form_login" enctype="multipart/form-data">
+        <form action="index.php?do=<?php echo $do; ?>&page=<?php echo $page; if($edit>0) echo '&edit='.$edit; ?>" method="post" id="form_login" name="form_login" enctype="multipart/form-data">
             <a href="index.php?do=<?php echo $do; ?>&add=1" style="margin-right:50px"><img src="images/icon_add.png" alt="" /> <b style="vertical-align: super;">Create new</b></a>
             <hr class="clear" />
             <?php
@@ -232,7 +251,7 @@ elseif($down>0 && mysqli_num_rows(mysqli_query($db,"select id from $do where aut
                 $sql_categories = mysqli_query($db,"SELECT `auto_id`,`name` FROM `categories` WHERE lang_id='$main_lang' and active=1");
                 echo '<div class="'.$hide.'">';
                 echo 'Choose category : <br />
-                <select name="category_id" id="category_id">';
+                <select name="category_id" required id="category_id">';
                 while($row_categories=mysqli_fetch_assoc($sql_categories))
                 {
                     if($row_categories['auto_id']==$information["category_id"])
@@ -249,6 +268,7 @@ elseif($down>0 && mysqli_num_rows(mysqli_query($db,"select id from $do where aut
                 $sql=mysqli_query($db,"select * from diller where aktivlik=1 order by sira");
                 while($row=mysqli_fetch_assoc($sql))
                 {
+                    if($row["id"]==$main_lang) $required = "required"; else $required = "";
                     if($add==1 || $edit>0) $hide=""; else $hide="hide";
                     $information=mysqli_fetch_assoc(mysqli_query($db,"select * from $do where auto_id='$edit' and lang_id='$row[id]' "));
 
@@ -256,7 +276,7 @@ elseif($down>0 && mysqli_num_rows(mysqli_query($db,"select id from $do where aut
                     else echo '<div class="'.$hide.'">';
 
                     echo 'Name : <br />
-                      <input type="text" name="name_'.$row["id"].'" value="'.$information["name"].'" style="width:250px" />
+                      <input type="text" '.$required.' name="name_'.$row["id"].'" value="'.$information["name"].'" style="width:250px" />
                       <br /><br />
                       Text : <br />
                         <textarea name="text_'.$row["id"].'" rows="1" cols="1" id="editor'.$row["sira"].'">'.$information["text"].'</textarea>
@@ -265,22 +285,35 @@ elseif($down>0 && mysqli_num_rows(mysqli_query($db,"select id from $do where aut
                 }
                 $information=mysqli_fetch_assoc(mysqli_query($db,"select * from $do where auto_id='$edit' and lang_id='$main_lang'"));
                 echo '<div class="'.$hide.'">';
-                if($information["tip"]!="" && $edit>0)
+                if($information["image_name"]!="" && $edit>0)
                 {
-                    $image='<ul class="media_photos" style="margin-left:450px;margin-top:-25px"><li><a rel="slide" href="../images/games/'.$information["image_name"].'?rand='.rand(0,10000).'" title="">
+                    $image='<ul class="media_photos" style="margin-left:450px;margin-top:-25px; margin-right: 40px;"><li><a rel="slide" href="../images/games/'.$information["image_name"].'?rand='.rand(0,10000).'" title="">
                     Current image : <img src="../images/games/'.$information ["image_name"].'?rand='.rand(0,10000).'" alt="" width="120" /></a>
                     <br class="clear" />
                   <a href="index.php?do='.$do.'&delete_img='.$information["auto_id"].'" title="Delete" class="delete"><img src="images/icon_delete.png" alt="" /></a></li></ul>';
+                    $height_photo_div = "height:120px;";
                 }
                 else
                 {
+                    $height_photo_div = "";
                     $image='';
                 }
-                echo '<div style="padding: 30px 0 30px 15px;border: 1px solid #ddd;">Zip file (only "zip" file): <input name="zip_file" type="file" /></div>';
-                echo '<div style="padding: 30px 0 30px 15px;border: 1px solid #ddd; margin-top: 5px;">Choose image (120 x 120) : <input name="image_file" type="file" />'.$image.'</div><br />';
+
+                if($information['code']!="" && $edit>0)
+                {
+                    $game_file = '<a href="../onlinegames/'.$information['code'].'?rand='.rand(0,10000).'" target="_blank">Play game</a>';
+                }
+                else
+                {
+                    $game_file = '';
+                }
+
+                echo '<div style="padding: 30px 0 30px 15px;border: 1px solid #ddd;">Zip file (only "zip" file): <input name="zip_file" type="file" id="zip_file" /> '.$game_file.'</div>';
+                echo '<div style="padding: 30px 0 50px 15px;border: 1px solid #ddd; margin-top: 5px; '.$height_photo_div.'">
+                        <div style="float: left;">Choose image (120 x 120) : <input name="image_file" id="image_file" type="file" /></div><div style="float: right;">'.$image.'</div></div><br />';
 
                 if($information["image_name"]!="" && $edit>0) echo '<br /><br />';
-                echo '<input type="submit" name="button" value=" Save " />
+                echo '<input type="submit" id="save" name="button" value=" Save " />
                   <hr class="clear" />
                   <br class="clear" /></div>';
             ?>
@@ -295,13 +328,14 @@ elseif($down>0 && mysqli_num_rows(mysqli_query($db,"select id from $do where aut
             </div>
 
             <div style="text-align: center; float: left; margin-left: 10%;">
-                Categories :
                 <select name="category_id" onchange="MM_jumpMenu('parent',this,0)">
+                    <option value="index.php?do=<?=$do?>&category_id=0" selected disabled hidden>Choose category</option>
+                    <option <?=($_GET['category_id']=="all") ? "selected" : ""?> value="index.php?do=<?=$do?>&category_id=all">ALL</option>
                     <?php
-                    $sql=mysqli_query($db,"select auto_id,name from categories where lang_id='$main_lang' order by sira desc");
+                    $sql=mysqli_query($db,"select auto_id,name from categories where lang_id='$main_lang' order by order_number asc");
                     while($row=mysqli_fetch_assoc($sql))
                     {
-                        if($row["auto_id"]==$blog) echo '<option value="index.php?do='.$do.'&category_id='.$row["auto_id"].'" selected="selected">'.$row["name"].'</option>';
+                        if($row["auto_id"]==intval($_GET['category_id'])) echo '<option value="index.php?do='.$do.'&category_id='.$row["auto_id"].'" selected="selected">'.$row["name"].'</option>';
                         else echo '<option value="index.php?do='.$do.'&category_id='.$row["auto_id"].'">'.$row["name"].'</option>';
                     }
                     ?>
@@ -322,20 +356,22 @@ elseif($down>0 && mysqli_num_rows(mysqli_query($db,"select id from $do where aut
 
         <br class="clear" />
         <?php
-        echo '<table class="data" width="100%" cellpadding="0" cellspacing="0"><thead><tr>
-                <th style="width:50%"><input type="checkbox" data-val="0" name="all_check" id="hamisini_sec" value="all_check" /> Name</th>
+        echo '<table class="data" width="100%" cellpadding="0" cellspacing="0" style="margin: 15px 0;"><thead><tr>
+                <th style="width:40%"><input type="checkbox" data-val="0" name="all_check" id="hamisini_sec" value="all_check" /> Name</th>
                 <th style="width:20%">Category</th>
+                <th style="width:20%">Testing</th>
                 <th style="width:30%">Editing</th>
 </tr></thead><tbody>';
         $query=str_replace("select id ","select * ",$query_count);
         $query.=" order by auto_id desc limit $start,$limit";
-        $sql=mysqli_query($db,"select * from $do where lang_id='$main_lang' order by category_id asc,order_number asc limit $start,$limit");
+        $sql=mysqli_query($db,"select * from $do where lang_id='$main_lang' ".$add_information_sql." order by order_number asc limit $start,$limit");
         while($row=mysqli_fetch_assoc($sql))
         {
             $row_categories = mysqli_fetch_assoc(mysqli_query($db, "SELECT `name` FROM `categories` WHERE active=1 and auto_id='$row[category_id]'"));
             echo '<tr>
 					<td><input type="checkbox" id="chbx_'.$row["auto_id"].'" value="'.$row["auto_id"].'" onclick="chbx_(this.id)" /> '.stripslashes($row["name"]).'</td>
 					<td>'.$row_categories['name'].'</td>
+					<td><a href="../onlinegames/'.$row['code'].'?rand='.rand(0,10000).'" target="_blank">Play game</a></td>
 					<td>
 						<a href="index.php?do='.$do.'&page='.$page.'&edit='.$row["auto_id"].'"><img src="images/icon_edit.png" alt="" title="Edit" /></a>
 						<a href="index.php?do='.$do.'&page='.$page.'&delete='.$row["auto_id"].'" class="delete"><img src="images/icon_delete.png" alt="" title="Sil" /></a>
@@ -369,3 +405,25 @@ elseif($down>0 && mysqli_num_rows(mysqli_query($db,"select id from $do where aut
         <!-- Content end-->
     </div>
 </div>
+
+<?php
+    if(!$edit>0 && $add==1)
+    {
+        ?>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $('input#save').bind("click",function()
+                {
+                    var imgVal = $('#image_file').val();
+                    // var zipVal = $('#zip_file').val();
+                    if(imgVal=='' /*|| zipVal==""*/)
+                    {
+                        alert("empty image or zip file");
+                        return false;
+                    }
+                });
+            });
+        </script>
+        <?php
+    }
+//?>

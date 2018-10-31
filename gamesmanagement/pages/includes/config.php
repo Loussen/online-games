@@ -26,13 +26,13 @@ ini_set('memory_limit', '-1');
 include 'functions.php';
 $this_ip=addslashes($_SERVER['REMOTE_ADDR']);
 //Lang
-$main_lang=mysqli_fetch_assoc(mysqli_query($db,"select id from diller where status='1' and aktivlik=1 "));	$main_lang=$main_lang["id"];
+$main_lang=mysqli_fetch_assoc(mysqli_query($db,"select id from diller where status='1' and aktivlik=1"));	$main_lang=$main_lang["id"];
 $lang_count=mysqli_num_rows(mysqli_query($db,"select id from diller where aktivlik=1"));
 if(is_file('8w4_lovatoadm/langs/index.php')) include '8w4_lovatoadm/langs/index.php';
 elseif(is_file('langs/8w4_lovatoadm/index.php')) include 'langs/8w4_lovatoadm/index.php';
 
 
-$elaqe_config = mysqli_fetch_assoc(mysqli_query($db,"SELECT `email`,`phone`,`facebook`,`youtube`,`twitter`,`google_map`,`address` FROM `elaqe` WHERE `lang_id`='$main_lang'"));
+$contact_config = mysqli_fetch_assoc(mysqli_query($db,"SELECT `email`,`phone`,`facebook`,`youtube`,`twitter`,`google_map`,`address` FROM `contacts` WHERE `lang_id`='$main_lang'"));
 
 $hava_active = 0;
 if($hava_active==1)	//Hava update
