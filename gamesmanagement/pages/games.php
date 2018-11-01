@@ -30,7 +30,7 @@ if($edit>0 && mysqli_num_rows(mysqli_query($db,"select id from $do where auto_id
 if($_POST) // Add && edit
 {
     extract($_POST);
-    $last_order=mysqli_fetch_assoc(mysqli_query($db,"select order_number from $do order by order_number desc"));
+    $last_order=mysqli_fetch_assoc(mysqli_query($db,"select order_number from $do where category_id='$_POST[category_id]' order by order_number desc"));
     $last_order=intval($last_order["order_number"])+1;
     $auto_id=mysqli_fetch_assoc(mysqli_query($db,"select auto_id from $do order by auto_id desc"));
     $auto_id=intval($auto_id["auto_id"])+1;
@@ -45,7 +45,27 @@ if($_POST) // Add && edit
         $info_edit=mysqli_fetch_assoc(mysqli_query($db,"select * from $do where auto_id='$edit' "));
         $add_where="and auto_id='$edit' ";
         $auto_id=$edit;
-        $last_order=$info_edit["order_number"];
+
+        if($_POST['category_id']!=$info_edit['category_id'])
+        {
+            $info_same_category = mysqli_query($db,"select * from $do where category_id='$_POST[category_id]' and active=1 order by order_number desc LIMIT 1");
+
+            $order_number_by_category = mysqli_fetch_assoc($info_same_category);
+
+            if(mysqli_num_rows($info_same_category)>0)
+            {
+                $last_order = $order_number_by_category['order_number']+1;
+            }
+            else
+            {
+                $last_order = 1;
+            }
+
+        }
+        else
+        {
+            $last_order=$info_edit["order_number"];
+        }
         $active=$info_edit["active"];
     }
     else $add_where="";
@@ -63,7 +83,7 @@ if($_POST) // Add && edit
 
         if(mysqli_num_rows(mysqli_query($db,"select id from $do where lang_id='$row[id]' $add_where"))>0 && $edit>0)
         {
-            mysqli_query($db,"update $do set name='$name',text='$text',category_id='$category_id',updated_at='$time' where lang_id='$row[id]' $add_where");
+            mysqli_query($db,"update $do set name='$name',text='$text',category_id='$category_id',updated_at='$time',order_number='$last_order' where lang_id='$row[id]' $add_where");
         }
         else
         {
@@ -93,7 +113,7 @@ if($_POST) // Add && edit
 
             if($edit>0)
             {
-                $old_image_name = mysqli_fetch_assoc(mysqli_query($db,"SELECT image_name FROM $do WHERE id='$this_id'"));
+                $old_image_name = mysqli_fetch_assoc(mysqli_query($db,"SELECT image_name FROM $do WHERE auto_id='$this_id'"));
                 @unlink("../images/games/".$old_image_name['image_name']);
             }
 
@@ -119,14 +139,25 @@ if($_POST) // Add && edit
         {
             $folder_name = substr(sha1(mt_rand()),17,8);
 
+            $filename = $folder_name."-".mt_rand(0,3).".".$original_type;
+
             if($edit>0)
             {
-                $old_folder_path = mysqli_fetch_assoc(mysqli_query($db,"SELECT code FROM $do WHERE id='$this_id'"));
-                @rmdir_recursive("../onlinegames/".$old_folder_path['code']);
+                $old_folder_path = mysqli_fetch_assoc(mysqli_query($db,"SELECT code FROM $do WHERE auto_id='$this_id'"));
+                if(is_dir("../onlinegames/".$old_folder_path['code']))
+                {
+                    @rrmdir("../onlinegames/".$old_folder_path['code']);
+                }
                 $folder_name = $old_folder_path['code'];
             }
 
+            if(is_dir("../onlinegames/".$folder_name))
+            {
+                $folder_name = substr(sha1(mt_rand()),17,8);
+            }
+
             $path = "../onlinegames/".$folder_name;
+
             @mkdir($path);
 //            chmod("../onlinegames",0755);
 //            echo substr(sprintf('%o', fileperms("../onlinegames")), -4)."<br />";
@@ -135,7 +166,7 @@ if($_POST) // Add && edit
 
             if(move_uploaded_file($source, $path."/".$filename))
             {
-//                chmod($path.'/'.$filename, octdec(755));
+//                chmod($path.'/'.$filename, 0644);
 //                echo $path.'/'.$filename." - ".substr(sprintf('%o', fileperms($path.'/'.$filename)), -4);
 
                 $zip = new ZipArchive();
@@ -146,7 +177,7 @@ if($_POST) // Add && edit
 
                     mysqli_query($db,"update $do set code='$folder_name' where auto_id='$this_id'");
 
-                    @unlink($path."/".$filename);
+//                    @unlink($path."/".$filename);
 
                     $zip->close();
                 }
@@ -162,7 +193,10 @@ if($delete>0 && mysqli_num_rows(mysqli_query($db,"select id from $do where auto_
 {
     $data = mysqli_fetch_assoc(mysqli_query($db,"select * from $do where auto_id='$delete' "));
     @unlink('../images/games/'.$data["image_name"]);
-    @rmdir_recursive('../onlinegames/'.$data['code']);
+    if(is_dir("../onlinegames/".$data['code']))
+    {
+        @rrmdir('../onlinegames/'.$data['code']);
+    }
     mysqli_query($db,"delete from $do where auto_id='$delete' ");
     $ok="Data has been successfully deleted.";
     $new_order=1;
@@ -185,32 +219,58 @@ elseif($delete_img>0 && mysqli_num_rows(mysqli_query($db,"select id from $do whe
 }
 elseif($up>0 && mysqli_num_rows(mysqli_query($db,"select id from $do where auto_id='$up' "))>0)
 {
-    $data = mysqli_fetch_assoc(mysqli_query($db,"select * from $do where auto_id='$up' "));
-    $current_order=mysqli_fetch_assoc(mysqli_query($db,"select * from $do where auto_id='$up' and category_id='$data[category_id]' "));
-    $current_order=$current_order["order_number"];
-    if($current_order>1)
+    $sub_services = mysqli_fetch_assoc(mysqli_query($db,"select * from $do where auto_id='$up' "));
+    $indiki_sira=mysqli_fetch_assoc(mysqli_query($db,"select * from $do where auto_id='$up' and category_id='$sub_services[category_id]' ")); $indiki_sira=$indiki_sira["order_number"];
+    if($indiki_sira>1)
     {
-        $previous_order=$current_order-1;
-        mysqli_query($db,"update $do set order_number='-1' where order_number='$previous_order' and category_id='$data[category_id]' ");
-        mysqli_query($db,"update $do set order_number='$previous_order' where order_number='$current_order' and category_id='$data[category_id]'");
-        mysqli_query($db,"update $do set order_number='$current_order' where order_number='-1' and category_id='$data[category_id]' ");
+        $asagi_sira=$indiki_sira-1;
+        mysqli_query($db,"update $do set order_number='-1' where order_number='$asagi_sira' and category_id='$sub_services[category_id]' ");
+        mysqli_query($db,"update $do set order_number='$asagi_sira' where order_number='$indiki_sira' and category_id='$sub_services[category_id]'");
+        mysqli_query($db,"update $do set order_number='$indiki_sira' where order_number='-1' and category_id='$sub_services[category_id]' ");
     }
+
 }
 elseif($down>0 && mysqli_num_rows(mysqli_query($db,"select id from $do where auto_id='$down' "))>0)
 {
-    $data = mysqli_fetch_assoc(mysqli_query($db,"select * from $do where auto_id='$down' "));
-    $current_order=mysqli_fetch_assoc(mysqli_query($db,"select * from $do where auto_id='$down' and category_id='$data[category_id]' "));
-    $current_order=$current_order["order_number"];
-    $last_order=mysqli_fetch_assoc(mysqli_query($db,"select order_number from $do where category_id='$data[category_id]' order by order_number desc"));
-    $last_order=$last_order["order_number"];
-    if($current_order<$last_order)
+    $sub_services = mysqli_fetch_assoc(mysqli_query($db,"select * from $do where auto_id='$down' "));
+    $indiki_sira=mysqli_fetch_assoc(mysqli_query($db,"select * from $do where auto_id='$down' and category_id='$sub_services[category_id]' ")); $indiki_sira=$indiki_sira["order_number"];
+    $son_sira=mysqli_fetch_assoc(mysqli_query($db,"select order_number from $do where category_id='$sub_services[category_id]' order by order_number desc")); $son_sira=$son_sira["order_number"];
+    if($indiki_sira<$son_sira)
     {
-        $next_order=$current_order+1;
-        mysqli_query($db,"update $do set order_number='-1' where order_number='$next_order' and category_id='$data[category_id]' ");
-        mysqli_query($db,"update $do set order_number='$next_order' where order_number='$current_order' and category_id='$data[category_id]' ");
-        mysqli_query($db,"update $do set order_number='$current_order' where order_number='-1' and category_id='$data[category_id]' ");
+        $yuxari_sira=$indiki_sira+1;
+        mysqli_query($db,"update $do set order_number='-1' where order_number='$yuxari_sira' and category_id='$sub_services[category_id]' ");
+        mysqli_query($db,"update $do set order_number='$yuxari_sira' where order_number='$indiki_sira' and category_id='$sub_services[category_id]' ");
+        mysqli_query($db,"update $do set order_number='$indiki_sira' where order_number='-1' and category_id='$sub_services[category_id]' ");
     }
 }
+//elseif($up>0 && mysqli_num_rows(mysqli_query($db,"select id from $do where auto_id='$up' "))>0)
+//{
+//    $data = mysqli_fetch_assoc(mysqli_query($db,"select * from $do where auto_id='$up' "));
+//    $current_order=mysqli_fetch_assoc(mysqli_query($db,"select * from $do where auto_id='$up' and category_id='$data[category_id]' "));
+//    $current_order=$current_order["order_number"];
+//    if($current_order>1)
+//    {
+//        $previous_order=$current_order-1;
+//        mysqli_query($db,"update $do set order_number='-1' where order_number='$previous_order' and category_id='$data[category_id]' ");
+//        mysqli_query($db,"update $do set order_number='$previous_order' where order_number='$current_order' and category_id='$data[category_id]'");
+//        mysqli_query($db,"update $do set order_number='$current_order' where order_number='-1' and category_id='$data[category_id]' ");
+//    }
+//}
+//elseif($down>0 && mysqli_num_rows(mysqli_query($db,"select id from $do where auto_id='$down' "))>0)
+//{
+//    $data = mysqli_fetch_assoc(mysqli_query($db,"select * from $do where auto_id='$down' "));
+//    $current_order=mysqli_fetch_assoc(mysqli_query($db,"select * from $do where auto_id='$down' and category_id='$data[category_id]' "));
+//    $current_order=$current_order["order_number"];
+//    $last_order=mysqli_fetch_assoc(mysqli_query($db,"select order_number from $do where category_id='$data[category_id]' order by order_number desc"));
+//    $last_order=$last_order["order_number"];
+//    if($current_order<$last_order)
+//    {
+//        $next_order=$current_order+1;
+//        mysqli_query($db,"update $do set order_number='-1' where order_number='$next_order' and category_id='$data[category_id]' ");
+//        mysqli_query($db,"update $do set order_number='$next_order' where order_number='$current_order' and category_id='$data[category_id]' ");
+//        mysqli_query($db,"update $do set order_number='$current_order' where order_number='-1' and category_id='$data[category_id]' ");
+//    }
+//}
 ?>
 <script type="text/JavaScript">
     function MM_jumpMenu(targ,selObj,restore){ //v3.0
@@ -315,7 +375,7 @@ elseif($down>0 && mysqli_num_rows(mysqli_query($db,"select id from $do where aut
                     $game_file = '';
                 }
 
-                echo '<div style="padding: 30px 0 30px 15px;border: 1px solid #ddd;">Zip file (only "zip" file): <input name="zip_file" type="file" id="zip_file" /> '.$game_file.'</div>';
+                echo '<div style="padding: 30px 0 30px 15px;border: 1px solid #ddd;">Game file (only "zip" file): <input name="zip_file" type="file" id="zip_file" /> '.$game_file.'</div>';
                 echo '<div style="padding: 30px 0 50px 15px;border: 1px solid #ddd; margin-top: 5px; '.$height_photo_div.'">
                         <div style="float: left;">Choose image (120 x 120) : <input name="image_file" id="image_file" type="file" /></div><div style="float: right;">'.$image.'</div></div><br />';
 
@@ -371,7 +431,7 @@ elseif($down>0 && mysqli_num_rows(mysqli_query($db,"select id from $do where aut
 </tr></thead><tbody>';
         $query=str_replace("select id ","select * ",$query_count);
         $query.=" order by auto_id desc limit $start,$limit";
-        $sql=mysqli_query($db,"select * from $do where lang_id='$main_lang' ".$add_information_sql." order by order_number asc limit $start,$limit");
+        $sql=mysqli_query($db,"select * from $do where lang_id='$main_lang' ".$add_information_sql." order by category_id asc, order_number asc limit $start,$limit");
         while($row=mysqli_fetch_assoc($sql))
         {
             $row_categories = mysqli_fetch_assoc(mysqli_query($db, "SELECT `name` FROM `categories` WHERE active=1 and auto_id='$row[category_id]'"));
@@ -382,8 +442,8 @@ elseif($down>0 && mysqli_num_rows(mysqli_query($db,"select id from $do where aut
 					<td>
 						<a href="index.php?do='.$do.'&page='.$page.'&edit='.$row["auto_id"].'"><img src="images/icon_edit.png" alt="" title="Edit" /></a>
 						<a href="index.php?do='.$do.'&page='.$page.'&delete='.$row["auto_id"].'" class="delete"><img src="images/icon_delete.png" alt="" title="Sil" /></a>
-						<a href="index.php?do='.$do.'&page='.$page.'&up='.$row["auto_id"].'"><img src="images/up.png" alt="" title="Up" /></a>
-						<a href="index.php?do='.$do.'&page='.$page.'&down='.$row["auto_id"].'"><img src="images/down.png" alt="" title="Down" /></a>';
+						<a href="index.php?do='.$do.'&page='.$page.'&up='.$row["auto_id"].'&category_id='.$_GET['category_id'].'"><img src="images/up.png" alt="" title="Up" /></a>
+						<a href="index.php?do='.$do.'&page='.$page.'&down='.$row["auto_id"].'&category_id='.$_GET['category_id'].'"><img src="images/down.png" alt="" title="Down" /></a>';
             if($row["active"]==1) $title='Active'; else $title='Deactive';
             echo '<img src="images/'.$row["active"].'_lamp.png" title="'.$title.'" border="0" align="absmiddle" style="cursor:pointer" id="info_'.$row["auto_id"].'" onclick="aktivlik(\''.$do.'\',this.id,this.title)"  />';
             echo '</td>
@@ -422,8 +482,8 @@ elseif($down>0 && mysqli_num_rows(mysqli_query($db,"select id from $do where aut
                 $('input#save').bind("click",function()
                 {
                     var imgVal = $('#image_file').val();
-                    // var zipVal = $('#zip_file').val();
-                    if(imgVal=='' /*|| zipVal==""*/)
+                    var zipVal = $('#zip_file').val();
+                    if(imgVal=='' || zipVal=="")
                     {
                         alert("empty image or zip file");
                         return false;

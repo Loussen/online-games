@@ -30,7 +30,7 @@ if($_POST){
 					<p><input type="text" id="username" name="login" style="width:285px" title="Username"/></p>
 					<p><input type="password" id="password" name="pass" style="width:285px" title="******"/></p>
 					<p><input type="hidden" name="csrf_" value="<?=set_csrf_()?>" /></p>
-					<p><input type="submit" id="submit" name="submit" value=" Daxil ol " class="Login" style="margin-right:5px"/></p>
+					<p><input type="submit" id="submit" name="submit" value=" Log in " class="Login" style="margin-right:5px"/></p>
 				</form>
 			</div>
 		</div>

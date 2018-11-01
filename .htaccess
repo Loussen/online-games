@@ -1,0 +1,44 @@
+<Files ~ "^\.(htaccess|htpasswd)$">
+deny from all
+</Files>
+
+<IfModule mod_expires.c>
+    ExpiresActive on
+
+    ExpiresByType image/jpg "access plus 1 month"
+    ExpiresByType image/jpeg "access plus 1 month"
+    ExpiresByType image/gif "access plus 1 month"
+    ExpiresByType image/png "access plus 1 month"
+</IfModule>
+
+<IfModule mod_headers.c>
+  <FilesMatch "\.(ttf|ttc|otf|eot|woff|woff2|font.css|css|js)$">
+    Header set Access-Control-Allow-Origin "*"
+  </FilesMatch>
+</IfModule>
+
+#Set Directory
+DirectoryIndex index.php index.html
+
+## Enable Mod Rewrite, this is only required once in each .htaccess file
+Options +FollowSymlinks
+RewriteEngine On
+RewriteBase /
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+RewriteRule ^(en|ru)(/?)$ index.php?lang_name=$1 [L,QSA]
+
+#Pages
+RewriteRule ^pages/(.*)-([0-9]+)(/?)$ index.php?do=pages&slug=$1&id=$2 [L,QSA]
+
+RewriteRule ^404(/?)$ index.php?do=404 [L,QSA]
+
+## Forbid access to system directory
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /upload/(.*)\ HTTP/ [NC]
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /gamesmanagement/browser/(.*)\ HTTP/ [NC]
+
+## Forbid file requested has php extension
+RewriteCond %{REQUEST_FILENAME} ^.+\.php$
+## Forbid Access
+RewriteRule .* - [F,NS,L]

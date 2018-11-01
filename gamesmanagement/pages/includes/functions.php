@@ -552,13 +552,34 @@ function realUrl()
     return $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 }
 
-function rmdir_recursive($dir) {
-    foreach(scandir($dir) as $file) {
+function rmdir_recursive($dir)
+{
+    foreach(scandir($dir) as $file)
+    {
         if ('.' === $file || '..' === $file) continue;
         if (is_dir("$dir/$file")) rmdir_recursive("$dir/$file");
-        else unlink("$dir/$file");
+        else @unlink("$dir/$file");
     }
     rmdir($dir);
+}
+
+function rrmdir($dir)
+{
+    if (is_dir($dir))
+    {
+        $objects = scandir($dir);
+        foreach ($objects as $object)
+        {
+            if ($object != "." && $object != "..")
+            {
+                if (filetype($dir."/".$object) == "dir")
+                    rrmdir($dir."/".$object);
+                else unlink($dir."/".$object);
+            }
+        }
+        reset($objects);
+        rmdir($dir);
+    }
 }
 
 
