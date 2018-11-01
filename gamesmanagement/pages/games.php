@@ -219,58 +219,32 @@ elseif($delete_img>0 && mysqli_num_rows(mysqli_query($db,"select id from $do whe
 }
 elseif($up>0 && mysqli_num_rows(mysqli_query($db,"select id from $do where auto_id='$up' "))>0)
 {
-    $sub_services = mysqli_fetch_assoc(mysqli_query($db,"select * from $do where auto_id='$up' "));
-    $indiki_sira=mysqli_fetch_assoc(mysqli_query($db,"select * from $do where auto_id='$up' and category_id='$sub_services[category_id]' ")); $indiki_sira=$indiki_sira["order_number"];
-    if($indiki_sira>1)
+    $data = mysqli_fetch_assoc(mysqli_query($db,"select * from $do where auto_id='$up' "));
+    $current_order=mysqli_fetch_assoc(mysqli_query($db,"select * from $do where auto_id='$up' and category_id='$data[category_id]' "));
+    $current_order=$current_order["order_number"];
+    if($current_order>1)
     {
-        $asagi_sira=$indiki_sira-1;
-        mysqli_query($db,"update $do set order_number='-1' where order_number='$asagi_sira' and category_id='$sub_services[category_id]' ");
-        mysqli_query($db,"update $do set order_number='$asagi_sira' where order_number='$indiki_sira' and category_id='$sub_services[category_id]'");
-        mysqli_query($db,"update $do set order_number='$indiki_sira' where order_number='-1' and category_id='$sub_services[category_id]' ");
+        $previous_order=$current_order-1;
+        mysqli_query($db,"update $do set order_number='-1' where order_number='$previous_order' and category_id='$data[category_id]' ");
+        mysqli_query($db,"update $do set order_number='$previous_order' where order_number='$current_order' and category_id='$data[category_id]'");
+        mysqli_query($db,"update $do set order_number='$current_order' where order_number='-1' and category_id='$data[category_id]' ");
     }
-
 }
 elseif($down>0 && mysqli_num_rows(mysqli_query($db,"select id from $do where auto_id='$down' "))>0)
 {
-    $sub_services = mysqli_fetch_assoc(mysqli_query($db,"select * from $do where auto_id='$down' "));
-    $indiki_sira=mysqli_fetch_assoc(mysqli_query($db,"select * from $do where auto_id='$down' and category_id='$sub_services[category_id]' ")); $indiki_sira=$indiki_sira["order_number"];
-    $son_sira=mysqli_fetch_assoc(mysqli_query($db,"select order_number from $do where category_id='$sub_services[category_id]' order by order_number desc")); $son_sira=$son_sira["order_number"];
-    if($indiki_sira<$son_sira)
+    $data = mysqli_fetch_assoc(mysqli_query($db,"select * from $do where auto_id='$down' "));
+    $current_order=mysqli_fetch_assoc(mysqli_query($db,"select * from $do where auto_id='$down' and category_id='$data[category_id]' "));
+    $current_order=$current_order["order_number"];
+    $last_order=mysqli_fetch_assoc(mysqli_query($db,"select order_number from $do where category_id='$data[category_id]' order by order_number desc"));
+    $last_order=$last_order["order_number"];
+    if($current_order<$last_order)
     {
-        $yuxari_sira=$indiki_sira+1;
-        mysqli_query($db,"update $do set order_number='-1' where order_number='$yuxari_sira' and category_id='$sub_services[category_id]' ");
-        mysqli_query($db,"update $do set order_number='$yuxari_sira' where order_number='$indiki_sira' and category_id='$sub_services[category_id]' ");
-        mysqli_query($db,"update $do set order_number='$indiki_sira' where order_number='-1' and category_id='$sub_services[category_id]' ");
+        $next_order=$current_order+1;
+        mysqli_query($db,"update $do set order_number='-1' where order_number='$next_order' and category_id='$data[category_id]' ");
+        mysqli_query($db,"update $do set order_number='$next_order' where order_number='$current_order' and category_id='$data[category_id]' ");
+        mysqli_query($db,"update $do set order_number='$current_order' where order_number='-1' and category_id='$data[category_id]' ");
     }
 }
-//elseif($up>0 && mysqli_num_rows(mysqli_query($db,"select id from $do where auto_id='$up' "))>0)
-//{
-//    $data = mysqli_fetch_assoc(mysqli_query($db,"select * from $do where auto_id='$up' "));
-//    $current_order=mysqli_fetch_assoc(mysqli_query($db,"select * from $do where auto_id='$up' and category_id='$data[category_id]' "));
-//    $current_order=$current_order["order_number"];
-//    if($current_order>1)
-//    {
-//        $previous_order=$current_order-1;
-//        mysqli_query($db,"update $do set order_number='-1' where order_number='$previous_order' and category_id='$data[category_id]' ");
-//        mysqli_query($db,"update $do set order_number='$previous_order' where order_number='$current_order' and category_id='$data[category_id]'");
-//        mysqli_query($db,"update $do set order_number='$current_order' where order_number='-1' and category_id='$data[category_id]' ");
-//    }
-//}
-//elseif($down>0 && mysqli_num_rows(mysqli_query($db,"select id from $do where auto_id='$down' "))>0)
-//{
-//    $data = mysqli_fetch_assoc(mysqli_query($db,"select * from $do where auto_id='$down' "));
-//    $current_order=mysqli_fetch_assoc(mysqli_query($db,"select * from $do where auto_id='$down' and category_id='$data[category_id]' "));
-//    $current_order=$current_order["order_number"];
-//    $last_order=mysqli_fetch_assoc(mysqli_query($db,"select order_number from $do where category_id='$data[category_id]' order by order_number desc"));
-//    $last_order=$last_order["order_number"];
-//    if($current_order<$last_order)
-//    {
-//        $next_order=$current_order+1;
-//        mysqli_query($db,"update $do set order_number='-1' where order_number='$next_order' and category_id='$data[category_id]' ");
-//        mysqli_query($db,"update $do set order_number='$next_order' where order_number='$current_order' and category_id='$data[category_id]' ");
-//        mysqli_query($db,"update $do set order_number='$current_order' where order_number='-1' and category_id='$data[category_id]' ");
-//    }
-//}
 ?>
 <script type="text/JavaScript">
     function MM_jumpMenu(targ,selObj,restore){ //v3.0
