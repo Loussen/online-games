@@ -60,7 +60,6 @@ if($_POST) // Add && edit
             {
                 $last_order = 1;
             }
-
         }
         else
         {
@@ -139,7 +138,7 @@ if($_POST) // Add && edit
         {
             $folder_name = substr(sha1(mt_rand()),17,8);
 
-            $filename = $folder_name."-".mt_rand(0,3).".".$original_type;
+            $filename = $folder_name."-".$this_id.".".$original_type;
 
             if($edit>0)
             {

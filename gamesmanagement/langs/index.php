@@ -19,12 +19,12 @@ if(mysqli_num_rows(mysqli_query($db,"select id from diller where id='$lang' "))>
 }
 $lang=intval($_SESSION["lang"]);
 if(is_file($lang.'/lang.php')) include $lang.'/lang.php';
-elseif(is_file('8w4_lovatoadm/langs/'.$lang.'/lang.php')) include '8w4_lovatoadm/langs/'.$lang.'/lang.php';
+elseif(is_file('gamesmanagement/langs/'.$lang.'/lang.php')) include 'gamesmanagement/langs/'.$lang.'/lang.php';
 else{
 	$lang=$main_lang;
 	$_SESSION["lang"]=$lang;
 	if(is_file($lang.'/lang.php')) include $lang.'/lang.php';
-	elseif(is_file('8w4_lovatoadm/langs/'.$lang.'/lang.php')) include '8w4_lovatoadm/langs/'.$lang.'/lang.php';
+	elseif(is_file('gamesmanagement/langs/'.$lang.'/lang.php')) include 'gamesmanagement/langs/'.$lang.'/lang.php';
 }
 $main_lang=$lang;
 

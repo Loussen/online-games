@@ -3,7 +3,7 @@
 ?>
 <div id="header">
 	<div id="logo">
-		<img src="../assets/img/logo.svg" style="width: 75%; margin-top: 5px;" />
+<!--		<img src="../assets/img/logo.svg" style="width: 75%; margin-top: 5px;" />-->
 	</div>
 	<div id="search">
 		<p style="margin-top:-4px;margin-left:-5px;color:#000000">

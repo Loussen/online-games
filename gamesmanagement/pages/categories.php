@@ -189,7 +189,7 @@ elseif($down>0 && mysqli_num_rows(mysqli_query($db,"select id from $do where aut
 
         <br class="clear" />
         <?php
-        echo '<table class="data" width="100%" cellpadding="0" cellspacing="0"><thead><tr>
+        echo '<table class="data" width="100%" cellpadding="0" cellspacing="0" style="margin: 15px 0;"><thead><tr>
                 <th style="width:50%"><input type="checkbox" data-val="0" name="all_check" id="hamisini_sec" value="all_check" /> Name</th>
                 <th style="width:30%">Editing</th>
 </tr></thead><tbody>';
