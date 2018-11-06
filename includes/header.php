@@ -22,8 +22,8 @@
                         <menu>
                             <li class="tsr-extra">
                                 <span class="label">
-                                    <a href="javascript:void(0);"
-                                       onclick="widgets_subscription.setState({visible: true, fstmodal: 'loginWelcome', tarifmessage: 'Genc OL tariff users subscribe with 50% special discount! 1.00 AZN/week for EA and Java Games and 0.60 AZN/week for Online Games (3 games download).'})">Login</a>
+                                    <a href="javascript:void(0);" onclick="widgets_subscription.setState({visible: true, fstmodal: 'loginWelcome', tarifmessage: 'Genc OL tariff users subscribe with 50% special discount! 1.00 AZN/week for EA and Java Games and 0.60 AZN/week for Online Games (3 games download).'})">Login</a>
+                                    <a href="javascript:void(0);" id="login_modal" data-toggle="modal" data-target="#login-modal">Login2</a>
                                 </span>
                             </li>
                             <li class="tsr-extra">

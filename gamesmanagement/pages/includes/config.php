@@ -8,6 +8,11 @@ define('username','root');
 define('password','');
 define('db_name','onlinegames');
 
+define("CAN_REGISTER", "any");
+define("DEFAULT_ROLE", "member");
+
+define("SECURE", FALSE);    // FOR DEVELOPMENT ONLY!!!!
+
 
 $site="http://".$_SERVER['SERVER_NAME'];	// sonda / iwaresi qoyulmasin
 define('SITE_PATH',$site);	// URL of site
@@ -23,6 +28,9 @@ mysqli_query($db,"set names utf8");
 //mysqli_set_charset($link, "utf8")
 ini_set('max_execution_time', 300);
 ini_set('memory_limit', '-1');
+
+$mysqli = new mysqli(host, username, password, db_name);
+
 include 'functions.php';
 $this_ip=addslashes($_SERVER['REMOTE_ADDR']);
 //Lang

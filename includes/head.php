@@ -417,15 +417,17 @@
 
 <title><?=$title?></title>
 
-<link rel='stylesheet' id='layerslider-css' href='<?=SITE_PATH?>/<?=SITE_PATH?>/assets/css/layerslider.css?ver=5.1.1' type='text/css' media='all'/>
+<link rel='stylesheet' id='layerslider-css' href='<?=SITE_PATH?>/assets/css/layerslider.css?ver=5.1.1' type='text/css' media='all'/>
 <link rel='stylesheet' id='ls-google-fonts-css' href='<?=SITE_PATH?>/assets/css/fonts.googleapis.css' type='text/css' media='all'/>
 <link rel='stylesheet' id='tsr-all-ie8-css' href='<?=SITE_PATH?>/assets/css/tsr-all-ie8.css?ver=4.5.15' type='text/css' media='all'/>
 <link rel='stylesheet' id='tsr-core-ol-ie-css' href='<?=SITE_PATH?>/assets/css/tsr-core-old-ie.css?ver=4.5.15' type='text/css' media='all'/>
 <link rel='stylesheet' id='tsr-core-css' href='<?=SITE_PATH?>/assets/css/tsr-core.css?ver=4.5.15' type='text/css' media='all'/>
 <link rel='stylesheet' id='main-css' href='<?=SITE_PATH?>/assets/css/main.css?ver=4.5.15' type='text/css' media='all'/>
 <link rel='stylesheet' id='bootstrap-css' href='<?=SITE_PATH?>/assets/css/bootstrap.min.css?ver=4.5.15' type='text/css' media='all'/>
+<!--<link rel='stylesheet' href='--><?//=SITE_PATH?><!--/assets/css/modal.css' type='text/css' media='all'/>-->
+<link rel='stylesheet' href='<?=SITE_PATH?>/assets/css/back.css' type='text/css' media='all'/>
 
-<script type='text/javascript' src='<?=SITE_PATH?>/assets/js/jquery.js?ver=1.12.4'></script>
+<script type='text/javascript' src='<?=SITE_PATH?>/assets/js/jquery.js'></script>
 <script type='text/javascript' src='<?=SITE_PATH?>/assets/js/jquery-migrate.min.js?ver=1.4.1'></script>
 <script type='text/javascript' src='<?=SITE_PATH?>/assets/js/layerslider.kreaturamedia.jquery.js?ver=5.1.1'></script>
 <script type='text/javascript' src='<?=SITE_PATH?>/assets/js/greensock.js?ver=1.11.2'></script>
