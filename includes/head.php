@@ -407,12 +407,12 @@
 <meta property="og:description" content="<?=$description?>"/>
 
 <!-- Favicon -->
-<link rel="icon" href="http://play.ucell.uz/wp-content/themes/ucell-games/dist/images/favicon.ico" sizes="32x32">
-<link rel="icon" href="http://play.ucell.uz/wp-content/themes/ucell-games/dist/images/favicon.ico" sizes="192x192">
-<link rel="apple-touch-icon-precomposed"
-      href="http://play.ucell.uz/wp-content/themes/ucell-games/dist/images/favicon.ico">
-<meta name="msapplication-TileImage"
-      content="http://play.ucell.uz/wp-content/themes/ucell-games/dist/images/favicon.ico">
+<!--<link rel="icon" href="http://play.ucell.uz/wp-content/themes/ucell-games/dist/images/favicon.ico" sizes="32x32">-->
+<!--<link rel="icon" href="http://play.ucell.uz/wp-content/themes/ucell-games/dist/images/favicon.ico" sizes="192x192">-->
+<!--<link rel="apple-touch-icon-precomposed"-->
+<!--      href="http://play.ucell.uz/wp-content/themes/ucell-games/dist/images/favicon.ico">-->
+<!--<meta name="msapplication-TileImage"-->
+<!--      content="http://play.ucell.uz/wp-content/themes/ucell-games/dist/images/favicon.ico">-->
 <!-- Favicon -->
 
 <title><?=$title?></title>

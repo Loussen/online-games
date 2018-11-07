@@ -1,3 +1,29 @@
+body
+{
+    background: #eee;
+}
+
+div.tsr-header-main, nav.tsr-main-nav, section.tsr-section-divider, div.tsr-footer-copyright
+{
+    background: #eee !important;
+}
+
+span.btnJoin
+{
+    background: #007FFF;
+}
+
+header.tsr-product-header, menu.tsr-nav-top-level a.menu-item, menu.tsr-nav-top-level li.newButtonForDiscount
+{
+    color: #007FFF !important;
+    font-weight: bold !important;
+}
+
+section.tsr-section-divider header.tsr-container
+{
+    color: #007FFF !important;
+}
+
 div#modal-backdrop {
     position: fixed;
     top: 0;

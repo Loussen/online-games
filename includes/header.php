@@ -22,8 +22,8 @@
                         <menu>
                             <li class="tsr-extra">
                                 <span class="label">
-                                    <a href="javascript:void(0);" onclick="widgets_subscription.setState({visible: true, fstmodal: 'loginWelcome', tarifmessage: 'Genc OL tariff users subscribe with 50% special discount! 1.00 AZN/week for EA and Java Games and 0.60 AZN/week for Online Games (3 games download).'})">Login</a>
-                                    <a href="javascript:void(0);" id="login_modal" data-toggle="modal" data-target="#login-modal">Login2</a>
+<!--                                    <a href="javascript:void(0);" onclick="widgets_subscription.setState({visible: true, fstmodal: 'loginWelcome', tarifmessage: 'Genc OL tariff users subscribe with 50% special discount! 1.00 AZN/week for EA and Java Games and 0.60 AZN/week for Online Games (3 games download).'})">Login</a>-->
+                                    <a href="javascript:void(0);" id="login_modal" data-toggle="modal" data-target="#login-modal">Login</a>
                                 </span>
                             </li>
                             <li class="tsr-extra">
@@ -65,14 +65,11 @@
                             <li class="topContentName newButtonForDiscount special">
                                 games
                             </li>
+<!--                            <li>-->
+<!--                                <a href="http://play.ucell.uz/online-games/top-games/">Play<br><strong>ONLINE</strong></a>-->
+<!--                            </li>-->
                             <li>
-                                <a href="http://play.ucell.uz/online-games/top-games/">Play<br><strong>ONLINE</strong></a>
-                            </li>
-                            <li>
-                                <a href="#">Java Games
-                                    <br>
-                                    <strong>DOWNLOAD</strong>
-                                </a>
+                                <a class="menu-item" href="http://play.ucell.uz/online-games/top-games/">Play<br><strong>ONLINE</strong></a>
                                 <menu class="tsr-nav-second-level">
                             <li>
                                 <a href="http://play.ucell.uz/java-games/new-year-games/937105">

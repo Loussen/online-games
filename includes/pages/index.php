@@ -55,15 +55,6 @@
                         <header class="tsr-product-header">Candy Thieves 3D</header>
                         <!--                            <p class="tsr-product-pric" style="height: 20px;color: #0083be; font-weight:bold;">
                                                                                              AZN                                                            </p>-->
-                        <button class="tsr-btn-download btnDownload"
-                                data-login="false"
-                                data-clubid="75112"
-                                data-catid="410154"
-                                data-mediaid="6191782"
-                                data-gencoluserlogin="Genc OL tariff users download with 50% special discount! The price of this game download for you is 0.75 AZN."
-                                data-gencoluser="">
-                            Download
-                        </button>
                         <!--Subscribe Button-->
                         <p class="tsr-product-small-print"><br/>
                             <span class="tsr-btn btnJoin"
@@ -86,15 +77,6 @@
                         <header class="tsr-product-header">BOU</header>
                         <!--                            <p class="tsr-product-pric" style="height: 20px;color: #0083be; font-weight:bold;">
                                                                                              AZN                                                            </p>-->
-                        <button class="tsr-btn-download btnDownload"
-                                data-login="false"
-                                data-clubid="75112"
-                                data-catid="410154"
-                                data-mediaid="6249040"
-                                data-gencoluserlogin="Genc OL tariff users download with 50% special discount! The price of this game download for you is 0.75 AZN."
-                                data-gencoluser="">
-                            Download
-                        </button>
                         <!--Subscribe Button-->
                         <p class="tsr-product-small-print"><br/>
                             <span class="tsr-btn btnJoin"
@@ -117,15 +99,6 @@
                         <header class="tsr-product-header">Paint the Frog</header>
                         <!--                            <p class="tsr-product-pric" style="height: 20px;color: #0083be; font-weight:bold;">
                                                                          AZN                                                            </p>-->
-                        <button class="tsr-btn-download btnDownload"
-                                data-login="false"
-                                data-clubid="75112"
-                                data-catid="410154"
-                                data-mediaid="5465088"
-                                data-gencoluserlogin="Genc OL tariff users download with 50% special discount! The price of this game download for you is 0.75 AZN."
-                                data-gencoluser="">
-                            Download
-                        </button>
 
                         <!--Subscribe Button-->
                         <p class="tsr-product-small-print"><br/>
@@ -148,15 +121,6 @@
                         <header class="tsr-product-header">2in1 Ultimate Pack</header>
                         <!--                            <p class="tsr-product-pric" style="height: 20px;color: #0083be; font-weight:bold;">
                                                                          AZN                                                            </p>-->
-                        <button class="tsr-btn-download btnDownload"
-                                data-login="false"
-                                data-clubid="75112"
-                                data-catid="410154"
-                                data-mediaid="6248634"
-                                data-gencoluserlogin="Genc OL tariff users download with 50% special discount! The price of this game download for you is 0.75 AZN."
-                                data-gencoluser="">
-                            Download
-                        </button>
 
                         <!--Subscribe Button-->
                         <p class="tsr-product-small-print"><br/>
@@ -179,15 +143,6 @@
                         <header class="tsr-product-header">Color Swap</header>
                         <!--                            <p class="tsr-product-pric" style="height: 20px;color: #0083be; font-weight:bold;">
                                                                          AZN                                                            </p>-->
-                        <button class="tsr-btn-download btnDownload"
-                                data-login="false"
-                                data-clubid="75112"
-                                data-catid="410154"
-                                data-mediaid="6170184"
-                                data-gencoluserlogin="Genc OL tariff users download with 50% special discount! The price of this game download for you is 0.75 AZN."
-                                data-gencoluser="">
-                            Download
-                        </button>
 
                         <!--Subscribe Button-->
                         <p class="tsr-product-small-print"><br/>
@@ -210,15 +165,6 @@
                         <header class="tsr-product-header">Temple Rush</header>
                         <!--                            <p class="tsr-product-pric" style="height: 20px;color: #0083be; font-weight:bold;">
                                                                          AZN                                                            </p>-->
-                        <button class="tsr-btn-download btnDownload"
-                                data-login="false"
-                                data-clubid="75112"
-                                data-catid="410154"
-                                data-mediaid="6465322"
-                                data-gencoluserlogin="Genc OL tariff users download with 50% special discount! The price of this game download for you is 0.75 AZN."
-                                data-gencoluser="">
-                            Download
-                        </button>
 
                         <!--Subscribe Button-->
                         <p class="tsr-product-small-print"><br/>
@@ -241,15 +187,6 @@
                         <header class="tsr-product-header">The Great Unknown: Houdini's Castle</header>
                         <!--                            <p class="tsr-product-pric" style="height: 20px;color: #0083be; font-weight:bold;">
                                                                          AZN                                                            </p>-->
-                        <button class="tsr-btn-download btnDownload"
-                                data-login="false"
-                                data-clubid="75112"
-                                data-catid="410154"
-                                data-mediaid="5473316"
-                                data-gencoluserlogin="Genc OL tariff users download with 50% special discount! The price of this game download for you is 0.75 AZN."
-                                data-gencoluser="">
-                            Download
-                        </button>
 
                         <!--Subscribe Button-->
                         <p class="tsr-product-small-print"><br/>
@@ -272,15 +209,6 @@
                         <header class="tsr-product-header">Giga Jump 2</header>
                         <!--                            <p class="tsr-product-pric" style="height: 20px;color: #0083be; font-weight:bold;">
                                                                          AZN                                                            </p>-->
-                        <button class="tsr-btn-download btnDownload"
-                                data-login="false"
-                                data-clubid="75112"
-                                data-catid="410154"
-                                data-mediaid="6374292"
-                                data-gencoluserlogin="Genc OL tariff users download with 50% special discount! The price of this game download for you is 0.75 AZN."
-                                data-gencoluser="">
-                            Download
-                        </button>
 
                         <!--Subscribe Button-->
                         <p class="tsr-product-small-print"><br/>
@@ -303,15 +231,6 @@
                         <header class="tsr-product-header">2in1 Movie Games</header>
                         <!--                            <p class="tsr-product-pric" style="height: 20px;color: #0083be; font-weight:bold;">
                                                                          AZN                                                            </p>-->
-                        <button class="tsr-btn-download btnDownload"
-                                data-login="false"
-                                data-clubid="75112"
-                                data-catid="410154"
-                                data-mediaid="6192724"
-                                data-gencoluserlogin="Genc OL tariff users download with 50% special discount! The price of this game download for you is 0.75 AZN."
-                                data-gencoluser="">
-                            Download
-                        </button>
 
                         <!--Subscribe Button-->
                         <p class="tsr-product-small-print"><br/>
@@ -334,15 +253,6 @@
                         <header class="tsr-product-header">Tap the Frog Faster</header>
                         <!--                            <p class="tsr-product-pric" style="height: 20px;color: #0083be; font-weight:bold;">
                                                                                              AZN                                                            </p>-->
-                        <button class="tsr-btn-download btnDownload"
-                                data-login="false"
-                                data-clubid="75112"
-                                data-catid="410154"
-                                data-mediaid="5465268"
-                                data-gencoluserlogin="Genc OL tariff users download with 50% special discount! The price of this game download for you is 0.75 AZN."
-                                data-gencoluser="">
-                            Download
-                        </button>
 
                         <!--Subscribe Button-->
                         <p class="tsr-product-small-print"><br/>
@@ -378,15 +288,6 @@
                         <header class="tsr-product-header">Candy Thieves 3D</header>
                         <!--                            <p class="tsr-product-pric" style="height: 20px;color: #0083be; font-weight:bold;">
                                                                                              AZN                                                            </p>-->
-                        <button class="tsr-btn-download btnDownload"
-                                data-login="false"
-                                data-clubid="75112"
-                                data-catid="410154"
-                                data-mediaid="6191782"
-                                data-gencoluserlogin="Genc OL tariff users download with 50% special discount! The price of this game download for you is 0.75 AZN."
-                                data-gencoluser="">
-                            Download
-                        </button>
                         <!--Subscribe Button-->
                         <p class="tsr-product-small-print"><br/>
                             <span class="tsr-btn btnJoin"
@@ -407,15 +308,6 @@
                     </figure>
                     <div class="tsr-product-content">
                         <header class="tsr-product-header">BOU</header>
-                        <button class="tsr-btn-download btnDownload"
-                                data-login="false"
-                                data-clubid="75112"
-                                data-catid="410154"
-                                data-mediaid="6249040"
-                                data-gencoluserlogin="Genc OL tariff users download with 50% special discount! The price of this game download for you is 0.75 AZN."
-                                data-gencoluser="">
-                            Download
-                        </button>
                         <!--Subscribe Button-->
                         <p class="tsr-product-small-print"><br/>
                             <span class="tsr-btn btnJoin"
@@ -436,15 +328,6 @@
                     </figure>
                     <div class="tsr-product-content">
                         <header class="tsr-product-header">Paint the Frog</header>
-                        <button class="tsr-btn-download btnDownload"
-                                data-login="false"
-                                data-clubid="75112"
-                                data-catid="410154"
-                                data-mediaid="5465088"
-                                data-gencoluserlogin="Genc OL tariff users download with 50% special discount! The price of this game download for you is 0.75 AZN."
-                                data-gencoluser="">
-                            Download
-                        </button>
 
                         <!--Subscribe Button-->
                         <p class="tsr-product-small-print"><br/>
@@ -465,15 +348,6 @@
                     </figure>
                     <div class="tsr-product-content">
                         <header class="tsr-product-header">2in1 Ultimate Pack</header>
-                        <button class="tsr-btn-download btnDownload"
-                                data-login="false"
-                                data-clubid="75112"
-                                data-catid="410154"
-                                data-mediaid="6248634"
-                                data-gencoluserlogin="Genc OL tariff users download with 50% special discount! The price of this game download for you is 0.75 AZN."
-                                data-gencoluser="">
-                            Download
-                        </button>
 
                         <!--Subscribe Button-->
                         <p class="tsr-product-small-print"><br/>
@@ -494,15 +368,6 @@
                     </figure>
                     <div class="tsr-product-content">
                         <header class="tsr-product-header">Color Swap</header>
-                        <button class="tsr-btn-download btnDownload"
-                                data-login="false"
-                                data-clubid="75112"
-                                data-catid="410154"
-                                data-mediaid="6170184"
-                                data-gencoluserlogin="Genc OL tariff users download with 50% special discount! The price of this game download for you is 0.75 AZN."
-                                data-gencoluser="">
-                            Download
-                        </button>
 
                         <!--Subscribe Button-->
                         <p class="tsr-product-small-print"><br/>
@@ -523,15 +388,6 @@
                     </figure>
                     <div class="tsr-product-content">
                         <header class="tsr-product-header">Temple Rush</header>
-                        <button class="tsr-btn-download btnDownload"
-                                data-login="false"
-                                data-clubid="75112"
-                                data-catid="410154"
-                                data-mediaid="6465322"
-                                data-gencoluserlogin="Genc OL tariff users download with 50% special discount! The price of this game download for you is 0.75 AZN."
-                                data-gencoluser="">
-                            Download
-                        </button>
 
                         <!--Subscribe Button-->
                         <p class="tsr-product-small-print"><br/>
@@ -552,15 +408,6 @@
                     </figure>
                     <div class="tsr-product-content">
                         <header class="tsr-product-header">The Great Unknown: Houdini's Castle</header>
-                        <button class="tsr-btn-download btnDownload"
-                                data-login="false"
-                                data-clubid="75112"
-                                data-catid="410154"
-                                data-mediaid="5473316"
-                                data-gencoluserlogin="Genc OL tariff users download with 50% special discount! The price of this game download for you is 0.75 AZN."
-                                data-gencoluser="">
-                            Download
-                        </button>
 
                         <!--Subscribe Button-->
                         <p class="tsr-product-small-print"><br/>
@@ -581,15 +428,6 @@
                     </figure>
                     <div class="tsr-product-content">
                         <header class="tsr-product-header">Giga Jump 2</header>
-                        <button class="tsr-btn-download btnDownload"
-                                data-login="false"
-                                data-clubid="75112"
-                                data-catid="410154"
-                                data-mediaid="6374292"
-                                data-gencoluserlogin="Genc OL tariff users download with 50% special discount! The price of this game download for you is 0.75 AZN."
-                                data-gencoluser="">
-                            Download
-                        </button>
 
                         <!--Subscribe Button-->
                         <p class="tsr-product-small-print"><br/>
@@ -610,15 +448,6 @@
                     </figure>
                     <div class="tsr-product-content">
                         <header class="tsr-product-header">2in1 Movie Games</header>
-                        <button class="tsr-btn-download btnDownload"
-                                data-login="false"
-                                data-clubid="75112"
-                                data-catid="410154"
-                                data-mediaid="6192724"
-                                data-gencoluserlogin="Genc OL tariff users download with 50% special discount! The price of this game download for you is 0.75 AZN."
-                                data-gencoluser="">
-                            Download
-                        </button>
 
                         <!--Subscribe Button-->
                         <p class="tsr-product-small-print"><br/>
@@ -639,15 +468,6 @@
                     </figure>
                     <div class="tsr-product-content">
                         <header class="tsr-product-header">Tap the Frog Faster</header>
-                        <button class="tsr-btn-download btnDownload"
-                                data-login="false"
-                                data-clubid="75112"
-                                data-catid="410154"
-                                data-mediaid="5465268"
-                                data-gencoluserlogin="Genc OL tariff users download with 50% special discount! The price of this game download for you is 0.75 AZN."
-                                data-gencoluser="">
-                            Download
-                        </button>
 
                         <!--Subscribe Button-->
                         <p class="tsr-product-small-print"><br/>
