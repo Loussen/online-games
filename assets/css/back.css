@@ -13,6 +13,11 @@ span.btnJoin
     background: #007FFF;
 }
 
+button#featured_button, form#search-form .tsr-btn
+{
+    background: #007FA0 !important;
+}
+
 header.tsr-product-header, menu.tsr-nav-top-level a.menu-item, menu.tsr-nav-top-level li.newButtonForDiscount
 {
     color: #007FFF !important;
@@ -45,3 +50,6 @@ form#login-form span.help-block
 {
     display: none;
 }
+
+.tsr-direction-nav a.tsr-prev { opacity: 1; }
+.tsr-direction-nav a.tsr-next { opacity: 1; }

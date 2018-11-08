@@ -65,188 +65,186 @@
                             <li class="topContentName newButtonForDiscount special">
                                 games
                             </li>
-<!--                            <li>-->
-<!--                                <a href="http://play.ucell.uz/online-games/top-games/">Play<br><strong>ONLINE</strong></a>-->
-<!--                            </li>-->
                             <li>
-                                <a class="menu-item" href="http://play.ucell.uz/online-games/top-games/">Play<br><strong>ONLINE</strong></a>
+                                <a class="menu-item" href="javascript:void(0);">Play<br><strong>ONLINE</strong></a>
                                 <menu class="tsr-nav-second-level">
-                            <li>
-                                <a href="http://play.ucell.uz/java-games/new-year-games/937105">
-                                    <span>Featured Game</span>
-                                    <article class="tsr-landing">
-                                        <figure>
-                                            <img src="http://helm.tekmob.com/m3/cache/937105_55.jpg">
-                                        </figure>
-                                        <header>SNOW MANIA</header>
-                                        <button
-                                                data-login="false"
-                                                data-postid="5"
-                                                data-club-id="75112"
-                                                data-view=""
-                                                data-media-id="937105"
-                                                data-cat-id="410730"
-                                                class="tsr-btn"
-                                                data-gencoluserlogin="Genc OL tariff users subscribe with 50% special discount! 1.00 AZN/week for EA and Java Games and 0.60 AZN/week for Online Games (3 games download)."
-                                                data-gencoluser="">
-                                            Download
-                                        </button>
-                                    </article>
-                                </a>
-                            </li>
+                                    <li>
+                                        <a href="http://play.ucell.uz/java-games/new-year-games/937105">
+                                            <span>Featured Game</span>
+                                            <article class="tsr-landing">
+                                                <figure>
+                                                    <img src="http://helm.tekmob.com/m3/cache/937105_55.jpg">
+                                                </figure>
+                                                <header>SNOW MANIA</header>
+                                                <button
+                                                        data-login="false"
+                                                        data-postid="5"
+                                                        data-club-id="75112"
+                                                        data-view=""
+                                                        data-media-id="937105"
+                                                        data-cat-id="410730"
+                                                        class="tsr-btn"
+                                                        data-gencoluserlogin="Genc OL tariff users subscribe with 50% special discount! 1.00 AZN/week for EA and Java Games and 0.60 AZN/week for Online Games (3 games download)."
+                                                        data-gencoluser=""
+                                                        id="featured_button">
+                                                    Subscibe
+                                                </button>
+                                            </article>
+                                        </a>
+                                    </li>
 
-                            <li class="has-sub">
-                                <a href="http://play.ucell.uz/java-games/new-year-games"
-                                   onclick="location.assign(jQuery(this).attr('href'));"
-                                   class="clickableTabWithLink">New Year Games</a>
-                                <menu class="tsr-nav-third-level">
-                            <li>
-                                <a href="http://play.ucell.uz/java-games/new-year-games/953970">
-                                    Dragon Slayer Jr Xmas </a>
+                                    <li class="has-sub">
+        <!--                                <a href="http://play.ucell.uz/java-games/new-year-games"-->
+        <!--                                   onclick="location.assign(jQuery(this).attr('href'));"-->
+        <!--                                   class="clickableTabWithLink">New Year Games</a>-->
+                                        <menu class="tsr-nav-third-level">
+                                            <li>
+                                                <a href="http://play.ucell.uz/java-games/new-year-games/953970">
+                                                    Dragon Slayer Jr Xmas </a>
+                                            </li>
+                                            <li>
+                                                <a href="http://play.ucell.uz/java-games/new-year-games/953817">
+                                                    Santas Puzzle Party </a>
+                                            </li>
+                                        </menu>
+                                    </li>
+                                    <li class="has-sub">
+        <!--                                <a href="http://play.ucell.uz/java-games/action-adventure"-->
+        <!--                                   onclick="location.assign(jQuery(this).attr('href'));"-->
+        <!--                                   class="clickableTabWithLink">Action & Adventure</a>-->
+                                        <menu class="tsr-nav-third-level">
+                                            <li>
+                                                <a href="http://play.ucell.uz/java-games/action-adventure/5810924">Dark Assassin</a>
+                                            </li>
+                                            <li>
+                                                <a href="http://play.ucell.uz/java-games/action-adventure/2115793">
+                                                    Zen Blaster </a>
+                                            </li>
+                                        </menu>
+                                    </li>
+                                    <li class="has-sub">
+        <!--                                <a href="http://play.ucell.uz/java-games/arcade"-->
+        <!--                                   onclick="location.assign(jQuery(this).attr('href'));"-->
+        <!--                                   class="clickableTabWithLink">Arcade</a>-->
+                                        <menu class="tsr-nav-third-level">
+                                            <li>
+                                                <a href="http://play.ucell.uz/java-games/arcade/6191782">
+                                                    Candy Thieves 3d </a>
+                                            </li>
+                                            <li>
+                                                <a href="http://play.ucell.uz/java-games/arcade/6249040">
+                                                    Bou </a>
+                                            </li>
+                                        </menu>
+                                    </li>
+                                    <li class="has-sub">
+        <!--                                <a href="http://play.ucell.uz/java-games/brain-puzzle"-->
+        <!--                                   onclick="location.assign(jQuery(this).attr('href'));"-->
+        <!--                                   class="clickableTabWithLink">Brain & Puzzle</a>-->
+                                        <menu class="tsr-nav-third-level">
+                                            <li>
+                                                <a href="http://play.ucell.uz/java-games/brain-puzzle/6178814">
+                                                    Cut The Rope: Magic Zero </a>
+                                            </li>
+                                            <li>
+                                                <a href="http://play.ucell.uz/java-games/brain-puzzle/5815158">
+                                                    Blast Mania </a>
+                                            </li>
+                                        </menu>
+                                    </li>
+                                    <li class="has-sub">
+        <!--                                <a href="http://play.ucell.uz/java-games/cards-board-games"-->
+        <!--                                   onclick="location.assign(jQuery(this).attr('href'));"-->
+        <!--                                   class="clickableTabWithLink">Cards & Board Games</a>-->
+                                        <menu class="tsr-nav-third-level">
+                                            <li>
+                                                <a href="http://play.ucell.uz/java-games/cards-board-games/5465198">
+                                                    Solitaire Mystery: Four Seasons </a>
+                                            </li>
+                                            <li>
+                                                <a href="http://play.ucell.uz/java-games/cards-board-games/6267148">
+                                                    World Casino </a>
+                                            </li>
+                                        </menu>
+                                    </li>
+                                    <li class="has-sub">
+        <!--                                <a href="http://play.ucell.uz/java-games/fun-entertainment"-->
+        <!--                                   onclick="location.assign(jQuery(this).attr('href'));"-->
+        <!--                                   class="clickableTabWithLink">Fun & Entertainment</a>-->
+                                        <menu class="tsr-nav-third-level">
+                                            <li>
+                                                <a href="http://play.ucell.uz/java-games/fun-entertainment/6155232">
+                                                    Fidget Spinner </a>
+                                            </li>
+                                            <li>
+                                                <a href="http://play.ucell.uz/java-games/fun-entertainment/5465192">
+                                                    Jewel Tree: Match It </a>
+                                            </li>
+                                        </menu>
+                                    </li>
+                                    <li class="has-sub">
+        <!--                                <a href="http://play.ucell.uz/java-games/platform"-->
+        <!--                                   onclick="location.assign(jQuery(this).attr('href'));"-->
+        <!--                                   class="clickableTabWithLink">Platform</a>-->
+                                        <menu class="tsr-nav-third-level">
+                                            <li>
+                                                <a href="http://play.ucell.uz/java-games/platform/2151613">
+                                                    Triballs </a>
+                                            </li>
+                                            <li>
+                                                <a href="http://play.ucell.uz/java-games/platform/1841999">
+                                                    Thief Dash </a>
+                                            </li>
+                                        </menu>
+                                    </li>
+                                    <li class="has-sub">
+        <!--                                <a href="http://play.ucell.uz/java-games/racing"-->
+        <!--                                   onclick="location.assign(jQuery(this).attr('href'));"-->
+        <!--                                   class="clickableTabWithLink">Racing</a>-->
+                                        <menu class="tsr-nav-third-level">
+                                            <li>
+                                                <a href="http://play.ucell.uz/java-games/racing/6301748">
+                                                    2 In 1 Car Games </a>
+                                            </li>
+                                            <li>
+                                                <a href="http://play.ucell.uz/java-games/racing/6284498">
+                                                    Zombie Rider </a>
+                                            </li>
+                                        </menu>
+                                    </li>
+                                    <li class="has-sub">
+        <!--                                <a href="http://play.ucell.uz/java-games/rpg-strategy"-->
+        <!--                                   onclick="location.assign(jQuery(this).attr('href'));"-->
+        <!--                                   class="clickableTabWithLink">RPG & Strategy</a>-->
+                                        <menu class="tsr-nav-third-level">
+                                            <li>
+                                                <a href="http://play.ucell.uz/java-games/rpg-strategy/5465108">
+                                                    King Of Thieves </a>
+                                            </li>
+                                            <li>
+                                                <a href="http://play.ucell.uz/java-games/rpg-strategy/5465114">
+                                                    My Om Nom </a>
+                                            </li>
+                                        </menu>
+                                    </li>
+                                    <li class="has-sub">
+        <!--                                <a href="http://play.ucell.uz/java-games/sports"-->
+        <!--                                   onclick="location.assign(jQuery(this).attr('href'));"-->
+        <!--                                   class="clickableTabWithLink">Sports</a>-->
+                                        <menu class="tsr-nav-third-level">
+                                            <li>
+                                                <a href="http://play.ucell.uz/java-games/sports/6266554">
+                                                    Pool Pro </a>
+                                            </li>
+                                            <li>
+                                                <a href="http://play.ucell.uz/java-games/sports/6185080">
+                                                    Baseball Pro 2017 </a>
+                                            </li>
+                                        </menu>
+                                    </li>
+                                    <li class="tsr-btn-close"><a href="#"></a></li>
+                                </menu>
                             </li>
-                            <li>
-                                <a href="http://play.ucell.uz/java-games/new-year-games/953817">
-                                    Santas Puzzle Party </a>
-                            </li>
-                        </menu>
-                        </li>
-                        <li class="has-sub">
-                            <a href="http://play.ucell.uz/java-games/action-adventure"
-                               onclick="location.assign(jQuery(this).attr('href'));"
-                               class="clickableTabWithLink">Action & Adventure</a>
-                            <menu class="tsr-nav-third-level">
-                        <li>
-                            <a href="http://play.ucell.uz/java-games/action-adventure/5810924">Dark Assassin</a>
-                        </li>
-                        <li>
-                            <a href="http://play.ucell.uz/java-games/action-adventure/2115793">
-                                Zen Blaster </a>
-                        </li>
-                        </menu>
-                        </li>
-                        <li class="has-sub">
-                            <a href="http://play.ucell.uz/java-games/arcade"
-                               onclick="location.assign(jQuery(this).attr('href'));"
-                               class="clickableTabWithLink">Arcade</a>
-                            <menu class="tsr-nav-third-level">
-                        <li>
-                            <a href="http://play.ucell.uz/java-games/arcade/6191782">
-                                Candy Thieves 3d </a>
-                        </li>
-                        <li>
-                            <a href="http://play.ucell.uz/java-games/arcade/6249040">
-                                Bou </a>
-                        </li>
-                        </menu>
-                        </li>
-                        <li class="has-sub">
-                            <a href="http://play.ucell.uz/java-games/brain-puzzle"
-                               onclick="location.assign(jQuery(this).attr('href'));"
-                               class="clickableTabWithLink">Brain & Puzzle</a>
-                            <menu class="tsr-nav-third-level">
-                        <li>
-                            <a href="http://play.ucell.uz/java-games/brain-puzzle/6178814">
-                                Cut The Rope: Magic Zero </a>
-                        </li>
-                        <li>
-                            <a href="http://play.ucell.uz/java-games/brain-puzzle/5815158">
-                                Blast Mania </a>
-                        </li>
-                        </menu>
-                        </li>
-                        <li class="has-sub">
-                            <a href="http://play.ucell.uz/java-games/cards-board-games"
-                               onclick="location.assign(jQuery(this).attr('href'));"
-                               class="clickableTabWithLink">Cards & Board Games</a>
-                            <menu class="tsr-nav-third-level">
-                        <li>
-                            <a href="http://play.ucell.uz/java-games/cards-board-games/5465198">
-                                Solitaire Mystery: Four Seasons </a>
-                        </li>
-                        <li>
-                            <a href="http://play.ucell.uz/java-games/cards-board-games/6267148">
-                                World Casino </a>
-                        </li>
-                        </menu>
-                        </li>
-                        <li class="has-sub">
-                            <a href="http://play.ucell.uz/java-games/fun-entertainment"
-                               onclick="location.assign(jQuery(this).attr('href'));"
-                               class="clickableTabWithLink">Fun & Entertainment</a>
-                            <menu class="tsr-nav-third-level">
-                        <li>
-                            <a href="http://play.ucell.uz/java-games/fun-entertainment/6155232">
-                                Fidget Spinner </a>
-                        </li>
-                        <li>
-                            <a href="http://play.ucell.uz/java-games/fun-entertainment/5465192">
-                                Jewel Tree: Match It </a>
-                        </li>
-                        </menu>
-                        </li>
-                        <li class="has-sub">
-                            <a href="http://play.ucell.uz/java-games/platform"
-                               onclick="location.assign(jQuery(this).attr('href'));"
-                               class="clickableTabWithLink">Platform</a>
-                            <menu class="tsr-nav-third-level">
-                        <li>
-                            <a href="http://play.ucell.uz/java-games/platform/2151613">
-                                Triballs </a>
-                        </li>
-                        <li>
-                            <a href="http://play.ucell.uz/java-games/platform/1841999">
-                                Thief Dash </a>
-                        </li>
-                        </menu>
-                        </li>
-                        <li class="has-sub">
-                            <a href="http://play.ucell.uz/java-games/racing"
-                               onclick="location.assign(jQuery(this).attr('href'));"
-                               class="clickableTabWithLink">Racing</a>
-                            <menu class="tsr-nav-third-level">
-                        <li>
-                            <a href="http://play.ucell.uz/java-games/racing/6301748">
-                                2 In 1 Car Games </a>
-                        </li>
-                        <li>
-                            <a href="http://play.ucell.uz/java-games/racing/6284498">
-                                Zombie Rider </a>
-                        </li>
-                        </menu>
-                        </li>
-                        <li class="has-sub">
-                            <a href="http://play.ucell.uz/java-games/rpg-strategy"
-                               onclick="location.assign(jQuery(this).attr('href'));"
-                               class="clickableTabWithLink">RPG & Strategy</a>
-                            <menu class="tsr-nav-third-level">
-                        <li>
-                            <a href="http://play.ucell.uz/java-games/rpg-strategy/5465108">
-                                King Of Thieves </a>
-                        </li>
-                        <li>
-                            <a href="http://play.ucell.uz/java-games/rpg-strategy/5465114">
-                                My Om Nom </a>
-                        </li>
-                        </menu>
-                        </li>
-                        <li class="has-sub">
-                            <a href="http://play.ucell.uz/java-games/sports"
-                               onclick="location.assign(jQuery(this).attr('href'));"
-                               class="clickableTabWithLink">Sports</a>
-                            <menu class="tsr-nav-third-level">
-                        <li>
-                            <a href="http://play.ucell.uz/java-games/sports/6266554">
-                                Pool Pro </a>
-                        </li>
-                        <li>
-                            <a href="http://play.ucell.uz/java-games/sports/6185080">
-                                Baseball Pro 2017 </a>
-                        </li>
-                        </menu>
-                        </li>
-                        <li class="tsr-btn-close"><a href="#"></a></li>
-                        </menu>
-                        </li>
                         </menu>
                     </nav>
 
