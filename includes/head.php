@@ -8,11 +8,17 @@
 ?>
 
 <?php
-    $info_description=mysqli_fetch_assoc(mysqli_query($db,"select `description_`,`title_`,`keywords_` from `seo` where `lang_id`='$esas_dil' "));
-    $description=$info_description["description_"];
-    $title=$info_description["title_"];
+    $stmt_select = mysqli_prepare($db,"SELECT `description_`,`title_`,`keywords_` FROM `seo` WHERE `lang_id`=(?) LIMIT 1");
+    $stmt_select->bind_param('i', $main_lang);
+    $stmt_select->execute();
+    $stmt_select->bind_result($site_description,$site_title,$site_keywords);
+    $stmt_select->fetch();
+
+//    $info_description=mysqli_fetch_assoc(mysqli_query($db,"select `description_`,`title_`,`keywords_` from `seo` where `lang_id`='$esas_dil' "));
+    $description=$site_description;
+    $title=$site_title;
     $image=SITE_PATH.'/images/logo/ASET-LOGO2.png';
-    $keywords = $info_description["keywords_"];
+    $keywords = $site_keywords;
     $og_url ='http://'.$_SERVER["HTTP_HOST"].$_SERVER["REQUEST_URI"];
 
     if($do=="company")
@@ -384,13 +390,13 @@
         $main_menu = mysqli_fetch_assoc(mysqli_query($db,"SELECT `link`,`name` FROM `menyular` WHERE `lang_id`='$esas_dil' and `link`='/' and `aktivlik`=1 order by id DESC LIMIT 1"));
         $title = $info_description["title_"].' - '.$lang68;
     }
-    else
-    {
-        $sql_services = mysqli_query($db,"SELECT `auto_id`,`fontawesome`,`name`,`qisa_metn` FROM services WHERE `lang_id`='$esas_dil' and `aktivlik`=1 order by `sira`");
-        $sql_partner = mysqli_query($db, "SELECT `auto_id`,`tip`,`name` FROM `partners` WHERE `lang_id`='$esas_dil' and `aktivlik`=1 order by `sira`");
-        $sql_news = mysqli_query($db, "SELECT `auto_id`,`tip`,`name`,`qisa_metn`,`created_at` FROM `blog` WHERE `lang_id`='$esas_dil' and `aktivlik`=1 and `text`!='' order by `created_at` DESC");
-        $sql_contact = mysqli_fetch_assoc(mysqli_query($db,"SELECT `address`,`text`,`phone`,`email` FROM `contacts` WHERE `lang_id`='$esas_dil'"));
-    }
+//    else
+//    {
+//        $sql_services = mysqli_query($db,"SELECT `auto_id`,`fontawesome`,`name`,`qisa_metn` FROM services WHERE `lang_id`='$esas_dil' and `aktivlik`=1 order by `sira`");
+//        $sql_partner = mysqli_query($db, "SELECT `auto_id`,`tip`,`name` FROM `partners` WHERE `lang_id`='$esas_dil' and `aktivlik`=1 order by `sira`");
+//        $sql_news = mysqli_query($db, "SELECT `auto_id`,`tip`,`name`,`qisa_metn`,`created_at` FROM `blog` WHERE `lang_id`='$esas_dil' and `aktivlik`=1 and `text`!='' order by `created_at` DESC");
+//        $sql_contact = mysqli_fetch_assoc(mysqli_query($db,"SELECT `address`,`text`,`phone`,`email` FROM `contacts` WHERE `lang_id`='$main_lang'"));
+//    }
 ?>
 <meta charset="utf-8">
 <meta name="language" content="en" />

@@ -14,7 +14,7 @@
 </head>
 <body class="page page-id-5 page-template page-template-mvc no-touch page-template-homepage page-template-mvchomepage-php tsr-grid">
 <?php
-    $sql_contact = mysqli_fetch_assoc(mysqli_query($db,"SELECT * FROM `contacts` WHERE `lang_id`='$esas_dil' order by `id` DESC"));
+//    $sql_contact = mysqli_fetch_assoc(mysqli_query($db,"SELECT * FROM `contacts` WHERE `lang_id`='$esas_dil' order by `id` DESC"));
 ?>
 <input type="hidden" name="csrf_" value="<?=set_csrf_()?>" />
 
@@ -202,7 +202,14 @@
 <script type='text/javascript' src='<?=SITE_PATH?>/assets/js/jquery.flexslider.js?ver=1.0.0'></script>
 <script type='text/javascript' src='<?=SITE_PATH?>/assets/js/tsr-carousel-listing.js?ver=1.0.0'></script>
 <!--<script type='text/javascript' src='--><?//=SITE_PATH?><!--/assets/js/all.min.js?ver=1.0.0'></script>-->
-<script type='text/javascript' src='<?=SITE_PATH?>/assets/js/jssor.slider.min.js'></script>
+<?php
+    if($do=="inner")
+    {
+        ?>
+        <script type='text/javascript' src='<?=SITE_PATH?>/assets/js/jssor.slider.min.js'></script>
+        <?php
+    }
+?>
 <script type='text/javascript' src='<?=SITE_PATH?>/assets/js/back.js'></script>
 
 <script>

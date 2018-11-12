@@ -397,7 +397,8 @@ elseif($down>0 && mysqli_num_rows(mysqli_query($db,"select id from $do where aut
         <br class="clear" />
         <?php
         echo '<table class="data" width="100%" cellpadding="0" cellspacing="0" style="margin: 15px 0;"><thead><tr>
-                <th style="width:40%"><input type="checkbox" data-val="0" name="all_check" id="hamisini_sec" value="all_check" /> Name</th>
+                <th style="width:10%"><input type="checkbox" data-val="0" name="all_check" id="hamisini_sec" value="all_check" /> №</th>
+                <th style="width:30%">Name</th>
                 <th style="width:20%">Category</th>
                 <th style="width:20%">Testing</th>
                 <th style="width:30%">Editing</th>
@@ -405,11 +406,13 @@ elseif($down>0 && mysqli_num_rows(mysqli_query($db,"select id from $do where aut
         $query=str_replace("select id ","select * ",$query_count);
         $query.=" order by auto_id desc limit $start,$limit";
         $sql=mysqli_query($db,"select * from $do where lang_id='$main_lang' ".$add_information_sql." order by category_id asc, order_number asc limit $start,$limit");
+        $i = 1;
         while($row=mysqli_fetch_assoc($sql))
         {
             $row_categories = mysqli_fetch_assoc(mysqli_query($db, "SELECT `name` FROM `categories` WHERE active=1 and auto_id='$row[category_id]'"));
             echo '<tr>
-					<td><input type="checkbox" id="chbx_'.$row["auto_id"].'" value="'.$row["auto_id"].'" onclick="chbx_(this.id)" /> '.stripslashes($row["name"]).'</td>
+                    <td><input type="checkbox" id="chbx_'.$row["auto_id"].'" value="'.$row["auto_id"].'" onclick="chbx_(this.id)" /> '.$i.'</td>
+					<td>'.stripslashes($row["name"]).'</td>
 					<td>'.$row_categories['name'].'</td>
 					<td><a href="../onlinegames/'.$row['code'].'?rand='.rand(0,10000).'" target="_blank">Play game</a></td>
 					<td>
@@ -421,6 +424,7 @@ elseif($down>0 && mysqli_num_rows(mysqli_query($db,"select id from $do where aut
             echo '<img src="images/'.$row["active"].'_lamp.png" title="'.$title.'" border="0" align="absmiddle" style="cursor:pointer" id="info_'.$row["auto_id"].'" onclick="aktivlik(\''.$do.'\',this.id,this.title)"  />';
             echo '</td>
 				</tr>';
+            $i++;
         }
         echo '</tbody></table>';
         ?>
