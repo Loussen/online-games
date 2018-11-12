@@ -15,24 +15,33 @@
     <div class="ls-wp-fullwidth-container">
         <div class="ls-wp-fullwidth-helper">
             <div id="layerslider_7" class="ls-wp-container" style="width:100%;height:480px;margin:0 auto;margin-bottom: 0px;">
-                <div class="ls-slide" data-ls=" transition2d: all;">
-                    <img src="assets/img/blank.gif"
-                         data-src="http://play.ucell.uz/wp-content/uploads/2016/06/Azercell-Portal-Banners8-1.jpg"
-                         class="ls-bg" alt="Slide background"/>
-                    <a href="http://play.ucell.uz/ea-games/ea-sports-racing/4422502" target="_self" class="ls-link"></a>
-                </div>
-                <div class="ls-slide" data-ls=" transition2d: all;">
-                    <img src="http://play.ucell.uz/wp-content/plugins/LayerSlider/static/img/blank.gif"
-                         data-src="http://play.ucell.uz/wp-content/uploads/2016/07/Azercell-Portal-Banners2-2_resized.jpg"
-                         class="ls-bg" alt="Slide background"/>
-                    <a href="http://play.ucell.uz/ea-games/top-10" target="_self" class="ls-link"></a>
-                </div>
-                <div class="ls-slide" data-ls=" transition2d: all;">
-                    <img src="http://play.ucell.uz/wp-content/plugins/LayerSlider/static/img/blank.gif"
-                         data-src="http://play.ucell.uz/wp-content/uploads/2016/07/Azercell-Portal-Banners3_resized.jpg"
-                         class="ls-bg" alt="Slide background"/>
-                    <a href="http://play.ucell.uz/ea-games/new/4422716" target="_self" class="ls-link"></a>
-                </div>
+                <?php
+                    $active = 1;
+
+                    $stmt_select = mysqli_prepare($db,"SELECT 
+                                                              `image_name`,
+                                                              `url` 
+                                                              FROM `slider`
+                                                              WHERE `lang_id`=(?) and `active`=(?) 
+                                                              order by `order_number` asc");
+                    $stmt_select->bind_param('ii', $main_lang,$active);
+                    $stmt_select->execute();
+                    $result = $stmt_select->get_result();
+
+                    while($row = $result->fetch_assoc())
+                    {
+                        ?>
+                        <div class="ls-slide" data-ls=" transition2d: all;">
+                            <img src="<?=SITE_PATH?>/assets/img/blank.gif"
+                                 data-src="<?=SITE_PATH?>/images/slider/<?=$row['image_name']?>"
+                                 class="ls-bg" alt="Slide background"/>
+                            <a href="<?=$row['url']?>" target="_blank" class="ls-link"></a>
+                        </div>
+                        <?php
+                    }
+
+                    $stmt_select->close();
+                ?>
             </div>
         </div>
     </div>
@@ -46,226 +55,52 @@
     <section class="tsr-section-carousel-listing front-categories">
         <div class="tsr-container">
             <div class="tsr-slides">
-                <a href="http://play.ucell.uz/java-games/arcade/6191782" class="tsr-module-product">
-                    <figure class="tsr-product-image" style="text-align:center;">
-                        <img src="http://helm.tekmob.com/m3/cache/6191782_38.jpg"
-                             style="max-width:250px; width: 100%;"/>
-                    </figure>
-                    <div class="tsr-product-content">
-                        <header class="tsr-product-header">Candy Thieves 3D</header>
-                        <!--                            <p class="tsr-product-pric" style="height: 20px;color: #0083be; font-weight:bold;">
-                                                                                             AZN                                                            </p>-->
-                        <!--Subscribe Button-->
-                        <p class="tsr-product-small-print"><br/>
-                            <span class="tsr-btn btnJoin"
-                                  data-clubid="75112"
-                                  data-login="false"
-                                  data-gencoluserlogin="Genc OL tariff users subscribe with 50% special discount! 1.00 AZN/week for EA and Java Games and 0.60 AZN/week for Online Games (3 games download)."
-                                  data-gencoluser=" ">
-                                    Subscribe
+                <?php
+                    $stmt_select = mysqli_prepare($db,
+                        "SELECT 
+                                `games`.`name` as `g_name`,
+                                `games`.`image_name` as `g_image_name`,
+                                `games`.`auto_id` as `g_id`,
+                                `categories`.`auto_id` as `c_id`,
+                                `categories`.`name` as `c_name` 
+                                FROM `games`
+                                LEFT JOIN `categories` on `games`.`category_id`=`categories`.`auto_id`
+                                WHERE `games`.`lang_id`=(?) and `games`.`active`=(?) and `categories`.`lang_id`=(?)
+                                order by `games`.`order_number` asc");
+                    $stmt_select->bind_param('iii', $main_lang,$active,$main_lang);
+                    $stmt_select->execute();
+                    $result = $stmt_select->get_result();
+
+                    while($row = $result->fetch_assoc())
+                    {
+                        ?>
+                        <a href="<?=SITE_PATH?>/online-games/<?=slugGenerator($row['c_name']) . '-' . $row['c_id']?>/<?=slugGenerator($row['g_name']) . '-' . $row['g_id']?>" class="tsr-module-product">
+                            <figure class="tsr-product-image" style="text-align:center;">
+                                <img src="<?=SITE_PATH?>/images/games/<?=$row['g_image_name']?>"
+                                     style="max-width:250px; width: 100%;"/>
+                            </figure>
+                            <div class="tsr-product-content">
+                                <header class="tsr-product-header"><?=$row['g_name']?></header>
+                                <!--                            <p class="tsr-product-pric" style="height: 20px;color: #0083be; font-weight:bold;">
+                                                                                                     AZN                                                            </p>-->
+                                <!--Play Button-->
+                                <p class="tsr-product-small-print"><br/>
+                                    <span class="tsr-btn btnJoin"
+                                          data-clubid="75112"
+                                          data-login="false"
+                                          data-gencoluserlogin="Genc OL tariff users subscribe with 50% special discount! 1.00 AZN/week for EA and Java Games and 0.60 AZN/week for Online Games (3 games download)."
+                                          data-gencoluser=" ">
+                                    Play
                                 </span>
-                        </p>
-                    </div>
-                    <div class="clear"></div>
-                </a>
-                <a href="http://play.ucell.uz/java-games/arcade/6249040" class="tsr-module-product">
-                    <figure class="tsr-product-image" style="text-align:center;">
-                        <img src="http://helm.tekmob.com/m3/cache/6249040_38.jpg"
-                             style="max-width:250px; width: 100%;"/>
-                    </figure>
-                    <div class="tsr-product-content">
-                        <header class="tsr-product-header">BOU</header>
-                        <!--                            <p class="tsr-product-pric" style="height: 20px;color: #0083be; font-weight:bold;">
-                                                                                             AZN                                                            </p>-->
-                        <!--Subscribe Button-->
-                        <p class="tsr-product-small-print"><br/>
-                            <span class="tsr-btn btnJoin"
-                                  data-clubid="75112"
-                                  data-login="false"
-                                  data-gencoluserlogin="Genc OL tariff users subscribe with 50% special discount! 1.00 AZN/week for EA and Java Games and 0.60 AZN/week for Online Games (3 games download)."
-                                  data-gencoluser=" ">
-                                      Subscribe
-                                </span>
-                        </p>
-                    </div>
-                    <div class="clear"></div>
-                </a>
-                <a href="http://play.ucell.uz/java-games/arcade/5465088" class="tsr-module-product">
-                    <figure class="tsr-product-image" style="text-align:center;">
-                        <img src="http://helm.tekmob.com/m3/cache/5465088_38.jpg"
-                             style="max-width:250px; width: 100%;"/>
-                    </figure>
-                    <div class="tsr-product-content">
-                        <header class="tsr-product-header">Paint the Frog</header>
-                        <!--                            <p class="tsr-product-pric" style="height: 20px;color: #0083be; font-weight:bold;">
-                                                                         AZN                                                            </p>-->
+                                </p>
+                            </div>
+                            <div class="clear"></div>
+                        </a>
+                        <?php
+                    }
 
-                        <!--Subscribe Button-->
-                        <p class="tsr-product-small-print"><br/>
-                            <span class="tsr-btn btnJoin"
-                                  data-clubid="75112"
-                                  data-login="false"
-                                  data-gencoluserlogin="Genc OL tariff users subscribe with 50% special discount! 1.00 AZN/week for EA and Java Games and 0.60 AZN/week for Online Games (3 games download)."
-                                  data-gencoluser=" ">
-                                  Subscribe                                                </span>
-                        </p>
-                    </div>
-                    <div class="clear"></div>
-                </a>
-                <a href="http://play.ucell.uz/java-games/arcade/6248634" class="tsr-module-product">
-                    <figure class="tsr-product-image" style="text-align:center;">
-                        <img src="http://helm.tekmob.com/m3/cache/6248634_38.jpg"
-                             style="max-width:250px; width: 100%;"/>
-                    </figure>
-                    <div class="tsr-product-content">
-                        <header class="tsr-product-header">2in1 Ultimate Pack</header>
-                        <!--                            <p class="tsr-product-pric" style="height: 20px;color: #0083be; font-weight:bold;">
-                                                                         AZN                                                            </p>-->
-
-                        <!--Subscribe Button-->
-                        <p class="tsr-product-small-print"><br/>
-                            <span class="tsr-btn btnJoin"
-                                  data-clubid="75112"
-                                  data-login="false"
-                                  data-gencoluserlogin="Genc OL tariff users subscribe with 50% special discount! 1.00 AZN/week for EA and Java Games and 0.60 AZN/week for Online Games (3 games download)."
-                                  data-gencoluser=" ">
-                                  Subscribe                                                </span>
-                        </p>
-                    </div>
-                    <div class="clear"></div>
-                </a>
-                <a href="http://play.ucell.uz/java-games/arcade/6170184" class="tsr-module-product">
-                    <figure class="tsr-product-image" style="text-align:center;">
-                        <img src="http://helm.tekmob.com/m3/cache/6170184_38.jpg"
-                             style="max-width:250px; width: 100%;"/>
-                    </figure>
-                    <div class="tsr-product-content">
-                        <header class="tsr-product-header">Color Swap</header>
-                        <!--                            <p class="tsr-product-pric" style="height: 20px;color: #0083be; font-weight:bold;">
-                                                                         AZN                                                            </p>-->
-
-                        <!--Subscribe Button-->
-                        <p class="tsr-product-small-print"><br/>
-                            <span class="tsr-btn btnJoin"
-                                  data-clubid="75112"
-                                  data-login="false"
-                                  data-gencoluserlogin="Genc OL tariff users subscribe with 50% special discount! 1.00 AZN/week for EA and Java Games and 0.60 AZN/week for Online Games (3 games download)."
-                                  data-gencoluser=" ">
-                                  Subscribe                                                </span>
-                        </p>
-                    </div>
-                    <div class="clear"></div>
-                </a>
-                <a href="http://play.ucell.uz/java-games/arcade/6465322" class="tsr-module-product">
-                    <figure class="tsr-product-image" style="text-align:center;">
-                        <img src="http://helm.tekmob.com/m3/cache/6465322_38.jpg"
-                             style="max-width:250px; width: 100%;"/>
-                    </figure>
-                    <div class="tsr-product-content">
-                        <header class="tsr-product-header">Temple Rush</header>
-                        <!--                            <p class="tsr-product-pric" style="height: 20px;color: #0083be; font-weight:bold;">
-                                                                         AZN                                                            </p>-->
-
-                        <!--Subscribe Button-->
-                        <p class="tsr-product-small-print"><br/>
-                            <span class="tsr-btn btnJoin"
-                                  data-clubid="75112"
-                                  data-login="false"
-                                  data-gencoluserlogin="Genc OL tariff users subscribe with 50% special discount! 1.00 AZN/week for EA and Java Games and 0.60 AZN/week for Online Games (3 games download)."
-                                  data-gencoluser=" ">
-                                  Subscribe                                                </span>
-                        </p>
-                    </div>
-                    <div class="clear"></div>
-                </a>
-                <a href="http://play.ucell.uz/java-games/arcade/5473316" class="tsr-module-product">
-                    <figure class="tsr-product-image" style="text-align:center;">
-                        <img src="http://helm.tekmob.com/m3/cache/5473316_38.jpg"
-                             style="max-width:250px; width: 100%;"/>
-                    </figure>
-                    <div class="tsr-product-content">
-                        <header class="tsr-product-header">The Great Unknown: Houdini's Castle</header>
-                        <!--                            <p class="tsr-product-pric" style="height: 20px;color: #0083be; font-weight:bold;">
-                                                                         AZN                                                            </p>-->
-
-                        <!--Subscribe Button-->
-                        <p class="tsr-product-small-print"><br/>
-                            <span class="tsr-btn btnJoin"
-                                  data-clubid="75112"
-                                  data-login="false"
-                                  data-gencoluserlogin="Genc OL tariff users subscribe with 50% special discount! 1.00 AZN/week for EA and Java Games and 0.60 AZN/week for Online Games (3 games download)."
-                                  data-gencoluser=" ">
-                                  Subscribe                                                </span>
-                        </p>
-                    </div>
-                    <div class="clear"></div>
-                </a>
-                <a href="http://play.ucell.uz/java-games/arcade/6374292" class="tsr-module-product">
-                    <figure class="tsr-product-image" style="text-align:center;">
-                        <img src="http://helm.tekmob.com/m3/cache/6374292_38.jpg"
-                             style="max-width:250px; width: 100%;"/>
-                    </figure>
-                    <div class="tsr-product-content">
-                        <header class="tsr-product-header">Giga Jump 2</header>
-                        <!--                            <p class="tsr-product-pric" style="height: 20px;color: #0083be; font-weight:bold;">
-                                                                         AZN                                                            </p>-->
-
-                        <!--Subscribe Button-->
-                        <p class="tsr-product-small-print"><br/>
-                            <span class="tsr-btn btnJoin"
-                                  data-clubid="75112"
-                                  data-login="false"
-                                  data-gencoluserlogin="Genc OL tariff users subscribe with 50% special discount! 1.00 AZN/week for EA and Java Games and 0.60 AZN/week for Online Games (3 games download)."
-                                  data-gencoluser=" ">
-                                  Subscribe                                                </span>
-                        </p>
-                    </div>
-                    <div class="clear"></div>
-                </a>
-                <a href="http://play.ucell.uz/java-games/arcade/6192724" class="tsr-module-product">
-                    <figure class="tsr-product-image" style="text-align:center;">
-                        <img src="http://helm.tekmob.com/m3/cache/6192724_38.jpg"
-                             style="max-width:250px; width: 100%;"/>
-                    </figure>
-                    <div class="tsr-product-content">
-                        <header class="tsr-product-header">2in1 Movie Games</header>
-                        <!--                            <p class="tsr-product-pric" style="height: 20px;color: #0083be; font-weight:bold;">
-                                                                         AZN                                                            </p>-->
-
-                        <!--Subscribe Button-->
-                        <p class="tsr-product-small-print"><br/>
-                            <span class="tsr-btn btnJoin"
-                                  data-clubid="75112"
-                                  data-login="false"
-                                  data-gencoluserlogin="Genc OL tariff users subscribe with 50% special discount! 1.00 AZN/week for EA and Java Games and 0.60 AZN/week for Online Games (3 games download)."
-                                  data-gencoluser=" ">
-                                  Subscribe                                                </span>
-                        </p>
-                    </div>
-                    <div class="clear"></div>
-                </a>
-                <a href="http://play.ucell.uz/java-games/arcade/5465268" class="tsr-module-product">
-                    <figure class="tsr-product-image" style="text-align:center;">
-                        <img src="http://helm.tekmob.com/m3/cache/5465268_38.jpg"
-                             style="max-width:250px; width: 100%;"/>
-                    </figure>
-                    <div class="tsr-product-content">
-                        <header class="tsr-product-header">Tap the Frog Faster</header>
-                        <!--                            <p class="tsr-product-pric" style="height: 20px;color: #0083be; font-weight:bold;">
-                                                                                             AZN                                                            </p>-->
-
-                        <!--Subscribe Button-->
-                        <p class="tsr-product-small-print"><br/>
-                            <span class="tsr-btn btnJoin"
-                                  data-clubid="75112"
-                                  data-login="false"
-                                  data-gencoluserlogin="Genc OL tariff users subscribe with 50% special discount! 1.00 AZN/week for EA and Java Games and 0.60 AZN/week for Online Games (3 games download)."
-                                  data-gencoluser=" ">
-                                                      Subscribe                                                </span>
-                        </p>
-                    </div>
-                    <div class="clear"></div>
-                </a>
+                    $stmt_select->close();
+                ?>
             </div>
         </div>
     </section>
@@ -279,208 +114,52 @@
     <section class="tsr-section-carousel-listing front-categories">
         <div class="tsr-container">
             <div class="tsr-slides">
-                <a href="http://play.ucell.uz/java-games/arcade/6191782" class="tsr-module-product">
-                    <figure class="tsr-product-image" style="text-align:center;">
-                        <img src="http://helm.tekmob.com/m3/cache/6191782_38.jpg"
-                             style="max-width:250px; width: 100%;"/>
-                    </figure>
-                    <div class="tsr-product-content">
-                        <header class="tsr-product-header">Candy Thieves 3D</header>
-                        <!--                            <p class="tsr-product-pric" style="height: 20px;color: #0083be; font-weight:bold;">
-                                                                                             AZN                                                            </p>-->
-                        <!--Subscribe Button-->
-                        <p class="tsr-product-small-print"><br/>
-                            <span class="tsr-btn btnJoin"
-                                  data-clubid="75112"
-                                  data-login="false"
-                                  data-gencoluserlogin="Genc OL tariff users subscribe with 50% special discount! 1.00 AZN/week for EA and Java Games and 0.60 AZN/week for Online Games (3 games download)."
-                                  data-gencoluser=" ">
-                                    Subscribe
+                <?php
+                    $stmt_select = mysqli_prepare($db,
+                        "SELECT 
+                                    `games`.`name` as `g_name`,
+                                    `games`.`image_name` as `g_image_name`,
+                                    `games`.`auto_id` as `g_id`,
+                                    `categories`.`auto_id` as `c_id`,
+                                    `categories`.`name` as `c_name` 
+                                    FROM `games`
+                                    LEFT JOIN `categories` on `games`.`category_id`=`categories`.`auto_id`
+                                    WHERE `games`.`lang_id`=(?) and `games`.`active`=(?) and `categories`.`lang_id`=(?)
+                                    order by `games`.`order_number` asc");
+                    $stmt_select->bind_param('iii', $main_lang,$active,$main_lang);
+                    $stmt_select->execute();
+                    $result = $stmt_select->get_result();
+
+                    while($row = $result->fetch_assoc())
+                    {
+                        ?>
+                        <a href="<?=SITE_PATH?>/online-games/<?=slugGenerator($row['c_name']) . '-' . $row['c_id']?>/<?=slugGenerator($row['g_name']) . '-' . $row['g_id']?>" class="tsr-module-product">
+                            <figure class="tsr-product-image" style="text-align:center;">
+                                <img src="<?=SITE_PATH?>/images/games/<?=$row['g_image_name']?>"
+                                     style="max-width:250px; width: 100%;"/>
+                            </figure>
+                            <div class="tsr-product-content">
+                                <header class="tsr-product-header"><?=$row['g_name']?></header>
+                                <!--                            <p class="tsr-product-pric" style="height: 20px;color: #0083be; font-weight:bold;">
+                                                                                                     AZN                                                            </p>-->
+                                <!--Play Button-->
+                                <p class="tsr-product-small-print"><br/>
+                                    <span class="tsr-btn btnJoin"
+                                          data-clubid="75112"
+                                          data-login="false"
+                                          data-gencoluserlogin="Genc OL tariff users subscribe with 50% special discount! 1.00 AZN/week for EA and Java Games and 0.60 AZN/week for Online Games (3 games download)."
+                                          data-gencoluser=" ">
+                                    Play
                                 </span>
-                        </p>
-                    </div>
-                    <div class="clear"></div>
-                </a>
-                <a href="http://play.ucell.uz/java-games/arcade/6249040" class="tsr-module-product">
-                    <figure class="tsr-product-image" style="text-align:center;">
-                        <img src="http://helm.tekmob.com/m3/cache/6249040_38.jpg"
-                             style="max-width:250px; width: 100%;"/>
-                    </figure>
-                    <div class="tsr-product-content">
-                        <header class="tsr-product-header">BOU</header>
-                        <!--Subscribe Button-->
-                        <p class="tsr-product-small-print"><br/>
-                            <span class="tsr-btn btnJoin"
-                                  data-clubid="75112"
-                                  data-login="false"
-                                  data-gencoluserlogin="Genc OL tariff users subscribe with 50% special discount! 1.00 AZN/week for EA and Java Games and 0.60 AZN/week for Online Games (3 games download)."
-                                  data-gencoluser=" ">
-                                      Subscribe
-                                </span>
-                        </p>
-                    </div>
-                    <div class="clear"></div>
-                </a>
-                <a href="http://play.ucell.uz/java-games/arcade/5465088" class="tsr-module-product">
-                    <figure class="tsr-product-image" style="text-align:center;">
-                        <img src="http://helm.tekmob.com/m3/cache/5465088_38.jpg"
-                             style="max-width:250px; width: 100%;"/>
-                    </figure>
-                    <div class="tsr-product-content">
-                        <header class="tsr-product-header">Paint the Frog</header>
+                                </p>
+                            </div>
+                            <div class="clear"></div>
+                        </a>
+                        <?php
+                    }
 
-                        <!--Subscribe Button-->
-                        <p class="tsr-product-small-print"><br/>
-                            <span class="tsr-btn btnJoin"
-                                  data-clubid="75112"
-                                  data-login="false"
-                                  data-gencoluserlogin="Genc OL tariff users subscribe with 50% special discount! 1.00 AZN/week for EA and Java Games and 0.60 AZN/week for Online Games (3 games download)."
-                                  data-gencoluser=" ">
-                                  Subscribe                                                </span>
-                        </p>
-                    </div>
-                    <div class="clear"></div>
-                </a>
-                <a href="http://play.ucell.uz/java-games/arcade/6248634" class="tsr-module-product">
-                    <figure class="tsr-product-image" style="text-align:center;">
-                        <img src="http://helm.tekmob.com/m3/cache/6248634_38.jpg"
-                             style="max-width:250px; width: 100%;"/>
-                    </figure>
-                    <div class="tsr-product-content">
-                        <header class="tsr-product-header">2in1 Ultimate Pack</header>
-
-                        <!--Subscribe Button-->
-                        <p class="tsr-product-small-print"><br/>
-                            <span class="tsr-btn btnJoin"
-                                  data-clubid="75112"
-                                  data-login="false"
-                                  data-gencoluserlogin="Genc OL tariff users subscribe with 50% special discount! 1.00 AZN/week for EA and Java Games and 0.60 AZN/week for Online Games (3 games download)."
-                                  data-gencoluser=" ">
-                                  Subscribe                                                </span>
-                        </p>
-                    </div>
-                    <div class="clear"></div>
-                </a>
-                <a href="http://play.ucell.uz/java-games/arcade/6170184" class="tsr-module-product">
-                    <figure class="tsr-product-image" style="text-align:center;">
-                        <img src="http://helm.tekmob.com/m3/cache/6170184_38.jpg"
-                             style="max-width:250px; width: 100%;"/>
-                    </figure>
-                    <div class="tsr-product-content">
-                        <header class="tsr-product-header">Color Swap</header>
-
-                        <!--Subscribe Button-->
-                        <p class="tsr-product-small-print"><br/>
-                            <span class="tsr-btn btnJoin"
-                                  data-clubid="75112"
-                                  data-login="false"
-                                  data-gencoluserlogin="Genc OL tariff users subscribe with 50% special discount! 1.00 AZN/week for EA and Java Games and 0.60 AZN/week for Online Games (3 games download)."
-                                  data-gencoluser=" ">
-                                  Subscribe                                                </span>
-                        </p>
-                    </div>
-                    <div class="clear"></div>
-                </a>
-                <a href="http://play.ucell.uz/java-games/arcade/6465322" class="tsr-module-product">
-                    <figure class="tsr-product-image" style="text-align:center;">
-                        <img src="http://helm.tekmob.com/m3/cache/6465322_38.jpg"
-                             style="max-width:250px; width: 100%;"/>
-                    </figure>
-                    <div class="tsr-product-content">
-                        <header class="tsr-product-header">Temple Rush</header>
-
-                        <!--Subscribe Button-->
-                        <p class="tsr-product-small-print"><br/>
-                            <span class="tsr-btn btnJoin"
-                                  data-clubid="75112"
-                                  data-login="false"
-                                  data-gencoluserlogin="Genc OL tariff users subscribe with 50% special discount! 1.00 AZN/week for EA and Java Games and 0.60 AZN/week for Online Games (3 games download)."
-                                  data-gencoluser=" ">
-                                  Subscribe                                                </span>
-                        </p>
-                    </div>
-                    <div class="clear"></div>
-                </a>
-                <a href="http://play.ucell.uz/java-games/arcade/5473316" class="tsr-module-product">
-                    <figure class="tsr-product-image" style="text-align:center;">
-                        <img src="http://helm.tekmob.com/m3/cache/5473316_38.jpg"
-                             style="max-width:250px; width: 100%;"/>
-                    </figure>
-                    <div class="tsr-product-content">
-                        <header class="tsr-product-header">The Great Unknown: Houdini's Castle</header>
-
-                        <!--Subscribe Button-->
-                        <p class="tsr-product-small-print"><br/>
-                            <span class="tsr-btn btnJoin"
-                                  data-clubid="75112"
-                                  data-login="false"
-                                  data-gencoluserlogin="Genc OL tariff users subscribe with 50% special discount! 1.00 AZN/week for EA and Java Games and 0.60 AZN/week for Online Games (3 games download)."
-                                  data-gencoluser=" ">
-                                  Subscribe                                                </span>
-                        </p>
-                    </div>
-                    <div class="clear"></div>
-                </a>
-                <a href="http://play.ucell.uz/java-games/arcade/6374292" class="tsr-module-product">
-                    <figure class="tsr-product-image" style="text-align:center;">
-                        <img src="http://helm.tekmob.com/m3/cache/6374292_38.jpg"
-                             style="max-width:250px; width: 100%;"/>
-                    </figure>
-                    <div class="tsr-product-content">
-                        <header class="tsr-product-header">Giga Jump 2</header>
-
-                        <!--Subscribe Button-->
-                        <p class="tsr-product-small-print"><br/>
-                            <span class="tsr-btn btnJoin"
-                                  data-clubid="75112"
-                                  data-login="false"
-                                  data-gencoluserlogin="Genc OL tariff users subscribe with 50% special discount! 1.00 AZN/week for EA and Java Games and 0.60 AZN/week for Online Games (3 games download)."
-                                  data-gencoluser=" ">
-                                  Subscribe                                                </span>
-                        </p>
-                    </div>
-                    <div class="clear"></div>
-                </a>
-                <a href="http://play.ucell.uz/java-games/arcade/6192724" class="tsr-module-product">
-                    <figure class="tsr-product-image" style="text-align:center;">
-                        <img src="http://helm.tekmob.com/m3/cache/6192724_38.jpg"
-                             style="max-width:250px; width: 100%;"/>
-                    </figure>
-                    <div class="tsr-product-content">
-                        <header class="tsr-product-header">2in1 Movie Games</header>
-
-                        <!--Subscribe Button-->
-                        <p class="tsr-product-small-print"><br/>
-                            <span class="tsr-btn btnJoin"
-                                  data-clubid="75112"
-                                  data-login="false"
-                                  data-gencoluserlogin="Genc OL tariff users subscribe with 50% special discount! 1.00 AZN/week for EA and Java Games and 0.60 AZN/week for Online Games (3 games download)."
-                                  data-gencoluser=" ">
-                                  Subscribe                                                </span>
-                        </p>
-                    </div>
-                    <div class="clear"></div>
-                </a>
-                <a href="http://play.ucell.uz/java-games/arcade/5465268" class="tsr-module-product">
-                    <figure class="tsr-product-image" style="text-align:center;">
-                        <img src="http://helm.tekmob.com/m3/cache/5465268_38.jpg"
-                             style="max-width:250px; width: 100%;"/>
-                    </figure>
-                    <div class="tsr-product-content">
-                        <header class="tsr-product-header">Tap the Frog Faster</header>
-
-                        <!--Subscribe Button-->
-                        <p class="tsr-product-small-print"><br/>
-                            <span class="tsr-btn btnJoin"
-                                  data-clubid="75112"
-                                  data-login="false"
-                                  data-gencoluserlogin="Genc OL tariff users subscribe with 50% special discount! 1.00 AZN/week for EA and Java Games and 0.60 AZN/week for Online Games (3 games download)."
-                                  data-gencoluser=" ">
-                                                      Subscribe                                                </span>
-                        </p>
-                    </div>
-                    <div class="clear"></div>
-                </a>
+                    $stmt_select->close();
+                ?>
             </div>
         </div>
     </section>

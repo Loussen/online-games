@@ -87,16 +87,15 @@
                                                         data-gencoluserlogin="Genc OL tariff users subscribe with 50% special discount! 1.00 AZN/week for EA and Java Games and 0.60 AZN/week for Online Games (3 games download)."
                                                         data-gencoluser=""
                                                         id="featured_button">
-                                                    Subscibe
+                                                    Subscribe
                                                 </button>
                                             </article>
                                         </a>
                                     </li>
-
                                     <li class="has-sub">
-        <!--                                <a href="http://play.ucell.uz/java-games/new-year-games"-->
-        <!--                                   onclick="location.assign(jQuery(this).attr('href'));"-->
-        <!--                                   class="clickableTabWithLink">New Year Games</a>-->
+                                        <a href="http://play.ucell.uz/java-games/new-year-games"
+                                           onclick="location.assign(jQuery(this).attr('href'));"
+                                           class="clickableTabWithLink">New Year Games</a>
                                         <menu class="tsr-nav-third-level">
                                             <li>
                                                 <a href="http://play.ucell.uz/java-games/new-year-games/953970">
@@ -109,9 +108,9 @@
                                         </menu>
                                     </li>
                                     <li class="has-sub">
-        <!--                                <a href="http://play.ucell.uz/java-games/action-adventure"-->
-        <!--                                   onclick="location.assign(jQuery(this).attr('href'));"-->
-        <!--                                   class="clickableTabWithLink">Action & Adventure</a>-->
+                                        <a href="http://play.ucell.uz/java-games/action-adventure"
+                                           onclick="location.assign(jQuery(this).attr('href'));"
+                                           class="clickableTabWithLink">Action & Adventure</a>
                                         <menu class="tsr-nav-third-level">
                                             <li>
                                                 <a href="http://play.ucell.uz/java-games/action-adventure/5810924">Dark Assassin</a>
@@ -123,9 +122,9 @@
                                         </menu>
                                     </li>
                                     <li class="has-sub">
-        <!--                                <a href="http://play.ucell.uz/java-games/arcade"-->
-        <!--                                   onclick="location.assign(jQuery(this).attr('href'));"-->
-        <!--                                   class="clickableTabWithLink">Arcade</a>-->
+                                        <a href="http://play.ucell.uz/java-games/arcade"
+                                           onclick="location.assign(jQuery(this).attr('href'));"
+                                           class="clickableTabWithLink">Arcade</a>
                                         <menu class="tsr-nav-third-level">
                                             <li>
                                                 <a href="http://play.ucell.uz/java-games/arcade/6191782">
@@ -138,9 +137,9 @@
                                         </menu>
                                     </li>
                                     <li class="has-sub">
-        <!--                                <a href="http://play.ucell.uz/java-games/brain-puzzle"-->
-        <!--                                   onclick="location.assign(jQuery(this).attr('href'));"-->
-        <!--                                   class="clickableTabWithLink">Brain & Puzzle</a>-->
+                                        <a href="http://play.ucell.uz/java-games/brain-puzzle"
+                                           onclick="location.assign(jQuery(this).attr('href'));"
+                                           class="clickableTabWithLink">Brain & Puzzle</a>
                                         <menu class="tsr-nav-third-level">
                                             <li>
                                                 <a href="http://play.ucell.uz/java-games/brain-puzzle/6178814">
@@ -153,9 +152,9 @@
                                         </menu>
                                     </li>
                                     <li class="has-sub">
-        <!--                                <a href="http://play.ucell.uz/java-games/cards-board-games"-->
-        <!--                                   onclick="location.assign(jQuery(this).attr('href'));"-->
-        <!--                                   class="clickableTabWithLink">Cards & Board Games</a>-->
+                                        <a href="http://play.ucell.uz/java-games/cards-board-games"
+                                           onclick="location.assign(jQuery(this).attr('href'));"
+                                           class="clickableTabWithLink">Cards & Board Games</a>
                                         <menu class="tsr-nav-third-level">
                                             <li>
                                                 <a href="http://play.ucell.uz/java-games/cards-board-games/5465198">
@@ -168,9 +167,9 @@
                                         </menu>
                                     </li>
                                     <li class="has-sub">
-        <!--                                <a href="http://play.ucell.uz/java-games/fun-entertainment"-->
-        <!--                                   onclick="location.assign(jQuery(this).attr('href'));"-->
-        <!--                                   class="clickableTabWithLink">Fun & Entertainment</a>-->
+                                        <a href="http://play.ucell.uz/java-games/fun-entertainment"
+                                           onclick="location.assign(jQuery(this).attr('href'));"
+                                           class="clickableTabWithLink">Fun & Entertainment</a>
                                         <menu class="tsr-nav-third-level">
                                             <li>
                                                 <a href="http://play.ucell.uz/java-games/fun-entertainment/6155232">
@@ -183,9 +182,9 @@
                                         </menu>
                                     </li>
                                     <li class="has-sub">
-        <!--                                <a href="http://play.ucell.uz/java-games/platform"-->
-        <!--                                   onclick="location.assign(jQuery(this).attr('href'));"-->
-        <!--                                   class="clickableTabWithLink">Platform</a>-->
+                                        <a href="http://play.ucell.uz/java-games/platform"
+                                           onclick="location.assign(jQuery(this).attr('href'));"
+                                           class="clickableTabWithLink">Platform</a>
                                         <menu class="tsr-nav-third-level">
                                             <li>
                                                 <a href="http://play.ucell.uz/java-games/platform/2151613">
@@ -198,9 +197,9 @@
                                         </menu>
                                     </li>
                                     <li class="has-sub">
-        <!--                                <a href="http://play.ucell.uz/java-games/racing"-->
-        <!--                                   onclick="location.assign(jQuery(this).attr('href'));"-->
-        <!--                                   class="clickableTabWithLink">Racing</a>-->
+                                        <a href="http://play.ucell.uz/java-games/racing"
+                                           onclick="location.assign(jQuery(this).attr('href'));"
+                                           class="clickableTabWithLink">Racing</a>
                                         <menu class="tsr-nav-third-level">
                                             <li>
                                                 <a href="http://play.ucell.uz/java-games/racing/6301748">
@@ -213,9 +212,9 @@
                                         </menu>
                                     </li>
                                     <li class="has-sub">
-        <!--                                <a href="http://play.ucell.uz/java-games/rpg-strategy"-->
-        <!--                                   onclick="location.assign(jQuery(this).attr('href'));"-->
-        <!--                                   class="clickableTabWithLink">RPG & Strategy</a>-->
+                                        <a href="http://play.ucell.uz/java-games/rpg-strategy"
+                                           onclick="location.assign(jQuery(this).attr('href'));"
+                                           class="clickableTabWithLink">RPG & Strategy</a>
                                         <menu class="tsr-nav-third-level">
                                             <li>
                                                 <a href="http://play.ucell.uz/java-games/rpg-strategy/5465108">
@@ -228,9 +227,9 @@
                                         </menu>
                                     </li>
                                     <li class="has-sub">
-        <!--                                <a href="http://play.ucell.uz/java-games/sports"-->
-        <!--                                   onclick="location.assign(jQuery(this).attr('href'));"-->
-        <!--                                   class="clickableTabWithLink">Sports</a>-->
+                                        <a href="http://play.ucell.uz/java-games/sports"
+                                           onclick="location.assign(jQuery(this).attr('href'));"
+                                           class="clickableTabWithLink">Sports</a>
                                         <menu class="tsr-nav-third-level">
                                             <li>
                                                 <a href="http://play.ucell.uz/java-games/sports/6266554">

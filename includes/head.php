@@ -13,6 +13,7 @@
     $stmt_select->execute();
     $stmt_select->bind_result($site_description,$site_title,$site_keywords);
     $stmt_select->fetch();
+    $stmt_select->close();
 
 //    $info_description=mysqli_fetch_assoc(mysqli_query($db,"select `description_`,`title_`,`keywords_` from `seo` where `lang_id`='$esas_dil' "));
     $description=$site_description;

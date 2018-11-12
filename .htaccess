@@ -32,6 +32,7 @@ RewriteRule ^(en|ru)(/?)$ index.php?lang_name=$1 [L,QSA]
 #Pages
 RewriteRule ^pages/(.*)-([0-9]+)(/?)$ index.php?do=pages&slug=$1&id=$2 [L,QSA]
 RewriteRule ^inner(/?)$ index.php?do=inner [L,QSA]
+RewriteRule ^category(/?)$ index.php?do=category [L,QSA]
 
 RewriteRule ^404(/?)$ index.php?do=404 [L,QSA]
 
