@@ -173,7 +173,7 @@
         </div>
     </div>
 </div>
-<div id="modal-backdrop"></div>
+<div id="modal-backdrop2"></div>
 
 <!--<div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">-->
 <!--    <div class="modal-dialog">-->
@@ -201,7 +201,8 @@
 <script type='text/javascript' src='<?=SITE_PATH?>/assets/js/enquire.min.js?ver=1.0.0'></script>
 <script type='text/javascript' src='<?=SITE_PATH?>/assets/js/jquery.flexslider.js?ver=1.0.0'></script>
 <script type='text/javascript' src='<?=SITE_PATH?>/assets/js/tsr-carousel-listing.js?ver=1.0.0'></script>
-<script type='text/javascript' src='<?=SITE_PATH?>/assets/js/all.min.js?ver=1.0.0'></script>
+<!--<script type='text/javascript' src='--><?//=SITE_PATH?><!--/assets/js/all.min.js?ver=1.0.0'></script>-->
+<script type='text/javascript' src='<?=SITE_PATH?>/assets/js/jssor.slider.min.js'></script>
 <script type='text/javascript' src='<?=SITE_PATH?>/assets/js/back.js'></script>
 
 <script>

@@ -29,6 +29,8 @@
                                 <script>
                                     jQuery(document).ready(function ($) {
 
+                                        // console.log($JssorArrowNavigator$);
+
                                         var slider_options = {
                                             $AutoPlay: false,
                                             $ArrowNavigatorOptions: {
