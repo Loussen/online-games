@@ -51,3 +51,7 @@ form#login-form span.help-block
     display: none;
 }
 
+figure.tsr-product-image img
+{
+    height: 130px !important;
+}

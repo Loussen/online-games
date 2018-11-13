@@ -92,6 +92,65 @@
                                             </article>
                                         </a>
                                     </li>
+                                    <?php
+                                        $stmt_select = mysqli_prepare($db,
+                                            "SELECT 
+                                                    `name`,`auto_id` 
+                                                    FROM `categories`
+                                                    WHERE `lang_id`=(?) and `active`=(?)
+                                                    order by `order_number` asc");
+                                        $stmt_select->bind_param('ii', $main_lang,$active);
+                                        $stmt_select->execute();
+                                        $result = $stmt_select->get_result();
+
+                                        while($row=$result->fetch_assoc())
+                                        {
+                                            ?>
+                                            <li class="has-sub">
+                                                <a href="<?=SITE_PATH?>/online-games/<?=slugGenerator($row['name']) . '-' . $row['auto_id']?>"
+                                                   onclick="location.assign(jQuery(this).attr('href'));"
+                                                   class="clickableTabWithLink"><?=$row['name']?></a>
+
+                                                <menu class="tsr-nav-third-level">
+                                                <?php
+                                                    $stmt_select_games = mysqli_prepare($db,
+                                                        "SELECT 
+                                                        `name`,`auto_id` 
+                                                        FROM `games`
+                                                        WHERE `lang_id`=(?) and `active`=(?) and `category_id`=(?)
+                                                        order by `order_number` asc");
+                                                    $stmt_select_games->bind_param('iii', $main_lang,$active,$row['auto_id']);
+                                                    $stmt_select_games->execute();
+                                                    $result_games = $stmt_select_games->get_result();
+
+                                                    $i = 1;
+                                                    while($row_games=$result_games->fetch_assoc())
+                                                    {
+                                                        ?>
+                                                        <li>
+                                                            <a href="<?=SITE_PATH?>/online-games/<?=slugGenerator($row['name']) . '-' . $row['auto_id']?>/<?=slugGenerator($row_games['name']) . '-' . $row_games['auto_id']?>">
+                                                                <?=$row_games['name']?>
+                                                            </a>
+                                                        </li>
+                                                        <?php
+
+                                                        if($i==3)
+                                                        {
+                                                            ?>
+                                                                </menu>
+                                                            <li class="has-sub">
+                                                                <menu class="tsr-nav-third-level">
+                                                            <?php
+                                                        }
+
+                                                        $i++;
+                                                    }
+                                                ?>
+                                                </menu>
+                                            </li>
+                                            <?php
+                                        }
+                                    ?>
                                     <li class="has-sub">
                                         <a href="http://play.ucell.uz/java-games/new-year-games"
                                            onclick="location.assign(jQuery(this).attr('href'));"

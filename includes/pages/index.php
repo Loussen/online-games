@@ -65,9 +65,9 @@
                                 `categories`.`name` as `c_name` 
                                 FROM `games`
                                 LEFT JOIN `categories` on `games`.`category_id`=`categories`.`auto_id`
-                                WHERE `games`.`lang_id`=(?) and `games`.`active`=(?) and `categories`.`lang_id`=(?)
+                                WHERE `games`.`lang_id`=(?) and `games`.`active`=(?) and `categories`.`lang_id`=(?) and `categories`.`active`=(?)
                                 order by `games`.`order_number` asc");
-                    $stmt_select->bind_param('iii', $main_lang,$active,$main_lang);
+                    $stmt_select->bind_param('iiii', $main_lang,$active,$main_lang,$active);
                     $stmt_select->execute();
                     $result = $stmt_select->get_result();
 
