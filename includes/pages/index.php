@@ -60,14 +60,11 @@
                         "SELECT 
                                 `games`.`name` as `g_name`,
                                 `games`.`image_name` as `g_image_name`,
-                                `games`.`auto_id` as `g_id`,
-                                `categories`.`auto_id` as `c_id`,
-                                `categories`.`name` as `c_name` 
+                                `games`.`auto_id` as `g_id`
                                 FROM `games`
-                                LEFT JOIN `categories` on `games`.`category_id`=`categories`.`auto_id`
-                                WHERE `games`.`lang_id`=(?) and `games`.`active`=(?) and `categories`.`lang_id`=(?) and `categories`.`active`=(?)
+                                WHERE `games`.`lang_id`=(?) and `games`.`active`=(?)
                                 order by `games`.`order_number` asc");
-                    $stmt_select->bind_param('iiii', $main_lang,$active_status,$main_lang,$active_status);
+                    $stmt_select->bind_param('ii', $main_lang,$active_status);
                     $stmt_select->execute();
                     $result = $stmt_select->get_result();
 

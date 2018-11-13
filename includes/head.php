@@ -25,6 +25,27 @@
     if($do=="category")
     {
         $category_id = intval($_GET['id']);
+        $category_slug = mysqli_real_escape_string($db,$_GET['slug']);
+
+        // Get current category
+        $stmt_select = mysqli_prepare($db,
+            "SELECT
+            `name`,
+            `auto_id`
+            FROM `categories`
+            WHERE `lang_id`=(?) and `active`=(?) and `auto_id`=(?)
+            LIMIT 1");
+        $stmt_select->bind_param('iii', $main_lang,$active_status,$category_id);
+        $stmt_select->execute();
+        $stmt_select->bind_result($current_category_name,$current_category_id);
+        $stmt_select->fetch();
+        $stmt_select->close();
+
+        if($category_slug!=slugGenerator($current_category_name) || $current_category_id!=$category_id)
+        {
+            header("Location: ".SITE_PATH."/404");
+            exit('Redirecting...');
+        }
 
         // Paginator
         $limit = 10;
@@ -61,38 +82,50 @@
         $result_games_by_categories = $stmt_select->get_result();
         $stmt_select->close();
 
-        // Get current category
+        // Get all categories
         $stmt_select = mysqli_prepare($db,
             "SELECT
             `name`,
             `auto_id`
             FROM `categories`
-            WHERE `lang_id`=(?) and `active`=(?) and `auto_id`=(?)
-            LIMIT 1");
-        $stmt_select->bind_param('iii', $main_lang,$active_status,$category_id);
-        $stmt_select->execute();
-        $stmt_select->bind_result($current_category_name,$current_category_id);
-        $stmt_select->fetch();
-        $stmt_select->close();
-
-        // All categories
-        $stmt_select = mysqli_prepare($db,
-            "SELECT
-            `name`,
-            `auto_id`
-            FROM `categories`
-            WHERE `lang_id`=(?) and `active`=(?)
-            LIMIT 1");
+            WHERE `lang_id`=(?) and `active`=(?)");
         $stmt_select->bind_param('ii', $main_lang,$active_status);
         $stmt_select->execute();
         $result_all_categories = $stmt_select->get_result();
         $stmt_select->close();
 
-        $title = $info_description["title_"].' - '.$menyu['name'];
+        $title = $title.' - '.$current_category_name.' games';
     }
-    elseif($do=="online-games")
+    elseif($do=="inner")
     {
-        echo $do;
+        $game_id = intval($_GET['id']);
+        $game_slug = mysqli_real_escape_string($db,$_GET['slug']);
+
+        // Get game info
+        $stmt_select = mysqli_prepare($db,
+            "SELECT 
+                    `games`.`auto_id` as `g_id`,
+                    `games`.`name` as `g_name`,
+                    `games`.`image_name` as `g_image_name`,
+                    `games`.`text` as `g_text`,
+                    `categories`.`name` as `c_name`,
+                    `categories`.`auto_id` as `c_id`
+                    FROM `games`
+                    LEFT JOIN `categories` on `games`.`category_id`=`categories`.`auto_id`
+                    WHERE `games`.`lang_id`=(?) and `games`.`active`=(?) and `games`.`auto_id`=(?)
+                    LIMIT 1");
+
+        $stmt_select->bind_param('iii', $main_lang,$active_status,$game_id);
+        $stmt_select->execute();
+        $stmt_select->bind_result($current_game_id,$current_game_name,$current_game_image_name,$current_game_text,$current_category_name,$current_category_id);
+        $stmt_select->fetch();
+        $stmt_select->close();
+
+        if($game_id!=$current_game_id || $game_slug!=slugGenerator($current_game_name))
+        {
+            header("Location: ".SITE_PATH."/404");
+            exit('Redirecting...');
+        }
     }
 ?>
 <meta charset="utf-8">

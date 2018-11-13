@@ -2,16 +2,16 @@
     <div class="breadcrumbs">
         <div class="tsr-container">
             <div class="col-12">
-                <a href="http://play.ucell.uz/homepage">Homepage</a>
+                <a href="<?=SITE_PATH?>">Homepage</a>
                 <!--<a href="">Home</a>-->
                 <span class="ts-icon-breadcrumb-arrow"></span>
                 <span class="bread-item-name ">Online Games</span>
                 <!--<a href="">Home</a>-->
                 <span class="ts-icon-breadcrumb-arrow"></span>
-                <a href="http://play.ucell.uz/online-games/top-games">TOP Games</a>
+                <a href="<?=SITE_PATH?>/category/<?=slugGenerator($current_category_name) . '-' . $current_category_id?>"><?=$current_category_name?></a>
                 <!--<a href="">Home</a>-->
                 <span class="ts-icon-breadcrumb-arrow"></span>
-                <span class="bread-item-name bold">Feelingz</span>
+                <span class="bread-item-name bold"><?=$current_game_name?></span>
             </div>
         </div>
     </div>
@@ -107,30 +107,28 @@
                                 </div>
 
                                 <div class="selected-title">
-                                    <h1>Feelingz</h1>
+                                    <h1><?=$current_game_name?></h1>
                                 </div>
 
                                 <div class="selected-type">
-                                    <h5>TOP Games</h5>
+                                    <h5><?=$current_category_name?></h5>
                                 </div>
 
                                 <div class="selected-classification">
 
-                                    <img src="./inner_files/filled_star.png">
-                                    <img src="./inner_files/filled_star.png">
-                                    <img src="./inner_files/filled_star.png">
+                                    <img src="<?=SITE_PATH?>/assets/img/filled_star.png">
+                                    <img src="<?=SITE_PATH?>/assets/img/filled_star.png">
+                                    <img src="<?=SITE_PATH?>/assets/img/filled_star.png">
 
-                                    <img src="./inner_files/star.png">
-                                    <img src="./inner_files/star.png">
+                                    <img src="<?=SITE_PATH?>/assets/img/star.png">
+                                    <img src="<?=SITE_PATH?>/assets/img/star.png">
                                 </div>
 
                                 <div class="selected-description">
                                     <p>
                                         <span class="more">
-                                            How do you feel ? How are you ? it's all about feelings. You never get the same feeling when you seat next to everyone, you have different feeling for each person that seats next to you.&nbsp;
-                                        </span><br>
-                                        <a href="http://play.ucell.uz/#" onclick="return false;" style="display: none;"
-                                           class="tsr-btn tsr-btn-blue readmore">Read more</a>
+                                            <?=html_entity_decode($current_game_text)?>
+                                        </span>
                                     </p>
                                 </div>
 
@@ -140,15 +138,6 @@
                                             data-view="422260  ">
                                         PLAY
                                     </button>
-
-                                    <!--Subscribe Button-->
-
-                                    <!--Subscribe Button-->
-                                    <span class="tsr-btn btnJoin" data-clubid="" data-login="false"
-                                          data-gencoluserlogin="Genc OL tariff users subscribe with 50% special discount! 1.00 AZN/week for EA and Java Games and 0.60 AZN/week for Online Games (3 games download)."
-                                          data-gencoluser=" ">
-                                                Subscribe
-                                    </span>
                                 </div>
                             </div>
                         </div>

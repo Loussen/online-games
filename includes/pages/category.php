@@ -19,7 +19,7 @@
     <main id="main" class="site-main" role="main">
         <section class="tsr-section-productAndService-listing tsr-color-gray">
             <div class="tsr-container">
-                <div class="tsr-row">
+                <div class="tsr-row" style="margin-bottom: 15px;">
                     <div class="col-2 no-padding">
                         <div style="padding: 10px;">
                         </div>
@@ -51,222 +51,79 @@
                         </div>
                         <section class="games-list">
                             <div class="tsr-container">
-                                <div class="tsr-module-product listgames">
-                                    <a href="http://play.ucell.uz/online-games/top-games/5905876">
-                                        <figure class="tsr-product-image">
-                                            <img src="http://helm.tekmob.com/m3/cache/5905876_42.jpg">
-                                        </figure>
-                                        <div class="tsr-product-content">
-                                            <header class="tsr-product-header">Fruit Blade</header>
+                                <?php
+                                    while($row=$result_games_by_categories->fetch_assoc())
+                                    {
+                                        ?>
+                                        <div class="tsr-module-product listgames">
+                                            <a href="<?=SITE_PATH?>/online-games/<?=slugGenerator($row['name']) . '-' . $row['auto_id']?>">
+                                                <figure class="tsr-product-image">
+                                                    <img src="<?=SITE_PATH?>/images/games/<?=$row['image_name']?>">
+                                                </figure>
+                                                <div class="tsr-product-content">
+                                                    <header class="tsr-product-header"><?=$row['name']?></header>
+                                                </div>
+                                            </a>
+
+                                            <p class="tsr-product-small-print">
+                                                <button class="tsr-btn tsr-btn-purple tsr-btn-100 btnPlay" data-login="false" data-postid="19" data-clubid="75112" data-catid="422130" data-mediaid="5905876" data-video="http://timwe.cachefly.net/webapps/fruit-blade-timwe_1/index.html" data-view="422260  ">
+                                                    PLAY                        </button><br>
+                                            </p>
                                         </div>
-                                    </a>
-
-                                    <p class="tsr-product-small-print">
-                                        <!-- <p class="tsr-product-price"> -->
-                                        <button class="tsr-btn tsr-btn-purple tsr-btn-100 btnPlay" data-login="false" data-postid="19" data-clubid="75112" data-catid="422130" data-mediaid="5905876" data-video="http://timwe.cachefly.net/webapps/fruit-blade-timwe_1/index.html" data-view="422260  ">
-                                            PLAY                        </button><br>
-                                        <!-- </p> -->
-                                        <!--Subscribe Button-->
-                                        <span class="tsr-btn btnJoin" data-clubid="75112" data-login="false" data-gencoluserlogin="Genc OL tariff users subscribe with 50% special discount! 1.00 AZN/week for EA and Java Games and 0.60 AZN/week for Online Games (3 games download)." data-gencoluser=" ">
-                              Subscribe                        </span>
-                                    </p>
-                                </div>
-                                <div class="tsr-module-product listgames">
-                                    <a href="http://play.ucell.uz/online-games/top-games/5657966">
-                                        <figure class="tsr-product-image">
-                                            <img src="http://helm.tekmob.com/m3/cache/5657966_42.jpg">
-                                        </figure>
-                                        <div class="tsr-product-content">
-                                            <header class="tsr-product-header">Sean The Miner</header>
-                                        </div>
-                                    </a>
-
-                                    <p class="tsr-product-small-print">
-                                        <!-- <p class="tsr-product-price"> -->
-                                        <button class="tsr-btn tsr-btn-purple tsr-btn-100 btnPlay" data-login="false" data-postid="19" data-clubid="75112" data-catid="422130" data-mediaid="5657966" data-video="http://timwe.cachefly.net/webapps/sean_the_miner_69/files/index.html" data-view="422260  ">
-                                            PLAY                        </button><br>
-                                        <!-- </p> -->
-                                        <!--Subscribe Button-->
-                                        <span class="tsr-btn btnJoin" data-clubid="75112" data-login="false" data-gencoluserlogin="Genc OL tariff users subscribe with 50% special discount! 1.00 AZN/week for EA and Java Games and 0.60 AZN/week for Online Games (3 games download)." data-gencoluser=" ">
-                              Subscribe                        </span>
-                                    </p>
-                                </div>
-                                <div class="tsr-module-product listgames">
-                                    <a href="http://play.ucell.uz/online-games/top-games/3456094">
-                                        <figure class="tsr-product-image">
-                                            <img src="http://helm.tekmob.com/m3/cache/3456094_42.jpg">
-                                        </figure>
-                                        <div class="tsr-product-content">
-                                            <header class="tsr-product-header">Feelingz</header>
-                                        </div>
-                                    </a>
-
-                                    <p class="tsr-product-small-print">
-                                        <!-- <p class="tsr-product-price"> -->
-                                        <button class="tsr-btn tsr-btn-purple tsr-btn-100 btnPlay" data-login="false" data-postid="19" data-clubid="75112" data-catid="422130" data-mediaid="3456094" data-video="http://timwe.cachefly.net/webapps/Feelingz/index.html" data-view="422260  ">
-                                            PLAY                        </button><br>
-                                        <!-- </p> -->
-                                        <!--Subscribe Button-->
-                                        <span class="tsr-btn btnJoin" data-clubid="75112" data-login="false" data-gencoluserlogin="Genc OL tariff users subscribe with 50% special discount! 1.00 AZN/week for EA and Java Games and 0.60 AZN/week for Online Games (3 games download)." data-gencoluser=" ">
-                              Subscribe                        </span>
-                                    </p>
-                                </div>
-                                <div class="tsr-module-product listgames">
-                                    <a href="http://play.ucell.uz/online-games/top-games/5905950">
-                                        <figure class="tsr-product-image">
-                                            <img src="http://helm.tekmob.com/m3/cache/5905950_42.jpg">
-                                        </figure>
-                                        <div class="tsr-product-content">
-                                            <header class="tsr-product-header">Guess The Soccer Star</header>
-                                        </div>
-                                    </a>
-
-                                    <p class="tsr-product-small-print">
-                                        <!-- <p class="tsr-product-price"> -->
-                                        <button class="tsr-btn tsr-btn-purple tsr-btn-100 btnPlay" data-login="false" data-postid="19" data-clubid="75112" data-catid="422130" data-mediaid="5905950" data-video="http://timwe.cachefly.net/webapps/guess-the-soccer-star-timwe_1/index.html" data-view="422260  ">
-                                            PLAY                        </button><br>
-                                        <!-- </p> -->
-                                        <!--Subscribe Button-->
-                                        <span class="tsr-btn btnJoin" data-clubid="75112" data-login="false" data-gencoluserlogin="Genc OL tariff users subscribe with 50% special discount! 1.00 AZN/week for EA and Java Games and 0.60 AZN/week for Online Games (3 games download)." data-gencoluser=" ">
-                              Subscribe                        </span>
-                                    </p>
-                                </div>
-                                <div class="tsr-module-product listgames">
-                                    <a href="http://play.ucell.uz/online-games/top-games/3456102">
-                                        <figure class="tsr-product-image">
-                                            <img src="http://helm.tekmob.com/m3/cache/3456102_42.jpg">
-                                        </figure>
-                                        <div class="tsr-product-content">
-                                            <header class="tsr-product-header">Zombie Taps</header>
-                                        </div>
-                                    </a>
-
-                                    <p class="tsr-product-small-print">
-                                        <!-- <p class="tsr-product-price"> -->
-                                        <button class="tsr-btn tsr-btn-purple tsr-btn-100 btnPlay" data-login="false" data-postid="19" data-clubid="75112" data-catid="422130" data-mediaid="3456102" data-video="http://timwe.cachefly.net/webapps/ZombieTaps/index.html" data-view="422260  ">
-                                            PLAY                        </button><br>
-                                        <!-- </p> -->
-                                        <!--Subscribe Button-->
-                                        <span class="tsr-btn btnJoin" data-clubid="75112" data-login="false" data-gencoluserlogin="Genc OL tariff users subscribe with 50% special discount! 1.00 AZN/week for EA and Java Games and 0.60 AZN/week for Online Games (3 games download)." data-gencoluser=" ">
-                              Subscribe                        </span>
-                                    </p>
-                                </div>
-                                <div class="tsr-module-product listgames">
-                                    <a href="http://play.ucell.uz/online-games/top-games/5905952">
-                                        <figure class="tsr-product-image">
-                                            <img src="http://helm.tekmob.com/m3/cache/5905952_42.jpg">
-                                        </figure>
-                                        <div class="tsr-product-content">
-                                            <header class="tsr-product-header">Robots Vs Aliens</header>
-                                        </div>
-                                    </a>
-
-                                    <p class="tsr-product-small-print">
-                                        <!-- <p class="tsr-product-price"> -->
-                                        <button class="tsr-btn tsr-btn-purple tsr-btn-100 btnPlay" data-login="false" data-postid="19" data-clubid="75112" data-catid="422130" data-mediaid="5905952" data-video="http://timwe.cachefly.net/webapps/robots-vs-aliens-timwe_1/index.html" data-view="422260  ">
-                                            PLAY                        </button><br>
-                                        <!-- </p> -->
-                                        <!--Subscribe Button-->
-                                        <span class="tsr-btn btnJoin" data-clubid="75112" data-login="false" data-gencoluserlogin="Genc OL tariff users subscribe with 50% special discount! 1.00 AZN/week for EA and Java Games and 0.60 AZN/week for Online Games (3 games download)." data-gencoluser=" ">
-                              Subscribe                        </span>
-                                    </p>
-                                </div>
-                                <div class="tsr-module-product listgames">
-                                    <a href="http://play.ucell.uz/online-games/top-games/5905912">
-                                        <figure class="tsr-product-image">
-                                            <img src="http://helm.tekmob.com/m3/cache/5905912_42.jpg">
-                                        </figure>
-                                        <div class="tsr-product-content">
-                                            <header class="tsr-product-header">Space Chasers</header>
-                                        </div>
-                                    </a>
-
-                                    <p class="tsr-product-small-print">
-                                        <!-- <p class="tsr-product-price"> -->
-                                        <button class="tsr-btn tsr-btn-purple tsr-btn-100 btnPlay" data-login="false" data-postid="19" data-clubid="75112" data-catid="422130" data-mediaid="5905912" data-video="http://timwe.cachefly.net/webapps/space-chasers-timwe_1/index.html" data-view="422260  ">
-                                            PLAY                        </button><br>
-                                        <!-- </p> -->
-                                        <!--Subscribe Button-->
-                                        <span class="tsr-btn btnJoin" data-clubid="75112" data-login="false" data-gencoluserlogin="Genc OL tariff users subscribe with 50% special discount! 1.00 AZN/week for EA and Java Games and 0.60 AZN/week for Online Games (3 games download)." data-gencoluser=" ">
-                              Subscribe                        </span>
-                                    </p>
-                                </div>
-                                <div class="tsr-module-product listgames">
-                                    <a href="http://play.ucell.uz/online-games/top-games/5905884">
-                                        <figure class="tsr-product-image">
-                                            <img src="http://helm.tekmob.com/m3/cache/5905884_42.jpg">
-                                        </figure>
-                                        <div class="tsr-product-content">
-                                            <header class="tsr-product-header">Flappy Lamp</header>
-                                        </div>
-                                    </a>
-
-                                    <p class="tsr-product-small-print">
-                                        <!-- <p class="tsr-product-price"> -->
-                                        <button class="tsr-btn tsr-btn-purple tsr-btn-100 btnPlay" data-login="false" data-postid="19" data-clubid="75112" data-catid="422130" data-mediaid="5905884" data-video="http://timwe.cachefly.net/webapps/flappylamp-timwe_1/index.html" data-view="422260  ">
-                                            PLAY                        </button><br>
-                                        <!-- </p> -->
-                                        <!--Subscribe Button-->
-                                        <span class="tsr-btn btnJoin" data-clubid="75112" data-login="false" data-gencoluserlogin="Genc OL tariff users subscribe with 50% special discount! 1.00 AZN/week for EA and Java Games and 0.60 AZN/week for Online Games (3 games download)." data-gencoluser=" ">
-                              Subscribe                        </span>
-                                    </p>
-                                </div>
-                                <div class="tsr-module-product listgames">
-                                    <a href="http://play.ucell.uz/online-games/top-games/4972274">
-                                        <figure class="tsr-product-image">
-                                            <img src="http://helm.tekmob.com/m3/cache/4972274_42.jpg">
-                                        </figure>
-                                        <div class="tsr-product-content">
-                                            <header class="tsr-product-header">What's My Icon Game</header>
-                                        </div>
-                                    </a>
-
-                                    <p class="tsr-product-small-print">
-                                        <!-- <p class="tsr-product-price"> -->
-                                        <button class="tsr-btn tsr-btn-purple tsr-btn-100 btnPlay" data-login="false" data-postid="19" data-clubid="75112" data-catid="422130" data-mediaid="4972274" data-video="http://timwe.cachefly.net/webapps/whats-my-icon-timwe_1/index.html" data-view="422260  ">
-                                            PLAY                        </button><br>
-                                        <!-- </p> -->
-                                        <!--Subscribe Button-->
-                                        <span class="tsr-btn btnJoin" data-clubid="75112" data-login="false" data-gencoluserlogin="Genc OL tariff users subscribe with 50% special discount! 1.00 AZN/week for EA and Java Games and 0.60 AZN/week for Online Games (3 games download)." data-gencoluser=" ">
-                              Subscribe                        </span>
-                                    </p>
-                                </div>
-                                <div class="tsr-module-product listgames">
-                                    <a href="http://play.ucell.uz/online-games/top-games/4015306">
-                                        <figure class="tsr-product-image">
-                                            <img src="http://helm.tekmob.com/m3/cache/4015306_42.jpg">
-                                        </figure>
-                                        <div class="tsr-product-content">
-                                            <header class="tsr-product-header">The Saloon</header>
-                                        </div>
-                                    </a>
-
-                                    <p class="tsr-product-small-print">
-                                        <!-- <p class="tsr-product-price"> -->
-                                        <button class="tsr-btn tsr-btn-purple tsr-btn-100 btnPlay" data-login="false" data-postid="19" data-clubid="75112" data-catid="422130" data-mediaid="4015306" data-video="http://timwe.cachefly.net/webapps/TheSaloon_test/" data-view="422260  ">
-                                            PLAY                        </button><br>
-                                        <!-- </p> -->
-                                        <!--Subscribe Button-->
-                                        <span class="tsr-btn btnJoin" data-clubid="75112" data-login="false" data-gencoluserlogin="Genc OL tariff users subscribe with 50% special discount! 1.00 AZN/week for EA and Java Games and 0.60 AZN/week for Online Games (3 games download)." data-gencoluser=" ">
-                              Subscribe                        </span>
-                                    </p>
-                                </div>
-
+                                        <?php
+                                    }
+                                ?>
                             </div>
                         </section>
-                        <section class="pagination-azercell-container">
-                            <div class="tsr-container">
-                                <div class="tsr-pagination">
-                                    <div class="tsr-center">
-                                        <a href="#" class="tsr-active">1</a>
-                                        <a href="http://play.ucell.uz/online-games/top-games/page/2">2</a>
-                                        <a href="http://play.ucell.uz/online-games/top-games/page/3">3</a>
-                                        <a href="http://play.ucell.uz/online-games/top-games/page/2" class="tsr-dir-next">&gt;</a>
-                                        <!-- <a href="http://play.ucell.uz/online-games/top-games/page/3" class="tsr-dir-last"></a> -->
+                        <?php
+                            if($count_rows > $limit)
+                            {
+                                $show= 5;
+                                ?>
+                                <section class="pagination-azercell-container">
+                                    <div class="tsr-container">
+                                        <div class="tsr-pagination">
+                                            <div class="tsr-center">
+                                        <?php
+                                        if($page>1)
+                                        {
+                                            ?>
+                                            <a href="<?=SITE_PATH?>/category/<?=slugGenerator($current_category_name) . '-' . $current_category_id.'/'.($page-1)?>" class="tsr-dir-previous">&lt;</a>
+                                            <?php
+                                        }
+
+                                        for ($i = $page - $show; $i <= $page + $show; $i++)
+                                        {
+                                            if ($i > 0 && $i <= $max_page)
+                                            {
+                                                if ($i == $page)
+                                                {
+                                                    ?>
+                                                    <a href="javascript:void(0);" class="tsr-active"><?=$i?></a>
+                                                    <?php
+                                                }
+                                                else
+                                                {
+                                                    ?>
+                                                    <a href="<?=SITE_PATH?>/category/<?=slugGenerator($current_category_name) . '-' . $current_category_id.'/'.$i?>"><?=$i?></a>
+                                                    <?php
+                                                }
+                                            }
+                                        }
+                                        if ($page < $max_page)
+                                        {
+                                            ?>
+                                            <a href="<?=SITE_PATH?>/category/<?=slugGenerator($current_category_name) . '-' . $current_category_id.'/'.($page + 1)?>">&gt;</a>
+                                            <?php
+                                        }
+                                        ?>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                        </section>
+                                </section>
+                                <?php
+                            }
+                        ?>
                     </div>
                 </div>
             </div>
