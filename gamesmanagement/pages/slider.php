@@ -74,7 +74,7 @@ if($_POST) // Add && edit
         if($type=="jpg" || $type=="bmp"  || $type=="png" || $type=="gif" || $type=="jpeg") $image_access=true;
         if($image_access==true)
         {
-            $image_upload_name = substr(sha1(mt_rand()),17,15)."-".$image_name.".".$type;
+            $image_upload_name = substr(sha1(mt_rand()),17,15)."-".pathinfo($_FILES['image_file']['name'], PATHINFO_FILENAME).".".$type;
 
             if($edit>0)
             {

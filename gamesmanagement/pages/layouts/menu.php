@@ -6,6 +6,7 @@
 		<li><a href="index.php?do=menyular"><img src="images/menus.png" alt="" width="25"/>Menus</a></li>
 		<li><a href="index.php?do=categories"><img src="images/categories.png" alt="" width="25"/>Categories</a></li>
 		<li><a href="index.php?do=games"><img src="images/games.png" alt="" width="25"/>Games</a></li>
+        <li><a href="index.php?do=gallery"><img src="images/sliders.png" alt="" width="25"/>Games' gallery</a></li>
         <li><a href="index.php?do=slider"><img src="images/sliders.png" alt="" width="25"/>Slider</a></li>
 <!--		<li><a href="index.php?do=slider"><img src="images/sliders.png" alt="" width="25"/>Slaydlar</a></li>-->
 <!--		<li><a href="index.php?do=products"><img src="images/works.png" alt="" width="25"/>Məhsullar</a></li>-->

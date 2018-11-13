@@ -126,6 +126,17 @@
             header("Location: ".SITE_PATH."/404");
             exit('Redirecting...');
         }
+
+        // Get game's gallery
+        $stmt_select = mysqli_prepare($db,
+            "SELECT
+            `image_name`
+            FROM `gallery`
+            WHERE `game_id`=(?)");
+        $stmt_select->bind_param('i', $game_id);
+        $stmt_select->execute();
+        $result_game_gallery = $stmt_select->get_result();
+        $stmt_select->close();
     }
 ?>
 <meta charset="utf-8">

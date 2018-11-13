@@ -70,18 +70,32 @@
                                 <div id="slider" style="width: 465px; height: 250px;">
                                     <!-- Loading Screen -->
                                     <div data-u="slides" class="slider-slides">
-                                        <div>
-                                            <img data-u="image" src="http://helm.tekmob.com/m3/cache/4422502_38.jpg" />
-                                            <div data-u="thumb">
-                                                <img class="i" src="http://helm.tekmob.com/m3/cache/4422502_38.jpg" />
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <img data-u="image" src="http://helm.tekmob.com/m3/cache/4422502_38.jpg" />
-                                            <div data-u="thumb">
-                                                <img class="i" src="http://helm.tekmob.com/m3/cache/4422502_38.jpg" />
-                                            </div>
-                                        </div>
+                                        <?php
+                                            $i=1;
+                                            while($row=$result_game_gallery->fetch_assoc())
+                                            {
+                                                if($i==1)
+                                                {
+                                                    ?>
+                                                    <div>
+                                                        <img data-u="image" src="<?=SITE_PATH.'/images/games/'.$current_game_image_name?>" />
+                                                        <div data-u="thumb">
+                                                            <img class="i" src="<?=SITE_PATH.'/images/games/'.$current_game_image_name?>" />
+                                                        </div>
+                                                    </div>
+                                                    <?php
+                                                }
+                                                ?>
+                                                <div>
+                                                    <img data-u="image" src="<?=SITE_PATH.'/images/game_gallery/'.$row['image_name']?>" />
+                                                    <div data-u="thumb">
+                                                        <img class="i" src="<?=SITE_PATH.'/images/game_gallery/'.$row['image_name']?>" />
+                                                    </div>
+                                                </div>
+                                                <?php
+                                                $i++;
+                                            }
+                                        ?>
                                     </div>
                                     <!-- Thumbnail Navigator -->
                                     <div data-u="thumbnavigator" class="slider-thumbnails" data-autocenter="2">
