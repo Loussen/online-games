@@ -27,6 +27,8 @@
         $category_id = intval($_GET['id']);
 
         // Paginator
+        $limit = 10;
+
         $stmt_select = mysqli_prepare($db,
             "SELECT 
                     `id`
@@ -37,9 +39,14 @@
         $stmt_select->execute();
         $stmt_select->store_result();
 
-        echo $stmt_select->num_rows; exit;
-        // Paginator
+        $count_rows = $stmt_select->num_rows;
+        $max_page=ceil($count_rows/$limit);
+        $page=intval($_GET["page"]); if($page<1) $page=1; if($page>$max_page) $page=$max_page;
+        if($page<1) $page = 1;
+        $start=$page*$limit-$limit;
+        $stmt_select->close();
 
+        // Get games by category
         $stmt_select = mysqli_prepare($db,
             "SELECT 
                     `name`,
@@ -47,10 +54,39 @@
                     `auto_id`
                     FROM `games`
                     WHERE `lang_id`=(?) and `active`=(?) and `category_id`=(?)
-                    order by `order_number` asc");
-        $stmt_select->bind_param('iii', $main_lang,$active,$category_id);
+                    order by `order_number` asc limit $start,$limit");
+
+        $stmt_select->bind_param('iii', $main_lang,$active_status,$category_id);
         $stmt_select->execute();
-        $result = $stmt_select->get_result();
+        $result_games_by_categories = $stmt_select->get_result();
+        $stmt_select->close();
+
+        // Get current category
+        $stmt_select = mysqli_prepare($db,
+            "SELECT
+            `name`,
+            `auto_id`
+            FROM `categories`
+            WHERE `lang_id`=(?) and `active`=(?) and `auto_id`=(?)
+            LIMIT 1");
+        $stmt_select->bind_param('iii', $main_lang,$active_status,$category_id);
+        $stmt_select->execute();
+        $stmt_select->bind_result($current_category_name,$current_category_id);
+        $stmt_select->fetch();
+        $stmt_select->close();
+
+        // All categories
+        $stmt_select = mysqli_prepare($db,
+            "SELECT
+            `name`,
+            `auto_id`
+            FROM `categories`
+            WHERE `lang_id`=(?) and `active`=(?)
+            LIMIT 1");
+        $stmt_select->bind_param('ii', $main_lang,$active_status);
+        $stmt_select->execute();
+        $result_all_categories = $stmt_select->get_result();
+        $stmt_select->close();
 
         $title = $info_description["title_"].' - '.$menyu['name'];
     }

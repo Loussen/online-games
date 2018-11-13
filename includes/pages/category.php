@@ -2,13 +2,13 @@
     <div class="breadcrumbs">
         <div class="tsr-container">
             <div class="col-12">
-                <a href="http://play.ucell.uz/homepage">Homepage</a>
+                <a href="<?=SITE_PATH?>">Homepage</a>
                 <!--<a href="">Home</a>-->
                 <span class="ts-icon-breadcrumb-arrow"></span>
                 <span class="bread-item-name ">Online Games</span>
                 <!--<a href="">Home</a>-->
                 <span class="ts-icon-breadcrumb-arrow"></span>
-                <a href="http://play.ucell.uz/online-games/top-games">TOP Games</a>
+                <a href="<?=SITE_PATH?>/category/<?=slugGenerator($current_category_name) . '-' . $current_category_id?>"><?=$current_category_name?></a>
             </div>
         </div>
     </div>
@@ -17,11 +17,6 @@
 <div id="primary" class="content-area">
 
     <main id="main" class="site-main" role="main">
-
-
-        <section>
-        </section>
-
         <section class="tsr-section-productAndService-listing tsr-color-gray">
             <div class="tsr-container">
                 <div class="tsr-row">
@@ -34,18 +29,17 @@
                                 <li>
                                     <span class="title open">Genre</span>
                                     <ul>
-                                        <li><a class="active" href="http://play.ucell.uz/online-games/top-games">TOP Games</a></li>
-                                        <li><a class="" href="http://play.ucell.uz/online-games/strategy">Strategy</a></li>
-                                        <li><a class="" href="http://play.ucell.uz/online-games/sports">Sports</a></li>
-                                        <li><a class="" href="http://play.ucell.uz/online-games/simulation">Simulation</a></li>
-                                        <li><a class="" href="http://play.ucell.uz/online-games/recommended-games">Recommended Games</a></li>
-                                        <li><a class="" href="http://play.ucell.uz/online-games/puzzle">Puzzle</a></li>
-                                        <li><a class="" href="http://play.ucell.uz/online-games/new-games">New Games</a></li>
-                                        <li><a class="" href="http://play.ucell.uz/online-games/educational">Educational</a></li>
-                                        <li><a class="" href="http://play.ucell.uz/online-games/casual">Casual</a></li>
-                                        <li><a class="" href="http://play.ucell.uz/online-games/brain-and-quizz">Brain and Quizz</a></li>
-                                        <li><a class="" href="http://play.ucell.uz/online-games/arcade">Arcade</a></li>
-                                        <li><a class="" href="http://play.ucell.uz/online-games/action">Action</a></li>
+                                        <?php
+                                            while($row=$result_all_categories->fetch_assoc())
+                                            {
+                                                $class_active = ($category_id==$row['auto_id']) ? 'active' : '';
+                                                ?>
+                                                <li>
+                                                    <a class="<?=$class_active?>" href="<?=SITE_PATH?>/category/<?=slugGenerator($row['name']) . '-' . $row['auto_id']?>"><?=$row['name']?></a>
+                                                </li>
+                                                <?php
+                                            }
+                                        ?>
                                     </ul>
                                 </li>
                             </ul>
