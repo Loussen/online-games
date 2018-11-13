@@ -71,7 +71,7 @@
                                     <!-- Loading Screen -->
                                     <div data-u="slides" class="slider-slides">
                                         <?php
-                                            if($result_game_gallery)
+                                            if(!empty($result_game_gallery->fetch_assoc()))
                                             {
                                                 $i=1;
                                                 while($row=$result_game_gallery->fetch_assoc())
