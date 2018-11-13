@@ -45,7 +45,7 @@
                 <div class="tsr-container">
                     <a href="http://play.ucell.uz/homepage" class="topLevelOnes">
                         <figure class="tsr-header-logo">
-                            <img src="http://play.ucell.uz/wp-content/themes/ucell-games/assets/images/logo-brand.png">
+                            <img src="<?=SITE_PATH."/assets/img/GamEthio.jpg"?>">
                         </figure>
                     </a>
                     <div class="tsr-header-mobileAndExtras">

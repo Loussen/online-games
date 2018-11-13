@@ -71,30 +71,45 @@
                                     <!-- Loading Screen -->
                                     <div data-u="slides" class="slider-slides">
                                         <?php
-                                            $i=1;
-                                            while($row=$result_game_gallery->fetch_assoc())
+                                            if($result_game_gallery)
                                             {
-                                                if($i==1)
+                                                $i=1;
+                                                while($row=$result_game_gallery->fetch_assoc())
                                                 {
+                                                    if($i==1)
+                                                    {
+                                                        ?>
+                                                        <div>
+                                                            <img data-u="image" src="<?=SITE_PATH.'/images/games/'.$current_game_image_name?>" />
+                                                            <div data-u="thumb">
+                                                                <img class="i" src="<?=SITE_PATH.'/images/games/'.$current_game_image_name?>" />
+                                                            </div>
+                                                        </div>
+                                                        <?php
+                                                    }
                                                     ?>
                                                     <div>
-                                                        <img data-u="image" src="<?=SITE_PATH.'/images/games/'.$current_game_image_name?>" />
+                                                        <img data-u="image" src="<?=SITE_PATH.'/images/game_gallery/'.$row['image_name']?>" />
                                                         <div data-u="thumb">
-                                                            <img class="i" src="<?=SITE_PATH.'/images/games/'.$current_game_image_name?>" />
+                                                            <img class="i" src="<?=SITE_PATH.'/images/game_gallery/'.$row['image_name']?>" />
                                                         </div>
                                                     </div>
                                                     <?php
+                                                    $i++;
                                                 }
+                                            }
+                                            else
+                                            {
                                                 ?>
                                                 <div>
-                                                    <img data-u="image" src="<?=SITE_PATH.'/images/game_gallery/'.$row['image_name']?>" />
+                                                    <img data-u="image" src="<?=SITE_PATH.'/images/games/'.$current_game_image_name?>" />
                                                     <div data-u="thumb">
-                                                        <img class="i" src="<?=SITE_PATH.'/images/game_gallery/'.$row['image_name']?>" />
+                                                        <img class="i" src="<?=SITE_PATH.'/images/games/'.$current_game_image_name?>" />
                                                     </div>
                                                 </div>
                                                 <?php
-                                                $i++;
                                             }
+
                                         ?>
                                     </div>
                                     <!-- Thumbnail Navigator -->
