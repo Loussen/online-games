@@ -43,7 +43,7 @@
 
             <div class="tsr-header-main">
                 <div class="tsr-container">
-                    <a href="http://play.ucell.uz/homepage" class="topLevelOnes">
+                    <a href="<?=SITE_PATH?>" class="topLevelOnes">
                         <figure class="tsr-header-logo">
                             <img src="<?=SITE_PATH."/assets/img/GamEthio.jpg"?>">
                         </figure>
