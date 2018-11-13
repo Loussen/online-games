@@ -109,7 +109,6 @@
                                                 </div>
                                                 <?php
                                             }
-
                                         ?>
                                     </div>
                                     <!-- Thumbnail Navigator -->
