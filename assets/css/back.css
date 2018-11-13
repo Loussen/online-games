@@ -55,3 +55,8 @@ figure.tsr-product-image img
 {
     height: 130px !important;
 }
+
+.tsr-section-header .tsr-header-logo
+{
+    padding: 9px;
+}
