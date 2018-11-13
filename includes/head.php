@@ -136,6 +136,7 @@
         $stmt_select->bind_param('i', $game_id);
         $stmt_select->execute();
         $result_game_gallery = $stmt_select->get_result();
+        $count_gallery = mysqli_num_rows($result_game_gallery);
         $stmt_select->close();
     }
 ?>
