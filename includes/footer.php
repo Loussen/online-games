@@ -9,7 +9,7 @@
                     Copy Ucell 2018
                 </div>
                 <div class="col-6 align-right">
-                    <img src="http://play.ucell.uz/wp-content/themes/ucell-games/assets/images/logo-brand.png"
+                    <img src="<?=SITE_PATH.'/assets/img/GameEthio.png'?>"
                          style="max-height: 29px; margin-right: 20px;">
                 </div>
             </div>

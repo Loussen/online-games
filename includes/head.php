@@ -114,7 +114,6 @@
                     LEFT JOIN `categories` on `games`.`category_id`=`categories`.`auto_id`
                     WHERE `games`.`lang_id`=(?) and `games`.`active`=(?) and `games`.`auto_id`=(?)
                     LIMIT 1");
-
         $stmt_select->bind_param('iii', $main_lang,$active_status,$game_id);
         $stmt_select->execute();
         $stmt_select->bind_result($current_game_id,$current_game_name,$current_game_image_name,$current_game_text,$current_category_name,$current_category_id);
