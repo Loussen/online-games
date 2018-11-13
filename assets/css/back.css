@@ -60,3 +60,10 @@ figure.tsr-product-image img
 {
     padding: 9px;
 }
+
+.breadcrumbs .col-12 a,
+.breadcrumbs .col-12 .bread-item-name,
+.breadcrumbs .col-12 a:last-of-type
+{
+    color: #ddd;
+}
