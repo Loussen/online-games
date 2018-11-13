@@ -93,13 +93,25 @@
                                         </a>
                                     </li>
                                     <?php
+
                                         $stmt_select = mysqli_prepare($db,
-                                            "SELECT 
-                                                    `name`,`auto_id` 
-                                                    FROM `categories`
-                                                    WHERE `lang_id`=(?) and `active`=(?)
-                                                    order by `order_number` asc");
-                                        $stmt_select->bind_param('ii', $main_lang,$active_status);
+                                            "SELECT
+                                                    `categories`.`name` as `c_name`,
+                                                    `categories`.`auto_id` as `c_id`,
+                                                    GROUP_CONCAT(`games`.`name`) as `g_names`,
+                                                    GROUP_CONCAT(`games`.`auto_id`) as `g_ids`
+                                                    FROM `games` 
+                                                    LEFT JOIN `categories` ON `games`.`category_id` = `categories`.`auto_id` 
+                                                    WHERE `games`.`lang_id`=(?) and `games`.`active`=(?) and `categories`.`lang_id`=(?) and `categories`.`active`=(?)
+                                                    group by `categories`.`name` order by `categories`.`order_number` ASC, `games`.`order_number` ASC");
+
+//                                        $stmt_select = mysqli_prepare($db,
+//                                            "SELECT
+//                                                    `name`,`auto_id`
+//                                                    FROM `categories`
+//                                                    WHERE `lang_id`=(?) and `active`=(?)
+//                                                    order by `order_number` asc");
+                                        $stmt_select->bind_param('iiii', $main_lang,$active_status,$main_lang,$active_status);
                                         $stmt_select->execute();
                                         $result = $stmt_select->get_result();
 
@@ -107,49 +119,87 @@
                                         {
                                             ?>
                                             <li class="has-sub">
-                                                <a href="<?=SITE_PATH?>/online-games/<?=slugGenerator($row['name']) . '-' . $row['auto_id']?>"
+                                                <a href="<?=SITE_PATH?>/category/<?=slugGenerator($row['c_name']) . '-' . $row['c_id']?>"
                                                    onclick="location.assign(jQuery(this).attr('href'));"
-                                                   class="clickableTabWithLink"><?=$row['name']?></a>
+                                                   class="clickableTabWithLink"><?=$row['c_name']?></a>
 
                                                 <menu class="tsr-nav-third-level">
                                                 <?php
-                                                    $stmt_select_games = mysqli_prepare($db,
-                                                        "SELECT 
-                                                        `name`,`auto_id` 
-                                                        FROM `games`
-                                                        WHERE `lang_id`=(?) and `active`=(?) and `category_id`=(?)
-                                                        order by `order_number` asc");
-                                                    $stmt_select_games->bind_param('iii', $main_lang,$active_status,$row['auto_id']);
-                                                    $stmt_select_games->execute();
-                                                    $result_games = $stmt_select_games->get_result();
 
-                                                    $i = 1;
-                                                    while($row_games=$result_games->fetch_assoc())
+                                                    $game_names = $row['g_names'];
+                                                    $game_names_arr = explode(",",$game_names);
+
+                                                    $game_ids = $row['g_ids'];
+                                                    $game_ids_arr = explode(",",$game_ids);
+
+                                                    if(is_array($game_names_arr) && count($game_names_arr)>0 && is_array($game_ids_arr) && count($game_ids_arr)>0)
                                                     {
-                                                        ?>
-                                                        <li>
-                                                            <a href="<?=SITE_PATH?>/online-games/<?=slugGenerator($row['name']) . '-' . $row['auto_id']?>/<?=slugGenerator($row_games['name']) . '-' . $row_games['auto_id']?>">
-                                                                <?=$row_games['name']?>
-                                                            </a>
-                                                        </li>
-                                                        <?php
+                                                        $combine_arr = array_combine($game_ids_arr,$game_names_arr);
 
-                                                        if($i==3)
+                                                        $i = 1;
+                                                        foreach ($combine_arr as $key=>$value)
                                                         {
                                                             ?>
-                                                                </menu>
-                                                            <li class="has-sub">
-                                                                <menu class="tsr-nav-third-level">
+                                                                <li>
+                                                                    <a href="<?=SITE_PATH?>/online-games/<?=slugGenerator($value) . '-' . $key?>">
+                                                                        <?=$value?>
+                                                                    </a>
+                                                                </li>
                                                             <?php
-                                                        }
 
-                                                        $i++;
+                                                            if($i%2==0)
+                                                            {
+                                                                ?>
+<!--                                                                    </menu>-->
+<!--                                                                <li class="has-sub">-->
+<!--                                                                    <menu class="tsr-nav-third-level">-->
+                                                                <?php
+                                                                break;
+                                                            }
+
+                                                            $i++;
+                                                        }
                                                     }
+
+//                                                    $stmt_select_games = mysqli_prepare($db,
+//                                                        "SELECT
+//                                                        `name`,`auto_id`
+//                                                        FROM `games`
+//                                                        WHERE `lang_id`=(?) and `active`=(?) and `category_id`=(?)
+//                                                        order by `order_number` asc LIMIT 2");
+//                                                    $stmt_select_games->bind_param('iii', $main_lang,$active_status,$row['auto_id']);
+//                                                    $stmt_select_games->execute();
+//                                                    $result_games = $stmt_select_games->get_result();
+
+//                                                    $i = 1;
+//                                                    while($row_games=$result_games->fetch_assoc())
+//                                                    {
+//                                                        ?>
+<!--                                                        <li>-->
+<!--                                                            <a href="--><?//=SITE_PATH?><!--/online-games/--><?//=slugGenerator($row['name']) . '-' . $row['auto_id']?><!--/--><?//=slugGenerator($row_games['name']) . '-' . $row_games['auto_id']?><!--">-->
+<!--                                                                --><?//=$row_games['name']?>
+<!--                                                            </a>-->
+<!--                                                        </li>-->
+<!--                                                        --><?php
+//
+//                                                        if($i==3)
+//                                                        {
+//                                                            ?>
+<!--                                                                </menu>-->
+<!--                                                            <li class="has-sub">-->
+<!--                                                                <menu class="tsr-nav-third-level">-->
+<!--                                                            --><?php
+//                                                        }
+//
+//                                                        $i++;
+//                                                    }
                                                 ?>
                                                 </menu>
                                             </li>
                                             <?php
                                         }
+
+                                        $stmt_select->close();
                                     ?>
 
                                     <li class="tsr-btn-close"><a href="#"></a></li>

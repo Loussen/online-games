@@ -74,7 +74,7 @@
                     while($row = $result->fetch_assoc())
                     {
                         ?>
-                        <a href="<?=SITE_PATH?>/online-games/<?=slugGenerator($row['c_name']) . '-' . $row['c_id']?>/<?=slugGenerator($row['g_name']) . '-' . $row['g_id']?>" class="tsr-module-product">
+                        <a href="<?=SITE_PATH?>/online-games/<?=slugGenerator($row['g_name']) . '-' . $row['g_id']?>" class="tsr-module-product">
                             <figure class="tsr-product-image" style="text-align:center;">
                                 <img src="<?=SITE_PATH?>/images/games/<?=$row['g_image_name']?>"
                                      style="max-width:250px; width: 100%;"/>
@@ -133,7 +133,7 @@
                     while($row = $result->fetch_assoc())
                     {
                         ?>
-                        <a href="<?=SITE_PATH?>/online-games/<?=slugGenerator($row['c_name']) . '-' . $row['c_id']?>/<?=slugGenerator($row['g_name']) . '-' . $row['g_id']?>" class="tsr-module-product">
+                        <a href="<?=SITE_PATH?>/online-games/<?=slugGenerator($row['g_name']) . '-' . $row['g_id']?>" class="tsr-module-product">
                             <figure class="tsr-product-image" style="text-align:center;">
                                 <img src="<?=SITE_PATH?>/images/games/<?=$row['g_image_name']?>"
                                      style="max-width:250px; width: 100%;"/>
