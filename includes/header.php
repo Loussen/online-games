@@ -45,7 +45,7 @@
                 <div class="tsr-container">
                     <a href="<?=SITE_PATH?>" class="topLevelOnes">
                         <figure class="tsr-header-logo">
-                            <img src="<?=SITE_PATH."/assets/img/GameEthio.png"?>">
+                            <img style="height: 56px;" src="<?=SITE_PATH."/assets/img/GameEthio.png"?>">
                         </figure>
                     </a>
                     <div class="tsr-header-mobileAndExtras">
