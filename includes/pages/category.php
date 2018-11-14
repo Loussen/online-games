@@ -131,70 +131,37 @@
         <section class="tsr-section-divider tsr-color-white">
             <header class="tsr-container">
             <span>
-                Recommendation            </span>
+                Recommendation
+            </span>
             </header>
         </section>
-
 
         <section class="tsr-section-carousel-listing">
             <div class="tsr-container" style="width: 732px; height: 567px;">
                 <div class="tsr-slides">
-                    <a href="http://play.ucell.uz/online-games/top-games/5657966" class="tsr-module-product">
-                        <figure class="tsr-product-image">
-                            <img src="http://helm.tekmob.com/m3/cache/5657966_42.jpg">
-                        </figure>
-                        <div class="tsr-product-content recomendation">
-                            <header class="tsr-product-header" style="height: 40px;">Sean The Miner</header>
-                            <p class="tsr-product-desc" style="height: 144px;"> Hey, here is a new challenge to take up! </p>
+                    <?php
+                        while($row=$result_games_reco->fetch_assoc())
+                        {
+                            ?>
+                            <a href="<?=SITE_PATH?>/online-games/<?=slugGenerator($row['name']) . '-' . $row['auto_id']?>">
+                                <figure class="tsr-product-image">
+                                    <img src="<?=SITE_PATH?>/images/games/<?=$row['image_name']?>">
+                                </figure>
+                                <div class="tsr-product-content recomendation">
+                                    <header class="tsr-product-header" style="height: 40px;"><?=$row['name']?></header>
+                                    <p class="tsr-product-desc" style="height: 144px;">
+                                        <?=more_string(html_entity_decode($row['text']),195)?>
+                                    </p>
 
-                            <button class="tsr-btn tsr-btn-purple tsr-btn-100 btnDownload" data-login="false" data-postid="19" data-clubid="75112" data-catid="422130" data-mediaid="5657966">
-                                PLAY                                </button>
-
-                            <!--Subscribe Button-->
-                            <p class="tsr-product-small-print" style="height: 69px;"><br>
-                                <span class="tsr-btn btnJoin" data-clubid="75112" data-login="false" data-gencoluserlogin="Genc OL tariff users subscribe with 50% special discount! 1.00 AZN/week for EA and Java Games and 0.60 AZN/week for Online Games (3 games download)." data-gencoluser=" ">
-                                          Subscribe                                    </span>
-                            </p>
-                        </div>
-                    </a>
-
-                    <a href="http://play.ucell.uz/online-games/top-games/5905884" class="tsr-module-product">
-                        <figure class="tsr-product-image">
-                            <img src="http://helm.tekmob.com/m3/cache/5905884_42.jpg">
-                        </figure>
-                        <div class="tsr-product-content recomendation">
-                            <header class="tsr-product-header" style="height: 40px;">Flappy Lamp</header>
-                            <p class="tsr-product-desc" style="height: 144px;"> Play as a magic lamp. Flap your way through the palace guards! </p>
-
-                            <button class="tsr-btn tsr-btn-purple tsr-btn-100 btnDownload" data-login="false" data-postid="19" data-clubid="75112" data-catid="422130" data-mediaid="5905884">
-                                PLAY                                </button>
-
-                            <!--Subscribe Button-->
-                            <p class="tsr-product-small-print" style="height: 69px;"><br>
-                                <span class="tsr-btn btnJoin" data-clubid="75112" data-login="false" data-gencoluserlogin="Genc OL tariff users subscribe with 50% special discount! 1.00 AZN/week for EA and Java Games and 0.60 AZN/week for Online Games (3 games download)." data-gencoluser=" ">
-                                          Subscribe                                    </span>
-                            </p>
-                        </div>
-                    </a>
-
-                    <a href="http://play.ucell.uz/online-games/top-games/4015306" class="tsr-module-product">
-                        <figure class="tsr-product-image">
-                            <img src="http://helm.tekmob.com/m3/cache/4015306_42.jpg">
-                        </figure>
-                        <div class="tsr-product-content recomendation">
-                            <header class="tsr-product-header" style="height: 40px;">The Saloon</header>
-                            <p class="tsr-product-desc" style="height: 144px;"> Become the best shooter in Wild West ever! Evil bandits kidnapped hostages and are keeping them in The Saloon. Only you can save them! Reload your gun and shoot up all bandits with their bosses! </p>
-
-                            <button class="tsr-btn tsr-btn-purple tsr-btn-100 btnDownload" data-login="false" data-postid="19" data-clubid="75112" data-catid="422130" data-mediaid="4015306">
-                                PLAY                                </button>
-
-                            <!--Subscribe Button-->
-                            <p class="tsr-product-small-print" style="height: 69px;"><br>
-                                <span class="tsr-btn btnJoin" data-clubid="75112" data-login="false" data-gencoluserlogin="Genc OL tariff users subscribe with 50% special discount! 1.00 AZN/week for EA and Java Games and 0.60 AZN/week for Online Games (3 games download)." data-gencoluser=" ">
-                                          Subscribe                                    </span>
-                            </p>
-                        </div>
-                    </a>
+                                    <button class="tsr-btn tsr-btn-purple tsr-btn-100 btnDownload" data-login="false" data-postid="19" data-clubid="75112" data-catid="422130" data-mediaid="5657966">
+                                        PLAY
+                                    </button>
+                                    </p>
+                                </div>
+                            </a>
+                            <?php
+                        }
+                    ?>
 
                 </div>
             </div>

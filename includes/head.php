@@ -94,6 +94,22 @@
         $result_all_categories = $stmt_select->get_result();
         $stmt_select->close();
 
+        // Get recommandation games
+        $stmt_select = mysqli_prepare($db,
+            "SELECT 
+                    `name`,
+                    `image_name`,
+                    `auto_id`,
+                    `text`
+                    FROM `games`
+                    WHERE `lang_id`=(?) and `active`=(?) and `recogame`=(?)
+                    order by `order_number` asc limit $start,$limit");
+
+        $stmt_select->bind_param('iii', $main_lang,$active_status,1);
+        $stmt_select->execute();
+        $result_games_reco = $stmt_select->get_result();
+        $stmt_select->close();
+
         $title = $title.' - '.$current_category_name.' games';
     }
     elseif($do=="inner")
