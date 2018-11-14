@@ -114,19 +114,19 @@
         <div class="tsr-container">
             <div class="tsr-slides">
                 <?php
-                    $stmt_select = mysqli_prepare($db,
-                        "SELECT 
-                                    `play_game`.`id`
-                                    FROM `play_game`
-                                    LEFT JOIN `games` on `games`.`auto_id`=`play_game`.`games_id`
-                                    WHERE `games`.`lang_id`=(?) and `games`.`active`=(?)
-                                    GROUP BY `play_game`.`games_id`");
-                    $stmt_select->bind_param('ii', $main_lang,$active_status);
-                    $stmt_select->execute();
-                    $result = $stmt_select->get_result();
-                    $count_games = mysqli_num_rows($result);
+//                    $stmt_select = mysqli_prepare($db,
+//                        "SELECT
+//                                    `play_game`.`id`
+//                                    FROM `play_game`
+//                                    LEFT JOIN `games` on `games`.`auto_id`=`play_game`.`games_id`
+//                                    WHERE `games`.`lang_id`=(?) and `games`.`active`=(?)
+//                                    GROUP BY `play_game`.`games_id`");
+//                    $stmt_select->bind_param('ii', $main_lang,$active_status);
+//                    $stmt_select->execute();
+//                    $result = $stmt_select->get_result();
+//                    $count_games = mysqli_num_rows($result);
 
-                    if($count_games>0)
+                    if($count_games>0 && 1==2)
                     {
                         $stmt_select = mysqli_prepare($db,
                             "SELECT 
