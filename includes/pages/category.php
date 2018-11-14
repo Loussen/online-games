@@ -143,26 +143,27 @@
                         while($row=$result_games_reco->fetch_assoc())
                         {
                             ?>
-                            <a href="<?=SITE_PATH?>/online-games/<?=slugGenerator($row['name']) . '-' . $row['auto_id']?>">
+                            <a href="<?=SITE_PATH?>/online-games/<?=slugGenerator($row['name']) . '-' . $row['auto_id']?>" class="tsr-module-product">
                                 <figure class="tsr-product-image">
                                     <img src="<?=SITE_PATH?>/images/games/<?=$row['image_name']?>">
                                 </figure>
                                 <div class="tsr-product-content recomendation">
-                                    <header class="tsr-product-header" style="height: 40px;"><?=$row['name']?></header>
+                                    <header class="tsr-product-header" style="height: 40px;">
+                                        <?=$row['name']?>
+                                    </header>
                                     <p class="tsr-product-desc" style="height: 144px;">
-                                        <?=more_string(html_entity_decode($row['text']),195)?>
+                                        <?=more_string(html_entity_decode($row['text']))?>
                                     </p>
 
                                     <button class="tsr-btn tsr-btn-purple tsr-btn-100 btnDownload" data-login="false" data-postid="19" data-clubid="75112" data-catid="422130" data-mediaid="5657966">
-                                        PLAY
-                                    </button>
+                                        PLAY                                </button>
+
                                     </p>
                                 </div>
                             </a>
                             <?php
                         }
                     ?>
-
                 </div>
             </div>
         </section>

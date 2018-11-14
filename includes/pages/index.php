@@ -48,7 +48,7 @@
     <!-- SECTION LIST -->
     <section class="tsr-section-divider tsr-color-white">
         <header class="tsr-container">
-            <span>Top Weekly</span>
+            <span>Top Games</span>
         </header>
     </section>
 
@@ -56,15 +56,17 @@
         <div class="tsr-container">
             <div class="tsr-slides">
                 <?php
+                    $topgame_status = 1;
+
                     $stmt_select = mysqli_prepare($db,
                         "SELECT 
                                 `games`.`name` as `g_name`,
                                 `games`.`image_name` as `g_image_name`,
                                 `games`.`auto_id` as `g_id`
                                 FROM `games`
-                                WHERE `games`.`lang_id`=(?) and `games`.`active`=(?)
+                                WHERE `games`.`lang_id`=(?) and `games`.`active`=(?) and `games`.`topgame`=(?) and `games`.`recogame`=0
                                 order by `games`.`order_number` asc");
-                    $stmt_select->bind_param('ii', $main_lang,$active_status);
+                    $stmt_select->bind_param('iii', $main_lang,$active_status,$topgame_status);
                     $stmt_select->execute();
                     $result = $stmt_select->get_result();
 
@@ -104,7 +106,7 @@
     <br/>
     <section class="tsr-section-divider tsr-color-white">
         <header class="tsr-container">
-            <span>Top Java Games</span>
+            <span>Most Played Games</span>
         </header>
     </section>
 
@@ -114,18 +116,46 @@
                 <?php
                     $stmt_select = mysqli_prepare($db,
                         "SELECT 
-                                    `games`.`name` as `g_name`,
-                                    `games`.`image_name` as `g_image_name`,
-                                    `games`.`auto_id` as `g_id`,
-                                    `categories`.`auto_id` as `c_id`,
-                                    `categories`.`name` as `c_name` 
-                                    FROM `games`
-                                    LEFT JOIN `categories` on `games`.`category_id`=`categories`.`auto_id`
-                                    WHERE `games`.`lang_id`=(?) and `games`.`active`=(?) and `categories`.`lang_id`=(?)
-                                    order by `games`.`order_number` asc");
-                    $stmt_select->bind_param('iii', $main_lang,$active,$main_lang);
+                                    `play_game`.`id`
+                                    FROM `play_game`
+                                    LEFT JOIN `games` on `games`.`auto_id`=`play_game`.`games_id`
+                                    WHERE `games`.`lang_id`=(?) and `games`.`active`=(?)
+                                    GROUP BY `play_game`.`games_id`");
+                    $stmt_select->bind_param('ii', $main_lang,$active_status);
                     $stmt_select->execute();
                     $result = $stmt_select->get_result();
+                    $count_games = mysqli_num_rows($result);
+
+                    if($count_games>0)
+                    {
+                        $stmt_select = mysqli_prepare($db,
+                            "SELECT 
+                                `games`.`name` as `g_name`,
+                                `games`.`image_name` as `g_image_name`,
+                                `games`.`auto_id` as `g_id`,
+                                sum(`play_game`.`count`) as `play_count`
+                                FROM `play_game`
+                                LEFT JOIN `games` on `games`.`auto_id`=`play_game`.`games_id`
+                                WHERE `games`.`lang_id`=(?) and `games`.`active`=(?)
+                                GROUP BY `play_game`.`games_id` order by `play_count` desc");
+                        $stmt_select->bind_param('ii', $main_lang,$active_status);
+                        $stmt_select->execute();
+                        $result = $stmt_select->get_result();
+                    }
+                    else
+                    {
+                        $stmt_select = mysqli_prepare($db,
+                            "SELECT 
+                                `games`.`name` as `g_name`,
+                                `games`.`image_name` as `g_image_name`,
+                                `games`.`auto_id` as `g_id`
+                                FROM `games`
+                                WHERE `games`.`lang_id`=(?) and `games`.`active`=(?) and `games`.`topgame`=0 and `games`.`recogame`=1
+                                order by `games`.`order_number` asc");
+                        $stmt_select->bind_param('ii', $main_lang,$active_status);
+                        $stmt_select->execute();
+                        $result = $stmt_select->get_result();
+                    }
 
                     while($row = $result->fetch_assoc())
                     {
@@ -137,8 +167,6 @@
                             </figure>
                             <div class="tsr-product-content">
                                 <header class="tsr-product-header"><?=$row['g_name']?></header>
-                                <!--                            <p class="tsr-product-pric" style="height: 20px;color: #0083be; font-weight:bold;">
-                                                                                                     AZN                                                            </p>-->
                                 <!--Play Button-->
                                 <p class="tsr-product-small-print"><br/>
                                     <span class="tsr-btn btnJoin"
@@ -154,7 +182,6 @@
                         </a>
                         <?php
                     }
-
                     $stmt_select->close();
                 ?>
             </div>

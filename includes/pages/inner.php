@@ -121,9 +121,16 @@
                                         </div>
                                         <!-- Thumbnail Item Skin End -->
                                     </div>
-                                    <!-- Arrow Navigator -->
-                                    <span data-u="arrowleft" class="left-arrow" data-autocenter="2"></span>
-                                    <span data-u="arrowright" class="right-arrow" data-autocenter="2"></span>
+                                    <?php
+                                        if($count_gallery>0)
+                                        {
+                                            ?>
+                                            <!-- Arrow Navigator -->
+                                            <span data-u="arrowleft" class="left-arrow" data-autocenter="2"></span>
+                                            <span data-u="arrowright" class="right-arrow" data-autocenter="2"></span>
+                                            <?php
+                                        }
+                                    ?>
                                 </div>
 
                             </div>

@@ -95,6 +95,8 @@
         $stmt_select->close();
 
         // Get recommandation games
+        $recogame_status = 1;
+
         $stmt_select = mysqli_prepare($db,
             "SELECT 
                     `name`,
@@ -103,9 +105,9 @@
                     `text`
                     FROM `games`
                     WHERE `lang_id`=(?) and `active`=(?) and `recogame`=(?)
-                    order by `order_number` asc limit $start,$limit");
+                    order by `order_number` asc LIMIT 3");
 
-        $stmt_select->bind_param('iii', $main_lang,$active_status,1);
+        $stmt_select->bind_param('iii', $main_lang,$active_status,$recogame_status);
         $stmt_select->execute();
         $result_games_reco = $stmt_select->get_result();
         $stmt_select->close();
