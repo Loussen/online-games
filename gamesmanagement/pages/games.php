@@ -30,6 +30,8 @@ if($edit>0 && mysqli_num_rows(mysqli_query($db,"select id from $do where auto_id
 if($_POST) // Add && edit
 {
     extract($_POST);
+    $topgame = ($topgame=='on') ? 1 : 0;
+    $recogame = ($recogame=='on') ? 1 : 0;
     $last_order=mysqli_fetch_assoc(mysqli_query($db,"select order_number from $do where category_id='$_POST[category_id]' order by order_number desc"));
     $last_order=intval($last_order["order_number"])+1;
     $auto_id=mysqli_fetch_assoc(mysqli_query($db,"select auto_id from $do order by auto_id desc"));
@@ -82,11 +84,11 @@ if($_POST) // Add && edit
 
         if(mysqli_num_rows(mysqli_query($db,"select id from $do where lang_id='$row[id]' $add_where"))>0 && $edit>0)
         {
-            mysqli_query($db,"update $do set name='$name',text='$text',category_id='$category_id',updated_at='$time',order_number='$last_order' where lang_id='$row[id]' $add_where");
+            mysqli_query($db,"update $do set name='$name',text='$text',category_id='$category_id',topgame='$topgame',recogame='$recogame',updated_at='$time',order_number='$last_order' where lang_id='$row[id]' $add_where");
         }
         else
         {
-            mysqli_query($db,"insert into $do values (0,'$name','','$category_id','$text','$last_order','', '$active', '$row[id]', '$auto_id', '$time',0) ");
+            mysqli_query($db,"insert into $do values (0,'$name','','$category_id','$topgame','$recogame','$text','$last_order','', '$active', '$row[id]', '$auto_id', '$time',0) ");
         }
     }
 
@@ -325,6 +327,10 @@ elseif($down>0 && mysqli_num_rows(mysqli_query($db,"select id from $do where aut
                 }
                 $information=mysqli_fetch_assoc(mysqli_query($db,"select * from $do where auto_id='$edit' and lang_id='$main_lang'"));
                 echo '<div class="'.$hide.'">';
+                ?>
+                Top game? : <input type="checkbox" name="topgame" <?=$information['topgame']==1 ? 'checked' : ''?> /><br /><br />
+                Recommendation game? : <input type="checkbox" name="recogame" <?=$information['recogame']==1 ? 'checked' : ''?> /><br /><br />
+                <?php
                 if($information["image_name"]!="" && $edit>0)
                 {
                     $image='<ul class="media_photos" style="margin-left:450px;margin-top:-25px; margin-right: 40px;"><li><a rel="slide" href="../images/games/'.$information["image_name"].'?rand='.rand(0,10000).'" title="">

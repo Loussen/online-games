@@ -10,7 +10,7 @@
                 </div>
                 <div class="col-6 align-right">
                     <img src="<?=SITE_PATH.'/assets/img/GameEthio.png'?>"
-                         style="max-height: 29px; margin-right: 20px;">
+                         style="max-height: 40px; margin-right: 20px;">
                 </div>
             </div>
         </div>
