@@ -84,11 +84,7 @@
                                                                                                      AZN                                                            </p>-->
                                 <!--Play Button-->
                                 <p class="tsr-product-small-print"><br/>
-                                    <span class="tsr-btn btnJoin"
-                                          data-clubid="75112"
-                                          data-login="false"
-                                          data-gencoluserlogin="Genc OL tariff users subscribe with 50% special discount! 1.00 AZN/week for EA and Java Games and 0.60 AZN/week for Online Games (3 games download)."
-                                          data-gencoluser=" ">
+                                    <span class="tsr-btn btnJoin" id="subscribe_modal" onclick="return false;">
                                     Play
                                 </span>
                                 </p>
@@ -168,12 +164,6 @@
                                 <header class="tsr-product-header"><?=$row['g_name']?></header>
                                 <!--Play Button-->
                                 <p class="tsr-product-small-print"><br/>
-                                    <?php
-                                        if($data==1)
-                                            $link = SITE_PATH."/play-game/";
-                                        else
-                                            $link = "return false;";
-                                    ?>
                                     <span class="tsr-btn btnJoin" id="subscribe_modal" onclick="return false;">
                                         Play
                                     </span>
