@@ -168,6 +168,12 @@
                                 <header class="tsr-product-header"><?=$row['g_name']?></header>
                                 <!--Play Button-->
                                 <p class="tsr-product-small-print"><br/>
+                                    <?php
+                                        if($data==1)
+                                            $link = SITE_PATH."/play-game/";
+                                        else
+                                            $link = "return false;";
+                                    ?>
                                     <span class="tsr-btn btnJoin" id="subscribe_modal" onclick="return false;">
                                         Play
                                     </span>

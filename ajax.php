@@ -54,6 +54,8 @@ if($_POST)
 
                 $sms_code = mt_rand(100000, 999999);
 
+                $msisdn = '251'.$msisdn;
+
                 $stmt_insert = mysqli_prepare($db, "INSERT INTO `subscriber` (`msisdn`,`sms_code`,`status`) VALUES (?,?,?)");
                 $stmt_insert->bind_param('iii', $msisdn,$sms_code,$status);
                 $insert = $stmt_insert->execute();

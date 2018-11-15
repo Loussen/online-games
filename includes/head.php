@@ -126,6 +126,7 @@
                     `games`.`name` as `g_name`,
                     `games`.`image_name` as `g_image_name`,
                     `games`.`text` as `g_text`,
+                    `games`.`star` as `g_star`,
                     `categories`.`name` as `c_name`,
                     `categories`.`auto_id` as `c_id`
                     FROM `games`
@@ -134,7 +135,7 @@
                     LIMIT 1");
         $stmt_select->bind_param('iii', $main_lang,$active_status,$game_id);
         $stmt_select->execute();
-        $stmt_select->bind_result($current_game_id,$current_game_name,$current_game_image_name,$current_game_text,$current_category_name,$current_category_id);
+        $stmt_select->bind_result($current_game_id,$current_game_name,$current_game_image_name,$current_game_text,$current_game_star,$current_category_name,$current_category_id);
         $stmt_select->fetch();
         $stmt_select->close();
 

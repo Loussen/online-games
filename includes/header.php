@@ -121,7 +121,7 @@
                                             <li class="has-sub">
                                                 <a href="<?=SITE_PATH?>/category/<?=slugGenerator($row['c_name']) . '-' . $row['c_id']?>"
                                                    onclick="location.assign(jQuery(this).attr('href'));"
-                                                   class="clickableTabWithLink"><?=$row['c_name']?></a>
+                                                   class="clickableTabWithLink" style="font-weight: bold;"><?=$row['c_name']?></a>
 
                                                 <menu class="tsr-nav-third-level">
                                                 <?php
@@ -159,6 +159,14 @@
 
                                                             $i++;
                                                         }
+
+                                                        ?>
+                                                        <li>
+                                                            <a href="<?=SITE_PATH?>/category/<?=slugGenerator($row['c_name']) . '-' . $row['c_id']?>">
+                                                                More >
+                                                            </a>
+                                                        </li>
+                                                        <?php
                                                     }
 
 //                                                    $stmt_select_games = mysqli_prepare($db,

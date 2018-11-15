@@ -66,8 +66,9 @@
                                             </a>
 
                                             <p class="tsr-product-small-print">
-                                                <button class="tsr-btn tsr-btn-purple tsr-btn-100 btnPlay" data-login="false" data-postid="19" data-clubid="75112" data-catid="422130" data-mediaid="5905876" data-video="http://timwe.cachefly.net/webapps/fruit-blade-timwe_1/index.html" data-view="422260  ">
-                                                    PLAY                        </button><br>
+                                                <button class="tsr-btn tsr-btn-purple tsr-btn-100 btnPlay" id="subscribe_modal">
+                                                    PLAY
+                                                </button><br>
                                             </p>
                                         </div>
                                         <?php
@@ -85,14 +86,14 @@
                                         <div class="tsr-pagination">
                                             <div class="tsr-center">
                                         <?php
-                                        if($page>1)
-                                        {
-                                            ?>
-                                            <a href="<?=SITE_PATH?>/category/<?=slugGenerator($current_category_name) . '-' . $current_category_id.'/'.($page-1)?>" class="tsr-dir-previous">&lt;</a>
-                                            <?php
-                                        }
+                                            if($page>1)
+                                            {
+                                                ?>
+                                                <a href="<?=SITE_PATH?>/category/<?=slugGenerator($current_category_name) . '-' . $current_category_id.'/'.($page-1)?>" class="tsr-dir-previous">&lt;</a>
+                                                <?php
+                                            }
 
-                                        for ($i = $page - $show; $i <= $page + $show; $i++)
+                                            for ($i = $page - $show; $i <= $page + $show; $i++)
                                         {
                                             if ($i > 0 && $i <= $max_page)
                                             {
@@ -110,12 +111,13 @@
                                                 }
                                             }
                                         }
-                                        if ($page < $max_page)
-                                        {
-                                            ?>
-                                            <a href="<?=SITE_PATH?>/category/<?=slugGenerator($current_category_name) . '-' . $current_category_id.'/'.($page + 1)?>">&gt;</a>
-                                            <?php
-                                        }
+
+                                            if ($page < $max_page)
+                                            {
+                                                ?>
+                                                <a href="<?=SITE_PATH?>/category/<?=slugGenerator($current_category_name) . '-' . $current_category_id.'/'.($page + 1)?>">&gt;</a>
+                                                <?php
+                                            }
                                         ?>
                                             </div>
                                         </div>
@@ -151,14 +153,13 @@
                                     <header class="tsr-product-header" style="height: 40px;">
                                         <?=$row['name']?>
                                     </header>
-                                    <p class="tsr-product-desc" style="height: 144px;">
-                                        <?=more_string(html_entity_decode($row['text']))?>
-                                    </p>
+<!--                                    <p class="tsr-product-desc" style="height: 144px;">-->
+<!--                                        --><?//=more_string(html_entity_decode($row['text']),120)?>
+<!--                                    </p>-->
 
-                                    <button class="tsr-btn tsr-btn-purple tsr-btn-100 btnDownload" data-login="false" data-postid="19" data-clubid="75112" data-catid="422130" data-mediaid="5657966">
-                                        PLAY                                </button>
-
-                                    </p>
+                                    <button class="tsr-btn tsr-btn-purple tsr-btn-100 btnDownload" id="subscribe_modal">
+                                        PLAY
+                                    </button>
                                 </div>
                             </a>
                             <?php

@@ -151,12 +151,22 @@
 
                                 <div class="selected-classification">
 
-                                    <img src="<?=SITE_PATH?>/assets/img/filled_star.png">
-                                    <img src="<?=SITE_PATH?>/assets/img/filled_star.png">
-                                    <img src="<?=SITE_PATH?>/assets/img/filled_star.png">
+                                    <?php
+                                        $stars = '';
+                                        for($i=1;$i<=5;$i++)
+                                        {
+                                            if($i<=$current_game_star)
+                                            {
+                                                $stars .= '<img src="'.SITE_PATH.'/assets/img/filled_star.png">';
+                                            }
+                                            else
+                                            {
+                                                $stars .= '<img src="'.SITE_PATH.'/assets/img/star.png">';
+                                            }
+                                        }
 
-                                    <img src="<?=SITE_PATH?>/assets/img/star.png">
-                                    <img src="<?=SITE_PATH?>/assets/img/star.png">
+                                        echo $stars;
+                                    ?>
                                 </div>
 
                                 <div class="selected-description">
@@ -168,9 +178,7 @@
                                 </div>
 
                                 <div class="game-platform">
-                                    <button class="tsr-btn tsr-btn-blue btnPlay" data-login="false" data-postid="19"
-                                            data-clubid="75112" data-catid="" data-mediaid="" data-video=""
-                                            data-view="422260  ">
+                                    <button class="tsr-btn tsr-btn-blue btnPlay" id="subscribe_modal">
                                         PLAY
                                     </button>
                                 </div>
@@ -230,7 +238,7 @@
                                 <h3>Similar Games</h3>
 
                                 <div class="other-games-content">
-                                    <section class="tsr-section-productAndService-listing tsr-color-white">
+                                    <section class="tsr-section-productAndService-listing tsr-color-white" style="background: #eee;">
 
                                         <div class="tsr-container">
                                             <div class="tsr-slides">
@@ -241,7 +249,7 @@
                                                         <div class="tsr-module-service ">
                                                             <a href="<?=SITE_PATH?>/online-games/<?=slugGenerator($row['name']) . '-' . $row['auto_id']?>">
                                                                 <figure class="">
-                                                                    <img src="<?=SITE_PATH?>/images/games/<?=$row['image_name']?>">
+                                                                    <img src="<?=SITE_PATH?>/images/games/<?=$row['image_name']?>" style="height: 170px;">
                                                                 </figure>
                                                                 <div class="tsr-service-content">
                                                                     <header class="tsr-service-header"><?=$row['name']?></header>
