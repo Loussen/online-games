@@ -114,19 +114,19 @@
         <div class="tsr-container">
             <div class="tsr-slides">
                 <?php
-//                    $stmt_select = mysqli_prepare($db,
-//                        "SELECT
-//                                    `play_game`.`id`
-//                                    FROM `play_game`
-//                                    LEFT JOIN `games` on `games`.`auto_id`=`play_game`.`games_id`
-//                                    WHERE `games`.`lang_id`=(?) and `games`.`active`=(?)
-//                                    GROUP BY `play_game`.`games_id`");
-//                    $stmt_select->bind_param('ii', $main_lang,$active_status);
-//                    $stmt_select->execute();
-//                    $result = $stmt_select->get_result();
-//                    $count_games = mysqli_num_rows($result);
+                    $stmt_select = mysqli_prepare($db,
+                        "SELECT
+                                    `play_game`.`id`
+                                    FROM `play_game`
+                                    LEFT JOIN `games` on `games`.`auto_id`=`play_game`.`games_id`
+                                    WHERE `games`.`lang_id`=(?) and `games`.`active`=(?)
+                                    GROUP BY `play_game`.`games_id`");
+                    $stmt_select->bind_param('ii', $main_lang,$active_status);
+                    $stmt_select->execute();
+                    $result = $stmt_select->get_result();
+                    $count_games = mysqli_num_rows($result);
 
-                    if($count_games>0 && 1==2)
+                    if($count_games>0)
                     {
                         $stmt_select = mysqli_prepare($db,
                             "SELECT 
@@ -162,20 +162,15 @@
                         ?>
                         <a href="<?=SITE_PATH?>/online-games/<?=slugGenerator($row['g_name']) . '-' . $row['g_id']?>" class="tsr-module-product">
                             <figure class="tsr-product-image" style="text-align:center;">
-                                <img src="<?=SITE_PATH?>/images/games/<?=$row['g_image_name']?>"
-                                     style="max-width:250px; width: 100%;"/>
+                                <img src="<?=SITE_PATH?>/images/games/<?=$row['g_image_name']?>" style="max-width:250px; width: 100%;"/>
                             </figure>
                             <div class="tsr-product-content">
                                 <header class="tsr-product-header"><?=$row['g_name']?></header>
                                 <!--Play Button-->
                                 <p class="tsr-product-small-print"><br/>
-                                    <span class="tsr-btn btnJoin"
-                                          data-clubid="75112"
-                                          data-login="false"
-                                          data-gencoluserlogin="Genc OL tariff users subscribe with 50% special discount! 1.00 AZN/week for EA and Java Games and 0.60 AZN/week for Online Games (3 games download)."
-                                          data-gencoluser=" ">
-                                    Play
-                                </span>
+                                    <span class="tsr-btn btnJoin" id="subscribe_modal" onclick="return false;">
+                                        Play
+                                    </span>
                                 </p>
                             </div>
                             <div class="clear"></div>

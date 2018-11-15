@@ -155,6 +155,65 @@
         $result_game_gallery = $stmt_select->get_result();
         $count_gallery = mysqli_num_rows($result_game_gallery);
         $stmt_select->close();
+
+        // Get most played games without current game
+        $stmt_select = mysqli_prepare($db,
+            "SELECT
+                    `play_game`.`id`
+                    FROM `play_game`
+                    LEFT JOIN `games` on `games`.`auto_id`=`play_game`.`games_id`
+                    WHERE `games`.`lang_id`=(?) and `games`.`active`=(?)
+                    GROUP BY `play_game`.`games_id`");
+        $stmt_select->bind_param('ii', $main_lang,$active_status);
+        $stmt_select->execute();
+        $result = $stmt_select->get_result();
+        $count_games = mysqli_num_rows($result);
+
+        if($count_games>0)
+        {
+            $stmt_select = mysqli_prepare($db,
+                "SELECT 
+                        `games`.`name` as `g_name`,
+                        `games`.`image_name` as `g_image_name`,
+                        `games`.`auto_id` as `g_id`,
+                        sum(`play_game`.`count`) as `play_count`
+                        FROM `play_game`
+                        LEFT JOIN `games` on `games`.`auto_id`=`play_game`.`games_id`
+                        WHERE `games`.`lang_id`=(?) and `games`.`active`=(?) and `games`.`auto_id`!=(?)
+                        GROUP BY `play_game`.`games_id` order by `play_count` desc");
+            $stmt_select->bind_param('iii', $main_lang,$active_status,$game_id);
+            $stmt_select->execute();
+            $result_most_played_game = $stmt_select->get_result();
+        }
+        else
+        {
+            $stmt_select = mysqli_prepare($db,
+                "SELECT 
+                        `games`.`name` as `g_name`,
+                        `games`.`image_name` as `g_image_name`,
+                        `games`.`auto_id` as `g_id`
+                        FROM `games`
+                        WHERE `games`.`lang_id`=(?) and `games`.`active`=(?) and `games`.`topgame`=0 and `games`.`recogame`=1 and `games`.`auto_id`!=(?)
+                        order by `games`.`order_number` asc");
+            $stmt_select->bind_param('iii', $main_lang,$active_status,$game_id);
+            $stmt_select->execute();
+            $result_most_played_game = $stmt_select->get_result();
+        }
+        $stmt_select->close();
+
+        // Get similar games
+        $stmt_select = mysqli_prepare($db,
+            "SELECT
+                    `auto_id`,
+                    `name`,
+                    `image_name`
+                    FROM `games`
+                    WHERE `lang_id`=(?) and `active`=(?) and `category_id`=(?) and `auto_id`!=(?)
+                    order by `order_number` asc");
+        $stmt_select->bind_param('iiii', $main_lang,$active_status,$current_category_id,$game_id);
+        $stmt_select->execute();
+        $result_similar_games = $stmt_select->get_result();
+        $stmt_select->close();
     }
 ?>
 <meta charset="utf-8">

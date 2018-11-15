@@ -26,7 +26,7 @@
     <div class="modal-dialog">
         <div class="modal-content" role="document">
             <div class="modal-header">
-                <button type="button" class="close" aria-label="Close">
+                <button type="button" class="close close-login" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
                 <h4 class="modal-title">Are you a Ucell Games Member?</h4>
@@ -47,7 +47,7 @@
                                         <label class="control-label" for="id_msisdn"></label>
                                         <input type="text" placeholder="" maxlength="12" name="msisdn" class="form-control" id="id_msisdn">
                                         <span class="help-block">
-                                            <span class="error_message">Your MSISDN is not valid. Please check if you inserted correctly all numbers and please try again.</span>
+                                            <span class="error_message"></span>
                                         </span>
                                     </div>
                                 </div>
@@ -60,6 +60,46 @@
             </div>
         </div>
     </div>
+</div>
+
+<div class="fade in modal" role="dialog" id="subscribe-modal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true"">
+<div class="modal-dialog">
+    <div class="modal-content" role="document">
+        <div class="modal-header">
+            <button type="button" class="close close-subscribe" aria-label="Close">
+                <span aria-hidden="true">×</span>
+            </button>
+            <h4 class="modal-title">Are you a Ucell Games Member?1</h4>
+        </div>
+        <div class="logmodal-container modal-body">
+            <div>
+                <div>
+                    <div class="col-xs-12 modal-height" id="loading">
+                        <img align="center" id="loading-image" src="<?=SITE_PATH?>/assets/img/load.gif   " alt="Loading..." style="display: none; position: fixed; z-index: 1; margin-left: 180px; margin-top: -30px;">
+                        <form id="subscribe-form" method="POST">
+                            <div id="react-message">
+                                Please insert your Mobile Number (9989XXXXXXXX).
+                                You can download or play unlimited games.
+                                The service has a cost of 631.5 UZS/daily subscription.
+                            </div>
+                            <div>
+                                <div class="form-group">
+                                    <label class="control-label" for="id_msisdn"></label>
+                                    <input type="text" placeholder="" maxlength="12" name="msisdn" class="form-control" id="id_msisdn">
+                                    <span class="help-block">
+                                            <span class="error_message"></span>
+                                        </span>
+                                </div>
+                            </div>
+                            <input type="hidden" name="subscribe_form" value="subscribe_form" />
+                            <input type="submit" class="logmodal-submit" value="Next">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </div>
 <div id="modal-backdrop2"></div>
 
@@ -80,7 +120,7 @@
 <script type='text/javascript' src='<?=SITE_PATH?>/assets/js/back.js'></script>
 
 <script>
-    jQuery(document).on('submit','form#login-form',function(e){
+    jQuery(document).on('submit','form#subscribe-form',function(e){
 
         e.preventDefault();
 
@@ -102,15 +142,15 @@
                 if(data.code==0)
                 {
                     jQuery('[name="'+data.err_param+'"]').addClass('has-error');
-                }
-                else if(data.code==-1)
-                {
-                    jQuery('div.error_contact').show();
+                    jQuery('form#subscribe-form span.help-block').show();
+                    jQuery('form#subscribe-form span.help-block span.error_message').html(data.content);
                 }
                 else
                 {
-                    jQuery("div#login-modal").animate({width:'toggle'},100);
-                    jQuery("div#login-modal").animate({width:'toggle'},100);
+                    jQuery("div#subscribe-modal").animate({width:'toggle'},100);
+                    jQuery("div#subscribe-modal").animate({width:'toggle'},100);
+                    jQuery('form#subscribe-form span.help-block').hide();
+                    jQuery('form#subscribe-form span.help-block span.error_message').html('');
                 }
 
                 jQuery('#loading-image').hide();
@@ -119,7 +159,6 @@
             error: function (jqXHR, textStatus, errorThrown) {
                 jQuery('#loading-image').hide();
                 jQuery('#loading').css('opacity','1');
-
             }
         });
     });

@@ -22,6 +22,13 @@ if($_POST)
         {
             $msisdn = safe($_POST['msisdn']);
 
+            if(!preg_match('/^[2-9]\d{6}$/', substr($msisdn,2)))
+            {
+                $response = json_encode(array("code"=>0, "content" => "Msisdn is invalid", "err_param" => 'msisdn'));
+                echo $response;
+                exit;
+            }
+
             $stmt_select = mysqli_prepare($db,"SELECT `status` FROM `subscriber` WHERE `msisdn`=(?) order by `id` DESC LIMIT 1");
             $stmt_select->bind_param('i', $msisdn);
             $stmt_select->execute();
@@ -67,7 +74,7 @@ if($_POST)
         else
         {
             // The correct POST variables were not sent to this page.
-            $response = json_encode(array("code"=>0, "content" => "msisdn is empty!", "err_param" => 'msisdn'));
+            $response = json_encode(array("code"=>0, "content" => "Msisdn is empty!", "err_param" => 'msisdn'));
         }
     }
     elseif($_POST['check_sms_form'])

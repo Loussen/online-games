@@ -67,3 +67,13 @@ figure.tsr-product-image img
 {
     color: #ddd;
 }
+
+span.error_message
+{
+    color: red;
+}
+
+.has-error
+{
+    border: 1px solid red !important;
+}

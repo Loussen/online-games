@@ -185,349 +185,44 @@
                             <section class="most-played-games">
                                 <h3>Most Played Games</h3>
                                 <div class="tsr-row maximized">
-                                    <div class="col-6 maximized mobilemax">
-                                        <div class="other-games-content">
-                                            <div class="most-played-games-game">
-                                                <a href="http://play.ucell.uz/online-games/top-games/5905876">
-                                                    <div class="game-figure">
-                                                        <img src="./inner_files/5905876_34.jpg">
-                                                    </div>
-                                                </a>
-                                                <div class="most-played-games-game-content">
-                                                    <a href="http://play.ucell.uz/online-games/top-games/5905876">
-                                                        <div class="game-name">
-                                                            Fruit Blade
+                                    <?php
+                                        while($row=$result_most_played_game->fetch_assoc())
+                                        {
+                                            ?>
+                                            <div class="col-6 maximized mobilemax">
+                                                <div class="other-games-content">
+                                                    <div class="most-played-games-game">
+                                                        <a href="<?=SITE_PATH?>/online-games/<?=slugGenerator($row['g_name']) . '-' . $row['g_id']?>">
+                                                            <div class="game-figure">
+                                                                <img src="<?=SITE_PATH?>/images/games/<?=$row['g_image_name']?>">
+                                                            </div>
+                                                        </a>
+                                                        <div class="most-played-games-game-content">
+                                                            <a href="<?=SITE_PATH?>/online-games/<?=slugGenerator($row['g_name']) . '-' . $row['g_id']?>">
+                                                                <div class="game-name">
+                                                                    <?=$row['g_name']?>
+                                                                </div>
+                                                            </a>
+                                                            <p class="tsr-product-price">
+                                                                <button class="tsr-btn tsr-btn-purple tsr-btn-100 btnPlay" id="subscribe_modal">
+                                                                    PLAY
+                                                                </button>
+                                                                <!--Subscribe Button-->
+                                                            </p>
                                                         </div>
-                                                    </a>
-                                                    <div class="download-most-played-games">
-                                                        <button class="tsr-btn-download btnPlay" data-login="false"
-                                                                data-postid="19" data-clubid="75112" data-catid="422130"
-                                                                data-mediaid="5905876" data-view="422260  ">
-                                                            PLAY
-                                                        </button>
-                                                    </div>
-                                                    <div class="game-arrow">
-                                                        <img src="./inner_files/arrow.png_">
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-6 maximized mobilemax">
-                                        <div class="other-games-content">
-                                            <div class="most-played-games-game">
-                                                <a href="http://play.ucell.uz/online-games/top-games/5657966">
-                                                    <div class="game-figure">
-                                                        <img src="./inner_files/5657966_34.jpg">
-                                                    </div>
-                                                </a>
-                                                <div class="most-played-games-game-content">
-                                                    <a href="http://play.ucell.uz/online-games/top-games/5657966">
-                                                        <div class="game-name">
-                                                            Sean The Miner
-                                                        </div>
-                                                    </a>
-                                                    <div class="download-most-played-games">
-                                                        <button class="tsr-btn-download btnPlay" data-login="false"
-                                                                data-postid="19" data-clubid="75112" data-catid="422130"
-                                                                data-mediaid="5657966" data-view="422260  ">
-                                                            PLAY
-                                                        </button>
-                                                    </div>
-                                                    <div class="game-arrow">
-                                                        <img src="./inner_files/arrow.png_">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-6 maximized mobilemax">
-                                        <div class="other-games-content">
-                                            <div class="most-played-games-game">
-                                                <a href="http://play.ucell.uz/online-games/top-games/3456094">
-                                                    <div class="game-figure">
-                                                        <img src="./inner_files/3456094_34.jpg">
-                                                    </div>
-                                                </a>
-                                                <div class="most-played-games-game-content">
-                                                    <a href="http://play.ucell.uz/online-games/top-games/3456094">
-                                                        <div class="game-name">
-                                                            Feelingz
-                                                        </div>
-                                                    </a>
-                                                    <div class="download-most-played-games">
-                                                        <button class="tsr-btn-download btnPlay" data-login="false"
-                                                                data-postid="19" data-clubid="75112" data-catid="422130"
-                                                                data-mediaid="3456094" data-view="422260  ">
-                                                            PLAY
-                                                        </button>
-                                                    </div>
-                                                    <div class="game-arrow">
-                                                        <img src="./inner_files/arrow.png_">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-6 maximized mobilemax">
-                                        <div class="other-games-content">
-                                            <div class="most-played-games-game">
-                                                <a href="http://play.ucell.uz/online-games/top-games/5905950">
-                                                    <div class="game-figure">
-                                                        <img src="./inner_files/5905950_34.jpg">
-                                                    </div>
-                                                </a>
-                                                <div class="most-played-games-game-content">
-                                                    <a href="http://play.ucell.uz/online-games/top-games/5905950">
-                                                        <div class="game-name">
-                                                            Guess The Soccer Star
-                                                        </div>
-                                                    </a>
-                                                    <div class="download-most-played-games">
-                                                        <button class="tsr-btn-download btnPlay" data-login="false"
-                                                                data-postid="19" data-clubid="75112" data-catid="422130"
-                                                                data-mediaid="5905950" data-view="422260  ">
-                                                            PLAY
-                                                        </button>
-                                                    </div>
-                                                    <div class="game-arrow">
-                                                        <img src="./inner_files/arrow.png_">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-6 maximized mobilemax">
-                                        <div class="other-games-content">
-                                            <div class="most-played-games-game">
-                                                <a href="http://play.ucell.uz/online-games/top-games/3456102">
-                                                    <div class="game-figure">
-                                                        <img src="./inner_files/3456102_34.jpg">
-                                                    </div>
-                                                </a>
-                                                <div class="most-played-games-game-content">
-                                                    <a href="http://play.ucell.uz/online-games/top-games/3456102">
-                                                        <div class="game-name">
-                                                            Zombie Taps
-                                                        </div>
-                                                    </a>
-                                                    <div class="download-most-played-games">
-                                                        <button class="tsr-btn-download btnPlay" data-login="false"
-                                                                data-postid="19" data-clubid="75112" data-catid="422130"
-                                                                data-mediaid="3456102" data-view="422260  ">
-                                                            PLAY
-                                                        </button>
-                                                    </div>
-                                                    <div class="game-arrow">
-                                                        <img src="./inner_files/arrow.png_">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-6 maximized mobilemax">
-                                        <div class="other-games-content">
-                                            <div class="most-played-games-game">
-                                                <a href="http://play.ucell.uz/online-games/top-games/5905952">
-                                                    <div class="game-figure">
-                                                        <img src="./inner_files/5905952_34.jpg">
-                                                    </div>
-                                                </a>
-                                                <div class="most-played-games-game-content">
-                                                    <a href="http://play.ucell.uz/online-games/top-games/5905952">
-                                                        <div class="game-name">
-                                                            Robots Vs Aliens
-                                                        </div>
-                                                    </a>
-                                                    <div class="download-most-played-games">
-                                                        <button class="tsr-btn-download btnPlay" data-login="false"
-                                                                data-postid="19" data-clubid="75112" data-catid="422130"
-                                                                data-mediaid="5905952" data-view="422260  ">
-                                                            PLAY
-                                                        </button>
-                                                    </div>
-                                                    <div class="game-arrow">
-                                                        <img src="./inner_files/arrow.png_">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-6 maximized mobilemax">
-                                        <div class="other-games-content">
-                                            <div class="most-played-games-game">
-                                                <a href="http://play.ucell.uz/online-games/top-games/5905912">
-                                                    <div class="game-figure">
-                                                        <img src="./inner_files/5905912_34.jpg">
-                                                    </div>
-                                                </a>
-                                                <div class="most-played-games-game-content">
-                                                    <a href="http://play.ucell.uz/online-games/top-games/5905912">
-                                                        <div class="game-name">
-                                                            Space Chasers
-                                                        </div>
-                                                    </a>
-                                                    <div class="download-most-played-games">
-                                                        <button class="tsr-btn-download btnPlay" data-login="false"
-                                                                data-postid="19" data-clubid="75112" data-catid="422130"
-                                                                data-mediaid="5905912" data-view="422260  ">
-                                                            PLAY
-                                                        </button>
-                                                    </div>
-                                                    <div class="game-arrow">
-                                                        <img src="./inner_files/arrow.png_">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-6 maximized mobilemax">
-                                        <div class="other-games-content">
-                                            <div class="most-played-games-game">
-                                                <a href="http://play.ucell.uz/online-games/top-games/5905884">
-                                                    <div class="game-figure">
-                                                        <img src="./inner_files/5905884_34.jpg">
-                                                    </div>
-                                                </a>
-                                                <div class="most-played-games-game-content">
-                                                    <a href="http://play.ucell.uz/online-games/top-games/5905884">
-                                                        <div class="game-name">
-                                                            Flappy Lamp
-                                                        </div>
-                                                    </a>
-                                                    <div class="download-most-played-games">
-                                                        <button class="tsr-btn-download btnPlay" data-login="false"
-                                                                data-postid="19" data-clubid="75112" data-catid="422130"
-                                                                data-mediaid="5905884" data-view="422260  ">
-                                                            PLAY
-                                                        </button>
-                                                    </div>
-                                                    <div class="game-arrow">
-                                                        <img src="./inner_files/arrow.png_">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-6 maximized mobilemax">
-                                        <div class="other-games-content">
-                                            <div class="most-played-games-game">
-                                                <a href="http://play.ucell.uz/online-games/top-games/4972274">
-                                                    <div class="game-figure">
-                                                        <img src="./inner_files/4972274_34.jpg">
-                                                    </div>
-                                                </a>
-                                                <div class="most-played-games-game-content">
-                                                    <a href="http://play.ucell.uz/online-games/top-games/4972274">
-                                                        <div class="game-name">
-                                                            What's My Icon Game
-                                                        </div>
-                                                    </a>
-                                                    <div class="download-most-played-games">
-                                                        <button class="tsr-btn-download btnPlay" data-login="false"
-                                                                data-postid="19" data-clubid="75112" data-catid="422130"
-                                                                data-mediaid="4972274" data-view="422260  ">
-                                                            PLAY
-                                                        </button>
-                                                    </div>
-                                                    <div class="game-arrow">
-                                                        <img src="./inner_files/arrow.png_">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-6 maximized mobilemax">
-                                        <div class="other-games-content">
-                                            <div class="most-played-games-game">
-                                                <a href="http://play.ucell.uz/online-games/top-games/4015306">
-                                                    <div class="game-figure">
-                                                        <img src="./inner_files/4015306_34.jpg">
-                                                    </div>
-                                                </a>
-                                                <div class="most-played-games-game-content">
-                                                    <a href="http://play.ucell.uz/online-games/top-games/4015306">
-                                                        <div class="game-name">
-                                                            The Saloon
-                                                        </div>
-                                                    </a>
-                                                    <div class="download-most-played-games">
-                                                        <button class="tsr-btn-download btnPlay" data-login="false"
-                                                                data-postid="19" data-clubid="75112" data-catid="422130"
-                                                                data-mediaid="4015306" data-view="422260  ">
-                                                            PLAY
-                                                        </button>
-                                                    </div>
-                                                    <div class="game-arrow">
-                                                        <img src="./inner_files/arrow.png_">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-6 maximized mobilemax">
-                                        <div class="other-games-content">
-                                            <div class="most-played-games-game">
-                                                <a href="http://play.ucell.uz/online-games/top-games/5905946">
-                                                    <div class="game-figure">
-                                                        <img src="./inner_files/5905946_34.jpg">
-                                                    </div>
-                                                </a>
-                                                <div class="most-played-games-game-content">
-                                                    <a href="http://play.ucell.uz/online-games/top-games/5905946">
-                                                        <div class="game-name">
-                                                            Temple Crossing
-                                                        </div>
-                                                    </a>
-                                                    <div class="download-most-played-games">
-                                                        <button class="tsr-btn-download btnPlay" data-login="false"
-                                                                data-postid="19" data-clubid="75112" data-catid="422130"
-                                                                data-mediaid="5905946" data-view="422260  ">
-                                                            PLAY
-                                                        </button>
-                                                    </div>
-                                                    <div class="game-arrow">
-                                                        <img src="./inner_files/arrow.png_">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-6 maximized mobilemax">
-                                        <div class="other-games-content">
-                                            <div class="most-played-games-game">
-                                                <a href="http://play.ucell.uz/online-games/top-games/5905932">
-                                                    <div class="game-figure">
-                                                        <img src="./inner_files/5905932_34.jpg">
-                                                    </div>
-                                                </a>
-                                                <div class="most-played-games-game-content">
-                                                    <a href="http://play.ucell.uz/online-games/top-games/5905932">
-                                                        <div class="game-name">
-                                                            Candy Slide
-                                                        </div>
-                                                    </a>
-                                                    <div class="download-most-played-games">
-                                                        <button class="tsr-btn-download btnPlay" data-login="false"
-                                                                data-postid="19" data-clubid="75112" data-catid="422130"
-                                                                data-mediaid="5905932" data-view="422260  ">
-                                                            PLAY
-                                                        </button>
-                                                    </div>
-                                                    <div class="game-arrow">
-                                                        <img src="./inner_files/arrow.png_">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                            <?php
+                                        }
+                                    ?>
                                 </div>
-                                <div class="tsr-row maximized">
-                                    <div class="col-12">
-                                        <a href="http://play.ucell.uz/online-games/top-games"
-                                           class="tsr-btn-view-all"><span>View all<i>(29)</i></span></a>
-                                    </div>
-                                </div>
+<!--                                <div class="tsr-row maximized">-->
+<!--                                    <div class="col-12">-->
+<!--                                        <a href="http://play.ucell.uz/online-games/top-games"-->
+<!--                                           class="tsr-btn-view-all"><span>View all<i>(29)</i></span></a>-->
+<!--                                    </div>-->
+<!--                                </div>-->
                             </section>
                         </div>
                         <div class="col-6">
@@ -539,235 +234,39 @@
 
                                         <div class="tsr-container">
                                             <div class="tsr-slides">
-                                                <div class="tsr-module-service ">
-                                                    <a href="http://play.ucell.uz/online-games/sports/5905960">
-                                                        <figure class="">
-                                                            <img src="./inner_files/5905960_42.jpg">
-                                                        </figure>
-                                                        <div class="tsr-service-content">
-                                                            <header class="tsr-service-header">Soccer Pro</header>
+                                                <?php
+                                                    while($row=$result_similar_games->fetch_assoc())
+                                                    {
+                                                        ?>
+                                                        <div class="tsr-module-service ">
+                                                            <a href="<?=SITE_PATH?>/online-games/<?=slugGenerator($row['name']) . '-' . $row['auto_id']?>">
+                                                                <figure class="">
+                                                                    <img src="<?=SITE_PATH?>/images/games/<?=$row['image_name']?>">
+                                                                </figure>
+                                                                <div class="tsr-service-content">
+                                                                    <header class="tsr-service-header"><?=$row['name']?></header>
+                                                                </div>
+                                                            </a>
+
+                                                            <p>
+                                                                <img class="rating-star" src="<?=SITE_PATH?>/assets/img/filled_star.png">
+                                                                <img class="rating-star" src="<?=SITE_PATH?>/assets/img/filled_star.png">
+                                                                <img class="rating-star" src="<?=SITE_PATH?>/assets/img/filled_star.png">
+
+                                                                <img class="rating-star" src="<?=SITE_PATH?>/assets/img/star.png">
+                                                                <img class="rating-star" src="<?=SITE_PATH?>/assets/img/star.png">
+                                                            </p>
+
+                                                            <p class="tsr-product-price">
+                                                                <button class="tsr-btn tsr-btn-purple tsr-btn-100 btnPlay" id="subscribe_modal">
+                                                                    PLAY
+                                                                </button>
+                                                                <!--Subscribe Button-->
+                                                            </p>
                                                         </div>
-                                                    </a>
-
-                                                    <p>
-
-                                                        <img class="rating-star" src="./inner_files/filled_star.png">
-                                                        <img class="rating-star" src="./inner_files/filled_star.png">
-                                                        <img class="rating-star" src="./inner_files/filled_star.png">
-
-                                                        <img class="rating-star" src="./inner_files/star.png">
-                                                        <img class="rating-star" src="./inner_files/star.png">
-                                                    </p>
-
-                                                    <p class="tsr-product-price">
-                                                        <button class="tsr-btn tsr-btn-purple tsr-btn-100 btnPlay"
-                                                                data-login="false" data-postid="19" data-clubid="75112"
-                                                                data-catid="422134" data-mediaid="5905960"
-                                                                data-view="422260  ">
-                                                            PLAY
-                                                        </button>
-
-
-                                                        <!--Subscribe Button-->
-                                                    </p>
-                                                    <p class="tsr-product-small-print">
-                                                <span class="tsr-btn btnJoin" data-clubid="" data-login="false"
-                                                      data-gencoluserlogin="Genc OL tariff users subscribe with 50% special discount! 1.00 AZN/week for EA and Java Games and 0.60 AZN/week for Online Games (3 games download)."
-                                                      data-gencoluser=" ">
-                                                      Subscribe                                        </span>
-                                                    </p>
-                                                </div>
-                                                <div class="tsr-module-service ">
-                                                    <a href="http://play.ucell.uz/online-games/sports/4972278">
-                                                        <figure class="">
-                                                            <img src="./inner_files/4972278_42.jpg">
-                                                        </figure>
-                                                        <div class="tsr-service-content">
-                                                            <header class="tsr-service-header">Super Boxing</header>
-                                                        </div>
-                                                    </a>
-
-                                                    <p>
-
-                                                        <img class="rating-star" src="./inner_files/filled_star.png">
-                                                        <img class="rating-star" src="./inner_files/filled_star.png">
-                                                        <img class="rating-star" src="./inner_files/filled_star.png">
-
-                                                        <img class="rating-star" src="./inner_files/star.png">
-                                                        <img class="rating-star" src="./inner_files/star.png">
-                                                    </p>
-
-                                                    <p class="tsr-product-price">
-                                                        <button class="tsr-btn tsr-btn-purple tsr-btn-100 btnPlay"
-                                                                data-login="false" data-postid="19" data-clubid="75112"
-                                                                data-catid="422134" data-mediaid="4972278"
-                                                                data-view="422260  ">
-                                                            PLAY
-                                                        </button>
-
-
-                                                        <!--Subscribe Button-->
-                                                    </p>
-                                                    <p class="tsr-product-small-print">
-                                                <span class="tsr-btn btnJoin" data-clubid="" data-login="false"
-                                                      data-gencoluserlogin="Genc OL tariff users subscribe with 50% special discount! 1.00 AZN/week for EA and Java Games and 0.60 AZN/week for Online Games (3 games download)."
-                                                      data-gencoluser=" ">
-                                                      Subscribe                                        </span>
-                                                    </p>
-                                                </div>
-                                                <div class="tsr-module-service ">
-                                                    <a href="http://play.ucell.uz/online-games/sports/5905880">
-                                                        <figure class="">
-                                                            <img src="./inner_files/5905880_42.jpg">
-                                                        </figure>
-                                                        <div class="tsr-service-content">
-                                                            <header class="tsr-service-header">Touchdown Pro</header>
-                                                        </div>
-                                                    </a>
-
-                                                    <p>
-
-                                                        <img class="rating-star" src="./inner_files/filled_star.png">
-                                                        <img class="rating-star" src="./inner_files/filled_star.png">
-                                                        <img class="rating-star" src="./inner_files/filled_star.png">
-
-                                                        <img class="rating-star" src="./inner_files/star.png">
-                                                        <img class="rating-star" src="./inner_files/star.png">
-                                                    </p>
-
-                                                    <p class="tsr-product-price">
-                                                        <button class="tsr-btn tsr-btn-purple tsr-btn-100 btnPlay"
-                                                                data-login="false" data-postid="19" data-clubid="75112"
-                                                                data-catid="422134" data-mediaid="5905880"
-                                                                data-view="422260  ">
-                                                            PLAY
-                                                        </button>
-
-
-                                                        <!--Subscribe Button-->
-                                                    </p>
-                                                    <p class="tsr-product-small-print">
-                                                <span class="tsr-btn btnJoin" data-clubid="" data-login="false"
-                                                      data-gencoluserlogin="Genc OL tariff users subscribe with 50% special discount! 1.00 AZN/week for EA and Java Games and 0.60 AZN/week for Online Games (3 games download)."
-                                                      data-gencoluser=" ">
-                                                      Subscribe                                        </span>
-                                                    </p>
-                                                </div>
-                                                <div class="tsr-module-service ">
-                                                    <a href="http://play.ucell.uz/online-games/sports/5657978">
-                                                        <figure class="">
-                                                            <img src="./inner_files/5657978_42.jpg">
-                                                        </figure>
-                                                        <div class="tsr-service-content">
-                                                            <header class="tsr-service-header">Fail Circle</header>
-                                                        </div>
-                                                    </a>
-
-                                                    <p>
-
-                                                        <img class="rating-star" src="./inner_files/filled_star.png">
-                                                        <img class="rating-star" src="./inner_files/filled_star.png">
-                                                        <img class="rating-star" src="./inner_files/filled_star.png">
-
-                                                        <img class="rating-star" src="./inner_files/star.png">
-                                                        <img class="rating-star" src="./inner_files/star.png">
-                                                    </p>
-
-                                                    <p class="tsr-product-price">
-                                                        <button class="tsr-btn tsr-btn-purple tsr-btn-100 btnPlay"
-                                                                data-login="false" data-postid="19" data-clubid="75112"
-                                                                data-catid="422134" data-mediaid="5657978"
-                                                                data-view="422260  ">
-                                                            PLAY
-                                                        </button>
-
-
-                                                        <!--Subscribe Button-->
-                                                    </p>
-                                                    <p class="tsr-product-small-print">
-                                                <span class="tsr-btn btnJoin" data-clubid="" data-login="false"
-                                                      data-gencoluserlogin="Genc OL tariff users subscribe with 50% special discount! 1.00 AZN/week for EA and Java Games and 0.60 AZN/week for Online Games (3 games download)."
-                                                      data-gencoluser=" ">
-                                                      Subscribe                                        </span>
-                                                    </p>
-                                                </div>
-                                                <div class="tsr-module-service ">
-                                                    <a href="http://play.ucell.uz/online-games/sports/5657956">
-                                                        <figure class="">
-                                                            <img src="./inner_files/5657956_42.jpg">
-                                                        </figure>
-                                                        <div class="tsr-service-content">
-                                                            <header class="tsr-service-header">Football Tricks 14
-                                                            </header>
-                                                        </div>
-                                                    </a>
-
-                                                    <p>
-
-                                                        <img class="rating-star" src="./inner_files/filled_star.png">
-                                                        <img class="rating-star" src="./inner_files/filled_star.png">
-                                                        <img class="rating-star" src="./inner_files/filled_star.png">
-
-                                                        <img class="rating-star" src="./inner_files/star.png">
-                                                        <img class="rating-star" src="./inner_files/star.png">
-                                                    </p>
-
-                                                    <p class="tsr-product-price">
-                                                        <button class="tsr-btn tsr-btn-purple tsr-btn-100 btnPlay"
-                                                                data-login="false" data-postid="19" data-clubid="75112"
-                                                                data-catid="422134" data-mediaid="5657956"
-                                                                data-view="422260  ">
-                                                            PLAY
-                                                        </button>
-
-
-                                                        <!--Subscribe Button-->
-                                                    </p>
-                                                    <p class="tsr-product-small-print">
-                                                <span class="tsr-btn btnJoin" data-clubid="" data-login="false"
-                                                      data-gencoluserlogin="Genc OL tariff users subscribe with 50% special discount! 1.00 AZN/week for EA and Java Games and 0.60 AZN/week for Online Games (3 games download)."
-                                                      data-gencoluser=" ">
-                                                      Subscribe                                        </span>
-                                                    </p>
-                                                </div>
-                                                <div class="tsr-module-service ">
-                                                    <a href="http://play.ucell.uz/online-games/sports/5905944">
-                                                        <figure class="">
-                                                            <img src="./inner_files/5905944_42.jpg">
-                                                        </figure>
-                                                        <div class="tsr-service-content">
-                                                            <header class="tsr-service-header">Pool Game</header>
-                                                        </div>
-                                                    </a>
-
-                                                    <p>
-
-                                                        <img class="rating-star" src="./inner_files/filled_star.png">
-                                                        <img class="rating-star" src="./inner_files/filled_star.png">
-                                                        <img class="rating-star" src="./inner_files/filled_star.png">
-
-                                                        <img class="rating-star" src="./inner_files/star.png">
-                                                        <img class="rating-star" src="./inner_files/star.png">
-                                                    </p>
-
-                                                    <p class="tsr-product-price">
-                                                        <button class="tsr-btn tsr-btn-purple tsr-btn-100 btnPlay"
-                                                                data-login="false" data-postid="19" data-clubid="75112"
-                                                                data-catid="422134" data-mediaid="5905944"
-                                                                data-view="422260  ">
-                                                            PLAY
-                                                        </button>
-
-
-                                                        <!--Subscribe Button-->
-                                                    </p>
-                                                    <p class="tsr-product-small-print">
-                                                <span class="tsr-btn btnJoin" data-clubid="" data-login="false"
-                                                      data-gencoluserlogin="Genc OL tariff users subscribe with 50% special discount! 1.00 AZN/week for EA and Java Games and 0.60 AZN/week for Online Games (3 games download)."
-                                                      data-gencoluser=" ">
-                                                      Subscribe                                        </span>
-                                                    </p>
-                                                </div>
+                                                        <?php
+                                                    }
+                                                ?>
                                             </div>
                                         </div>
                                     </section>
