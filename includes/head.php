@@ -18,7 +18,7 @@
 //    $info_description=mysqli_fetch_assoc(mysqli_query($db,"select `description_`,`title_`,`keywords_` from `seo` where `lang_id`='$esas_dil' "));
     $description=$site_description;
     $title=$site_title;
-    $image=SITE_PATH.'/images/logo/ASET-LOGO2.png';
+    $image=SITE_PATH.'/assets/img/GameEthio.png';
     $keywords = $site_keywords;
     $og_url ='http://'.$_SERVER["HTTP_HOST"].$_SERVER["REQUEST_URI"];
 
@@ -113,6 +113,7 @@
         $stmt_select->close();
 
         $title = $title.' - '.$current_category_name.' games';
+        $description = $current_category_name;
     }
     elseif($do=="inner")
     {
@@ -215,6 +216,10 @@
         $stmt_select->execute();
         $result_similar_games = $stmt_select->get_result();
         $stmt_select->close();
+
+        $title = $title.' - '.$current_category_name.' - '.$current_game_name;
+        $image = SITE_PATH."/images/games/".$current_game_image_name;
+        $description = $current_game_name;
     }
 ?>
 <meta charset="utf-8">
