@@ -25,19 +25,19 @@ function sec_session_start() {
     session_regenerate_id();    // regenerated the session, delete the old one.
 }
 
-function login($sms_code, $msisdn, $db)
+function login($sms_code, $msisdn, $type='subscribe', $db)
 {
     // Using prepared statements means that SQL injection is not possible.
-    if(isset($sms_code) && strlen($sms_code)>3)
+    if(isset($sms_code) && !empty($sms_code))
     {
-        if($stmt_select = mysqli_prepare($db,"SELECT `id`,`msisdn`,`sms_code` FROM `subscriber` WHERE `msisdn`=(?) order by `id` DESC LIMIT 1"))
+        if($stmt_select = mysqli_prepare($db,"SELECT `id`,`msisdn`,`sms_code`,`sms_code_login` FROM `subscriber` WHERE `msisdn`=(?) order by `id` DESC LIMIT 1"))
         {
             $stmt_select->bind_param('s', $msisdn);  // Bind "$msisdn" to parameter.
             $stmt_select->execute();    // Execute the prepared query.
             $stmt_select->store_result();
 
             // get variables from result.
-            $stmt_select->bind_result($user_id, $user_msisdn, $user_sms_code);
+            $stmt_select->bind_result($user_id, $user_msisdn, $user_sms_code, $user_sms_code_login);
             $stmt_select->fetch();
 
             if ($stmt_select->num_rows == 1)
@@ -53,7 +53,10 @@ function login($sms_code, $msisdn, $db)
                     // Check if the password in the database matches
                     // the password the user submitted. We are using
                     // the password_verify function to avoid timing attacks.
-                    if ($sms_code==$user_sms_code)
+
+                    $user_verify_sms_code = ($type=='login') ? $user_sms_code_login : $user_sms_code;
+
+                    if ($sms_code==$user_verify_sms_code)
                     {
                         // Sms code is correct!
                         // Get the user-agent string of the user.

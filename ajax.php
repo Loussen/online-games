@@ -43,7 +43,22 @@ if($_POST)
             {
                 if($result_status==1)
                 {
-                    $response = json_encode(array("code"=>2, "content" => "You are already subscriber. Please log in", "err_param" => ''));
+                    $sms_code_login = mt_rand(100000, 999999);
+
+                    $stmt_update = mysqli_prepare($db, "UPDATE `subscriber` SET `sms_code_login`=? WHERE `msisdn`=?");
+                    $stmt_update->bind_param('sss', $sms_code_login,$msisdn);
+                    $update = $stmt_update->execute();
+
+                    if($update==1)
+                    {
+                        $_SESSION['msisdn_step2'] = $msisdn;
+
+                        $response = json_encode(array("code"=>2, "content" => "You are already subscriber. Please log in", "err_param" => ''));
+                    }
+                    else
+                    {
+                        $response = json_encode(array("code"=>0, "content" => "Update sms code error", "err_param" => ''));
+                    }
                 }
                 else
                 {
@@ -53,15 +68,15 @@ if($_POST)
             }
             else
             {
-                $status = $sms_id = 0;
+                $status = $sms_id = $null_code = 0;
                 $created_at = date("Y-m-d H:i:s");
                 $null_date = '0000-00-00 00:00:00';
                 $null_param = '';
 
                 $sms_code = mt_rand(100000, 999999);
 
-                $stmt_insert = mysqli_prepare($db, "INSERT INTO `subscriber` (`msisdn`,`created_at`,`updated_at`,`next_date`,`ends_date`,`sms_code`,`last_login_date`,`last_login_ip`,`sms_id`,`status`) VALUES (?,?,?,?,?,?,?,?,?,?)");
-                $stmt_insert->bind_param('sssssissii', $msisdn,$created_at,$null_date,$null_date,$null_date,$sms_code,$null_date,$null_param,$sms_id,$status);
+                $stmt_insert = mysqli_prepare($db, "INSERT INTO `subscriber` (`msisdn`,`created_at`,`updated_at`,`next_date`,`ends_date`,`sms_code`,`sms_code_login`,`last_login_date`,`last_login_ip`,`sms_id`,`status`) VALUES (?,?,?,?,?,?,?,?,?,?)");
+                $stmt_insert->bind_param('sssssiissii', $msisdn,$created_at,$null_date,$null_date,$null_date,$sms_code,$null_code,$null_date,$null_param,$sms_id,$status);
                 $insert = $stmt_insert->execute();
 
                 if($insert==1)
@@ -87,7 +102,7 @@ if($_POST)
     {
         $sms_code = intval($_POST['sms_code']);
 
-        if(login($sms_code, $_SESSION['msisdn_step1'], $db) == 'success')
+        if(login($sms_code, $_SESSION['msisdn_step1'], 'subscribe', $db) == 'success')
         {
             // Send sms code for charging
 
@@ -101,7 +116,7 @@ if($_POST)
                 $last_login_ip = $_SERVER['REMOTE_ADDR'];
 
                 $stmt_update = mysqli_prepare($db, "UPDATE `subscriber` SET `status`=?, `last_login_date`=?, `last_login_ip`=? WHERE `msisdn`=?");
-                $stmt_update->bind_param('iss', $status,$last_login_date,$last_login_ip,$session_msisdn);
+                $stmt_update->bind_param('isss', $status,$last_login_date,$last_login_ip,$session_msisdn);
                 $update = $stmt_update->execute();
 
                 if($update==1)
@@ -117,19 +132,19 @@ if($_POST)
                 unset($_SESSION['msisdn_step1']);
             }
         }
-        elseif(login($sms_code, $_SESSION['msisdn_step1'], $db) == 'sms_code_empty')
+        elseif(login($sms_code, $_SESSION['msisdn_step1'],'subscribe', $db) == 'sms_code_empty')
         {
             $response = json_encode(array("code"=>0, "content" => "Sms code is empty!", "err_param" => 'sms_code'));
         }
-        elseif(login($sms_code, $_SESSION['msisdn_step1'], $db) == 'user_not_exists')
+        elseif(login($sms_code, $_SESSION['msisdn_step1'],'subscribe', $db) == 'user_not_exists')
         {
             $response = json_encode(array("code"=>0, "content" => "User is not exists!", "err_param" => ''));
         }
-        elseif(login($sms_code, $_SESSION['msisdn_step1'], $db) == 'sms_code_incorrect')
+        elseif(login($sms_code, $_SESSION['msisdn_step1'],'subscribe', $db) == 'sms_code_incorrect')
         {
             $response = json_encode(array("code"=>0, "content" => "Sms code is incorrect!", "err_param" => 'sms_code'));
         }
-        elseif(login($sms_code, $_SESSION['msisdn_step1'], $db) == 'account_locked')
+        elseif(login($sms_code, $_SESSION['msisdn_step1'],'subscribe', $db) == 'account_locked')
         {
             $response = json_encode(array("code"=>0, "content" => "Your account is locked!", "err_param" => ''));
         }
@@ -138,53 +153,53 @@ if($_POST)
             $response = json_encode(array("code"=>0, "content" => "subscriber not found!", "err_param" => ''));
         }
     }
-    elseif($_POST['login_form'])
-    {
-        if(isset($_POST['msisdn']) && !empty($_POST['msisdn']))
-        {
-            $prefix = '251';
-            $msisdn = safe($_POST['msisdn']);
-
-            if(!preg_match('/^[2-9]\d{6}$/', substr($msisdn,2)))
-            {
-                $response = json_encode(array("code"=>0, "content" => "Msisdn is invalid", "err_param" => 'msisdn'));
-                echo $response;
-                exit;
-            }
-
-            $msisdn = $prefix.$msisdn;
-
-            $stmt_select = mysqli_prepare($db,"SELECT `status` FROM `subscriber` WHERE `msisdn`=(?) LIMIT 1");
-            $stmt_select->bind_param('s', $msisdn);
-            $stmt_select->execute();
-            $stmt_select->bind_result($result_status);
-            $stmt_select->store_result();
-            $stmt_select->fetch();
-
-            if($stmt_select->num_rows==1)
-            {
-                if($result_status==1)
-                {
-                    $_SESSION['msisdn_step2'] = $msisdn;
-
-                    $response = json_encode(array("code"=>1, "content" => "Success", "err_param" => ''));
-                }
-                else
-                {
-                    $response = json_encode(array("code"=>0, "content" => "Error balance", "err_param" => ''));
-                }
-            }
-            else
-            {
-                $response = json_encode(array("code"=>0, "content" => "User not exists", "err_param" => ''));
-            }
-        }
-    }
+//    elseif($_POST['login_form'])
+//    {
+//        if(isset($_POST['msisdn']) && !empty($_POST['msisdn']))
+//        {
+//            $prefix = '251';
+//            $msisdn = safe($_POST['msisdn']);
+//
+//            if(!preg_match('/^[2-9]\d{6}$/', substr($msisdn,2)))
+//            {
+//                $response = json_encode(array("code"=>0, "content" => "Msisdn is invalid", "err_param" => 'msisdn'));
+//                echo $response;
+//                exit;
+//            }
+//
+//            $msisdn = $prefix.$msisdn;
+//
+//            $stmt_select = mysqli_prepare($db,"SELECT `status` FROM `subscriber` WHERE `msisdn`=(?) LIMIT 1");
+//            $stmt_select->bind_param('s', $msisdn);
+//            $stmt_select->execute();
+//            $stmt_select->bind_result($result_status);
+//            $stmt_select->store_result();
+//            $stmt_select->fetch();
+//
+//            if($stmt_select->num_rows==1)
+//            {
+//                if($result_status==1)
+//                {
+//                    $_SESSION['msisdn_step2'] = $msisdn;
+//
+//                    $response = json_encode(array("code"=>1, "content" => "Success", "err_param" => ''));
+//                }
+//                else
+//                {
+//                    $response = json_encode(array("code"=>0, "content" => "Error balance", "err_param" => ''));
+//                }
+//            }
+//            else
+//            {
+//                $response = json_encode(array("code"=>0, "content" => "User not exists", "err_param" => ''));
+//            }
+//        }
+//    }
     elseif($_POST['check_sms_form_for_login'] && isset($_SESSION['msisdn_step2']) && !empty($_SESSION['msisdn_step2']))
     {
         $sms_code = intval($_POST['sms_code']);
 
-        if(login($sms_code, $_SESSION['msisdn_step2'], $db) == 'success')
+        if(login($sms_code, $_SESSION['msisdn_step2'],'login', $db) == 'success')
         {
             // Send sms code for login
 
@@ -199,7 +214,7 @@ if($_POST)
                 $last_login_ip = $_SERVER['REMOTE_ADDR'];
 
                 $stmt_update = mysqli_prepare($db, "UPDATE `subscriber` SET `last_login_date`=?,`last_login_ip`=? WHERE `msisdn`=?");
-                $stmt_update->bind_param('sss', $last_login_date,$last_login_ip);
+                $stmt_update->bind_param('sss', $last_login_date,$last_login_ip,$session_msisdn);
                 $update = $stmt_update->execute();
 
                 if($update==1)
@@ -215,19 +230,19 @@ if($_POST)
                 unset($_SESSION['msisdn_step2']);
             }
         }
-        elseif(login($sms_code, $_SESSION['msisdn_step1'], $db) == 'sms_code_empty')
+        elseif(login($sms_code, $_SESSION['msisdn_step2'],'login', $db) == 'sms_code_empty')
         {
             $response = json_encode(array("code"=>0, "content" => "Sms code is empty!", "err_param" => 'sms_code'));
         }
-        elseif(login($sms_code, $_SESSION['msisdn_step1'], $db) == 'user_not_exists')
+        elseif(login($sms_code, $_SESSION['msisdn_step2'],'login', $db) == 'user_not_exists')
         {
             $response = json_encode(array("code"=>0, "content" => "User is not exists!", "err_param" => ''));
         }
-        elseif(login($sms_code, $_SESSION['msisdn_step1'], $db) == 'sms_code_incorrect')
+        elseif(login($sms_code, $_SESSION['msisdn_step2'],'login', $db) == 'sms_code_incorrect')
         {
             $response = json_encode(array("code"=>0, "content" => "Sms code is incorrect!", "err_param" => 'sms_code'));
         }
-        elseif(login($sms_code, $_SESSION['msisdn_step1'], $db) == 'account_locked')
+        elseif(login($sms_code, $_SESSION['msisdn_step2'],'login', $db) == 'account_locked')
         {
             $response = json_encode(array("code"=>0, "content" => "Your account is locked!", "err_param" => ''));
         }

@@ -31,6 +31,10 @@ jQuery(document).ready(function(){
     // });
 
     jQuery("span#subscribe_modal, button#subscribe_modal, a#subscribe_modal").click(function(){
+        jQuery('form#subscribe-form span.help-block').hide();
+        jQuery('.has-error').removeClass('has-error');
+        jQuery('form#subscribe-form input[type=text]').val('');
+
         // jQuery("div#subscribe-modal").animate({width:'toggle'},100);
         jQuery("div#subscribe-modal").show();
         jQuery("div#modal-backdrop2").css("display","block");
