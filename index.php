@@ -45,7 +45,7 @@
                                 <div>
                                     <div class="form-group">
                                         <label class="control-label" for="id_msisdn"></label>
-                                        <input type="text" placeholder="" maxlength="12" name="msisdn" class="form-control" id="id_msisdn">
+                                        <input type="text" placeholder="" maxlength="9" name="msisdn" class="form-control" id="id_msisdn">
                                         <span class="help-block">
                                             <span class="error_message"></span>
                                         </span>
@@ -85,7 +85,7 @@
                                 <div>
                                     <div class="form-group">
                                         <label class="control-label" for="id_msisdn"></label>
-                                        <input type="text" placeholder="" maxlength="12" name="msisdn" class="form-control" id="id_msisdn">
+                                        <input type="text" placeholder="" maxlength="9" name="msisdn" class="form-control" id="id_msisdn">
                                         <span class="help-block">
                                                 <span class="error_message"></span>
                                             </span>
@@ -125,7 +125,7 @@
                             <div>
                                 <div class="form-group">
                                     <label class="control-label" for="id_msisdn"></label>
-                                    <input type="text" placeholder="" maxlength="12" name="sms_code" class="form-control" id="id_msisdn">
+                                    <input type="text" placeholder="" maxlength="6" name="sms_code" class="form-control" id="id_msisdn">
                                     <span class="help-block">
                                         <span class="error_message"></span>
                                     </span>
@@ -165,7 +165,7 @@
                             <div>
                                 <div class="form-group">
                                     <label class="control-label" for="id_msisdn"></label>
-                                    <input type="text" placeholder="" maxlength="12" name="sms_code" class="form-control" id="id_msisdn">
+                                    <input type="text" placeholder="" maxlength="6" name="sms_code" class="form-control" id="id_msisdn">
                                     <span class="help-block">
                                         <span class="error_message"></span>
                                     </span>
