@@ -23,7 +23,7 @@ if($_POST)
             $prefix = '251';
             $msisdn = safe($_POST['msisdn']);
 
-            if(!preg_match('/^[2-9]\d{6}$/', substr($msisdn,2)))
+            if(!preg_match('/^[1-9]\d{6}$/', substr($msisdn,2)))
             {
                 $response = json_encode(array("code"=>0, "content" => "Msisdn is invalid", "err_param" => 'msisdn'));
                 echo $response;
