@@ -6,8 +6,9 @@
  * Time: 11:26 AM
  */
 
+ob_start(); session_start();
 include_once 'includes/functions.php';
-sec_session_start();
+//sec_session_start();
 
 // Unset all session values
 $_SESSION = array();
@@ -25,4 +26,4 @@ setcookie(session_name(),
 
 // Destroy session
 session_destroy();
-header('Location: index.php');
+header('Location: '.$_SERVER['HTTP_REFERER']);

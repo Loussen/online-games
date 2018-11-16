@@ -71,7 +71,7 @@
                                     <!-- Loading Screen -->
                                     <div data-u="slides" class="slider-slides">
                                         <?php
-                                            if($count_gallery>0)
+                                            if($count_gallery>100000)
                                             {
                                                 $i=1;
                                                 while($row=$result_game_gallery->fetch_assoc())
@@ -112,17 +112,17 @@
                                         ?>
                                     </div>
                                     <!-- Thumbnail Navigator -->
-                                    <div data-u="thumbnavigator" class="slider-thumbnails" data-autocenter="2">
+<!--                                    <div data-u="thumbnavigator" class="slider-thumbnails" data-autocenter="2">-->
                                         <!-- Thumbnail Item Skin Begin -->
-                                        <div data-u="slides" style="cursor: default;">
-                                            <div data-u="prototype" class="p">
-                                                <div data-u="thumbnailtemplate" class="tp"></div>
-                                            </div>
-                                        </div>
+<!--                                        <div data-u="slides" style="cursor: default;">-->
+<!--                                            <div data-u="prototype" class="p">-->
+<!--                                                <div data-u="thumbnailtemplate" class="tp"></div>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
                                         <!-- Thumbnail Item Skin End -->
-                                    </div>
+<!--                                    </div>-->
                                     <?php
-                                        if($count_gallery>0)
+                                        if($count_gallery>10000)
                                         {
                                             ?>
                                             <!-- Arrow Navigator -->
