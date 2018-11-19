@@ -164,9 +164,27 @@
                                 <header class="tsr-product-header"><?=$row['g_name']?></header>
                                 <!--Play Button-->
                                 <p class="tsr-product-small-print"><br/>
-                                    <span class="tsr-btn btnJoin" id="subscribe_modal" onclick="return false;">
-                                        Play
-                                    </span>
+                                    <?php
+                                        $link = (subscribe_check($db)==true) ? SITE_PATH."/play-game/".slugGenerator($row['g_name']) . '-' . $row['g_id'] : '';
+
+                                        if(subscribe_check($db)==true)
+                                        {
+                                            ?>
+                                            <span class="tsr-btn btnJoin" id="play_link" onclick="window.location = '<?=$link?>'">
+                                                Play
+                                            </span>
+                                            <?php
+                                        }
+                                        else
+                                        {
+                                            ?>
+                                            <span class="tsr-btn btnJoin" id="subscribe_modal" onclick="return false;">
+                                                Play
+                                            </span>
+                                            <?php
+                                        }
+                                    ?>
+
                                 </p>
                             </div>
                             <div class="clear"></div>

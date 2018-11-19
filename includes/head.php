@@ -221,7 +221,44 @@
         $image = SITE_PATH."/images/games/".$current_game_image_name;
         $description = $current_game_name;
     }
+    elseif($do=="play_game")
+    {
+        if(subscribe_check($db)==true)
+        {
+            $game_id = intval($_GET['id']);
+            $game_slug = mysqli_real_escape_string($db,$_GET['slug']);
+
+            // Get game info
+            $stmt_select = mysqli_prepare($db,
+                "SELECT 
+                    `auto_id`,
+                    `name`,
+                    `code`
+                    FROM `games`
+                    WHERE `lang_id`=(?) and `active`=(?) and `auto_id`=(?)
+                    LIMIT 1");
+            $stmt_select->bind_param('iii', $main_lang,$active_status,$game_id);
+            $stmt_select->execute();
+            $stmt_select->bind_result($current_game_id,$current_game_name,$current_game_code);
+            $stmt_select->fetch();
+            $stmt_select->close();
+
+            if($game_id!=$current_game_id || $game_slug!=slugGenerator($current_game_name))
+            {
+                header("Location: ".SITE_PATH."/404");
+                exit('Redirecting...');
+            }
+
+            $title = $title.' - '.' - '.$current_game_name;
+        }
+        else
+        {
+            header("Location: ".SITE_PATH."/404");
+            exit('Redirecting...');
+        }
+    }
 ?>
+<base href="/">
 <meta charset="utf-8">
 <meta name="language" content="en" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>

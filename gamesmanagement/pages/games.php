@@ -32,6 +32,7 @@ if($_POST) // Add && edit
     extract($_POST);
     $topgame = ($topgame=='on') ? 1 : 0;
     $recogame = ($recogame=='on') ? 1 : 0;
+    $star = ($star>0) ? $star : 0;
     $last_order=mysqli_fetch_assoc(mysqli_query($db,"select order_number from $do where category_id='$_POST[category_id]' order by order_number desc"));
     $last_order=intval($last_order["order_number"])+1;
     $auto_id=mysqli_fetch_assoc(mysqli_query($db,"select auto_id from $do order by auto_id desc"));
@@ -105,7 +106,8 @@ if($_POST) // Add && edit
     {
         $image_type=$_FILES["image_file"]["type"];
         $image_name=strtolower($_FILES["image_file"]["name"]);
-        $type=end(explode(".",$image_name));
+        $explode_name = explode(".",$image_name);
+        $type=end($explode_name);
         $image_access=false;
         if($type=="jpg" || $type=="bmp"  || $type=="png" || $type=="gif" || $type=="jpeg") $image_access=true;
         if($image_access==true)
@@ -130,7 +132,8 @@ if($_POST) // Add && edit
         $source = $_FILES["zip_file"]["tmp_name"];
         $type = $_FILES["zip_file"]["type"];
 
-        $original_type = end(explode(".",$filename));
+        $explode_name = explode(".",$filename);
+        $original_type = end($explode_name);
 
         $accepted_types = array('application/zip', 'application/x-zip-compressed', 'multipart/x-zip', 'application/x-compressed');
 
@@ -175,6 +178,27 @@ if($_POST) // Add && edit
                 if ($x === true)
                 {
                     $zip->extractTo($path);
+
+                    rename($path."/index.html", $path."/index.php");
+
+                    $txt = '
+                    <?php
+    include "../../gamesmanagement/pages/includes/config.php";
+
+    include "../../gamesmanagement/pages/includes/check2.php";
+
+    include "../../includes/functions.php";
+
+    if(subscribe_check($db)!==true && $admin_user==false)
+    {
+        header("Location: ".SITE_PATH."/404");
+        exit("Redirecting...");
+    }
+?>
+';
+                    $txt .= file_get_contents($path."/index.php");
+                    file_put_contents($path."/index.php", $txt);
+
 
                     mysqli_query($db,"update $do set code='$folder_name' where auto_id='$this_id'");
 

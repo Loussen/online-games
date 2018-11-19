@@ -193,7 +193,7 @@ function subscribe_check($db)
     {
         if ($stmt = mysqli_prepare($db,"SELECT `msisdn`
                                       FROM `subscriber` 
-                                      WHERE `user_id` = ? and `status` = ?  LIMIT 1"))
+                                      WHERE `id` = ? and `status` = ?  LIMIT 1"))
         {
             $status = 1;
 

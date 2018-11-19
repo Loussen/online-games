@@ -45,6 +45,14 @@ jQuery(document).ready(function(){
     //     jQuery("div.modal-backdrop2").css("display","none");
     // })
 
+    jQuery('a').click(function(e) {
+        if (e.target.id == 'play_link') {
+            // Display div.
+
+            e.preventDefault();
+        }
+    });
+
 });
 
 // Get the modal

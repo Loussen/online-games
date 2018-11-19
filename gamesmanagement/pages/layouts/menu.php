@@ -3,7 +3,7 @@
 	<a href="javascript:;" id="hide_menu">&laquo;</a>
 	<ul id="main_menu">
 <!--		<li><a href="--><?//=SITE_PATH.'/gamesmanagement'?><!--"><img src="images/home.png" alt="" width="25"/>Ana səhifə</a></li>-->
-		<li><a href="index.php?do=menyular"><img src="images/menus.png" alt="" width="25"/>Menus</a></li>
+<!--		<li><a href="index.php?do=menyular"><img src="images/menus.png" alt="" width="25"/>Menus</a></li>-->
 		<li><a href="index.php?do=categories"><img src="images/categories.png" alt="" width="25"/>Categories</a></li>
 		<li><a href="index.php?do=games"><img src="images/games.png" alt="" width="25"/>Games</a></li>
         <li><a href="index.php?do=gallery"><img src="images/sliders.png" alt="" width="25"/>Games' gallery</a></li>

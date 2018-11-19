@@ -25,7 +25,7 @@ if($_POST){
 		</div>
 		<div id="login_body_window">
 			<div class="inner">
-                <img src="../front/assets/img/logo.svg" alt="logo" style="width: 70%;"/>
+                <img src="<?=SITE_PATH?>/assets/img/GameEthio.png" alt="logo"/>
 				<form action="login.php" method="post" id="form_login" name="form_login">
 					<p><input type="text" id="username" name="login" style="width:285px" title="Username"/></p>
 					<p><input type="password" id="password" name="pass" style="width:285px" title="******"/></p>

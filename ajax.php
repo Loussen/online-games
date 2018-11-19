@@ -46,7 +46,7 @@ if($_POST)
                     $sms_code_login = mt_rand(100000, 999999);
 
                     $stmt_update = mysqli_prepare($db, "UPDATE `subscriber` SET `sms_code_login`=? WHERE `msisdn`=?");
-                    $stmt_update->bind_param('sss', $sms_code_login,$msisdn);
+                    $stmt_update->bind_param('ss', $sms_code_login,$msisdn);
                     $update = $stmt_update->execute();
 
                     if($update==1)

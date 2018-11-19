@@ -231,7 +231,7 @@
                     jQuery('form#subscribe-form span.help-block').hide();
                     jQuery('form#subscribe-form span.help-block span.error_message').html('');
                     jQuery("div#subscribe-modal").hide('fast');
-                    jQuery("div#sms-modal-subscribe").show('fast');
+                    jQuery("div#sms-modal-login").show('fast');
                 }
                 else
                 {
