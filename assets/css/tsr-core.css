@@ -1246,7 +1246,7 @@ HEADER
 .tsr-section-header .tsr-main-nav .tsr-nav-top-level > .has-sub > a:hover { background: #007FA0; }
 .tsr-section-header .tsr-main-nav .tsr-nav-top-level > .has-sub > a:after { content: "\e669"; }
 .tsr-section-header .tsr-main-nav .tsr-nav-top-level > .has-sub.is-expanded > a:after { content: "\e66b"; }
-.tsr-section-header .tsr-main-nav .tsr-nav-top-level li > a:after { font-family: 'ts-icons-all'; font-size: 17px; font-weight: normal; font-variant: normal; text-align: center; position: absolute; color: white; line-height: 1; right: 10px; top: 12px; display: block; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+.tsr-section-header .tsr-main-nav .tsr-nav-top-level li > a:after { font-family: 'ts-icons-all'; font-size: 17px; font-weight: normal; font-variant: normal; text-align: center; position: absolute; color: white; line-height: 1; right: 10px; top: 6px; display: block; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
 .tsr-section-header .tsr-main-nav .tsr-nav-second-level { display: none; }
 .tsr-section-header .tsr-main-nav .tsr-nav-second-level li { border-top: 1px solid #007FA0; }
 .tsr-section-header .tsr-main-nav .tsr-nav-second-level a { background: #007FFF; padding-left: 25px; }

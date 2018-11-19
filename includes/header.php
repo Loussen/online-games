@@ -79,7 +79,7 @@
                                 games
                             </li>
                             <li>
-                                <a class="menu-item" href="javascript:void(0);">Play<br><strong>ONLINE</strong></a>
+                                <a style="font-weight: bold;" href="javascript:void(0);">Play<br><strong>ONLINE</strong></a>
                                 <menu class="tsr-nav-second-level">
                                     <li>
                                         <a href="http://play.ucell.uz/java-games/new-year-games/937105">
@@ -234,7 +234,7 @@
 
                     <article class="tsr-header-search tsr-forms">
                         <form action="<?=SITE_PATH?>/search" id="search-form" method="GET">
-                            <input type="text" placeholder="Search Term (minimum 3 characters)" id="NeoSearch"
+                            <input type="text" placeholder="Search" id="NeoSearch"
                                    name="search" value="">
                             <input type="submit" id="NeoSearchButton" class="tsr-btn" value="Search">
                             <a data-parent="search" class="tsr-btn-close" href="#"></a>
