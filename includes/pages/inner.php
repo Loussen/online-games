@@ -178,9 +178,29 @@
                                 </div>
 
                                 <div class="game-platform">
-                                    <button class="tsr-btn tsr-btn-blue btnPlay" id="subscribe_modal">
-                                        PLAY
-                                    </button>
+                                    <?php
+                                        $link = (subscribe_check($db)==true) ? SITE_PATH."/play-game/".slugGenerator($current_game_name) . '-' . $current_game_id : '';
+
+                                        if(subscribe_check($db)==true)
+                                        {
+                                            ?>
+                                            <span class="tsr-btn btnJoin" id="play_link" style="cursor: pointer;" onclick="window.location = '<?=$link?>'">
+                                                Play
+                                            </span>
+                                            <?php
+                                        }
+                                        else
+                                        {
+                                            ?>
+                                            <span class="tsr-btn btnJoin" id="subscribe_modal" style="cursor: pointer;" onclick="return false;">
+                                                Play
+                                            </span>
+                                            <?php
+                                        }
+                                    ?>
+<!--                                    <button class="tsr-btn tsr-btn-blue btnPlay" id="subscribe_modal">-->
+<!--                                        PLAY-->
+<!--                                    </button>-->
                                 </div>
                             </div>
                         </div>
@@ -211,12 +231,32 @@
                                                                     <?=$row['g_name']?>
                                                                 </div>
                                                             </a>
-                                                            <p class="tsr-product-price">
-                                                                <button class="tsr-btn tsr-btn-purple tsr-btn-100 btnPlay" id="subscribe_modal">
-                                                                    PLAY
-                                                                </button>
-                                                                <!--Subscribe Button-->
-                                                            </p>
+                                                            <?php
+                                                                $link = (subscribe_check($db)==true) ? SITE_PATH."/play-game/".slugGenerator($row['g_name']) . '-' . $row['g_id'] : '';
+
+                                                                if(subscribe_check($db)==true)
+                                                                {
+                                                                    ?>
+                                                                    <span class="tsr-btn btnJoin" id="play_link" style="cursor: pointer;" onclick="window.location = '<?=$link?>'">
+                                                                        Play
+                                                                    </span>
+                                                                    <?php
+                                                                }
+                                                                else
+                                                                {
+                                                                    ?>
+                                                                    <span class="tsr-btn btnJoin" style="cursor: pointer;" id="subscribe_modal" onclick="return false;">
+                                                                        Play
+                                                                    </span>
+                                                                    <?php
+                                                                }
+                                                            ?>
+<!--                                                            <p class="tsr-product-price">-->
+<!--                                                                <button class="tsr-btn tsr-btn-purple tsr-btn-100 btnPlay" id="subscribe_modal">-->
+<!--                                                                    PLAY-->
+<!--                                                                </button>-->
+<!--                                                                <!--Subscribe Button-->
+<!--                                                            </p>-->
                                                         </div>
                                                     </div>
                                                 </div>
@@ -265,12 +305,33 @@
                                                                 <img class="rating-star" src="<?=SITE_PATH?>/assets/img/star.png">
                                                             </p>
 
-                                                            <p class="tsr-product-price">
-                                                                <button class="tsr-btn tsr-btn-purple tsr-btn-100 btnPlay" id="subscribe_modal">
-                                                                    PLAY
-                                                                </button>
-                                                                <!--Subscribe Button-->
-                                                            </p>
+                                                            <?php
+                                                                $link = (subscribe_check($db)==true) ? SITE_PATH."/play-game/".slugGenerator($row['name']) . '-' . $row['auto_id'] : '';
+
+                                                                if(subscribe_check($db)==true)
+                                                                {
+                                                                    ?>
+                                                                    <span class="tsr-btn btnJoin" id="play_link" style="cursor: pointer;" onclick="window.location = '<?=$link?>'">
+                                                                            Play
+                                                                        </span>
+                                                                    <?php
+                                                                }
+                                                                else
+                                                                {
+                                                                    ?>
+                                                                    <span class="tsr-btn btnJoin" style="cursor: pointer;" id="subscribe_modal" onclick="return false;">
+                                                                            Play
+                                                                        </span>
+                                                                    <?php
+                                                                }
+                                                            ?>
+
+<!--                                                            <p class="tsr-product-price">-->
+<!--                                                                <button class="tsr-btn tsr-btn-purple tsr-btn-100 btnPlay" id="subscribe_modal">-->
+<!--                                                                    PLAY-->
+<!--                                                                </button>-->
+<!--                                                                <!--Subscribe Button-->
+<!--                                                            </p>-->
                                                         </div>
                                                         <?php
                                                     }

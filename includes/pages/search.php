@@ -39,9 +39,30 @@
                                             </a>
 
                                             <p class="tsr-product-small-print">
-                                                <button class="tsr-btn tsr-btn-purple tsr-btn-100 btnPlay" id="subscribe_modal">
-                                                    PLAY
-                                                </button><br>
+<!--                                                <button class="tsr-btn tsr-btn-purple tsr-btn-100 btnPlay" id="subscribe_modal">-->
+<!--                                                    PLAY-->
+<!--                                                </button><br>-->
+
+                                                <?php
+                                                    $link = (subscribe_check($db)==true) ? SITE_PATH."/play-game/".slugGenerator($row['name']) . '-' . $row['auto_id'] : '';
+
+                                                    if(subscribe_check($db)==true)
+                                                    {
+                                                        ?>
+                                                        <span class="tsr-btn btnJoin" id="play_link" onclick="window.location = '<?=$link?>'">
+                                                            Play
+                                                        </span>
+                                                        <?php
+                                                    }
+                                                    else
+                                                    {
+                                                        ?>
+                                                        <span class="tsr-btn btnJoin" id="subscribe_modal" onclick="return false;">
+                                                            Play
+                                                        </span>
+                                                        <?php
+                                                    }
+                                                ?>
                                             </p>
                                         </div>
                                         <?php

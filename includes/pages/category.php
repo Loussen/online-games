@@ -65,11 +65,31 @@
                                                 </div>
                                             </a>
 
-                                            <p class="tsr-product-small-print">
-                                                <button class="tsr-btn tsr-btn-purple tsr-btn-100 btnPlay" id="subscribe_modal">
-                                                    PLAY
-                                                </button><br>
-                                            </p>
+                                            <?php
+                                                $link = (subscribe_check($db)==true) ? SITE_PATH."/play-game/".slugGenerator($row['name']) . '-' . $row['auto_id'] : '';
+
+                                                if(subscribe_check($db)==true)
+                                                {
+                                                    ?>
+                                                    <span class="tsr-btn btnJoin" id="play_link" onclick="window.location = '<?=$link?>'">
+                                                        Play
+                                                    </span>
+                                                    <?php
+                                                }
+                                                else
+                                                {
+                                                    ?>
+                                                    <span class="tsr-btn btnJoin" id="subscribe_modal" onclick="return false;">
+                                                        Play
+                                                    </span>
+                                                    <?php
+                                                }
+                                            ?>
+<!--                                            <p class="tsr-product-small-print">-->
+<!--                                                <button class="tsr-btn tsr-btn-purple tsr-btn-100 btnPlay" id="subscribe_modal">-->
+<!--                                                    PLAY-->
+<!--                                                </button><br>-->
+<!--                                            </p>-->
                                         </div>
                                         <?php
                                     }
@@ -85,40 +105,40 @@
                                     <div class="tsr-container">
                                         <div class="tsr-pagination">
                                             <div class="tsr-center">
-                                        <?php
-                                            if($page>1)
-                                            {
-                                                ?>
-                                                <a href="<?=SITE_PATH?>/category/<?=slugGenerator($current_category_name) . '-' . $current_category_id.'/'.($page-1)?>" class="tsr-dir-previous">&lt;</a>
                                                 <?php
-                                            }
+                                                    if($page>1)
+                                                    {
+                                                        ?>
+                                                        <a href="<?=SITE_PATH?>/category/<?=slugGenerator($current_category_name) . '-' . $current_category_id.'/'.($page-1)?>" class="tsr-dir-previous">&lt;</a>
+                                                        <?php
+                                                    }
 
-                                            for ($i = $page - $show; $i <= $page + $show; $i++)
-                                        {
-                                            if ($i > 0 && $i <= $max_page)
-                                            {
-                                                if ($i == $page)
-                                                {
-                                                    ?>
-                                                    <a href="javascript:void(0);" class="tsr-active"><?=$i?></a>
-                                                    <?php
-                                                }
-                                                else
-                                                {
-                                                    ?>
-                                                    <a href="<?=SITE_PATH?>/category/<?=slugGenerator($current_category_name) . '-' . $current_category_id.'/'.$i?>"><?=$i?></a>
-                                                    <?php
-                                                }
-                                            }
-                                        }
+                                                    for ($i = $page - $show; $i <= $page + $show; $i++)
+                                                    {
+                                                        if ($i > 0 && $i <= $max_page)
+                                                        {
+                                                            if ($i == $page)
+                                                            {
+                                                                ?>
+                                                                <a href="javascript:void(0);" class="tsr-active"><?=$i?></a>
+                                                                <?php
+                                                            }
+                                                            else
+                                                            {
+                                                                ?>
+                                                                <a href="<?=SITE_PATH?>/category/<?=slugGenerator($current_category_name) . '-' . $current_category_id.'/'.$i?>"><?=$i?></a>
+                                                                <?php
+                                                            }
+                                                        }
+                                                    }
 
-                                            if ($page < $max_page)
-                                            {
+                                                    if ($page < $max_page)
+                                                    {
+                                                        ?>
+                                                        <a href="<?=SITE_PATH?>/category/<?=slugGenerator($current_category_name) . '-' . $current_category_id.'/'.($page + 1)?>">&gt;</a>
+                                                        <?php
+                                                    }
                                                 ?>
-                                                <a href="<?=SITE_PATH?>/category/<?=slugGenerator($current_category_name) . '-' . $current_category_id.'/'.($page + 1)?>">&gt;</a>
-                                                <?php
-                                            }
-                                        ?>
                                             </div>
                                         </div>
                                     </div>
@@ -157,9 +177,29 @@
 <!--                                        --><?//=more_string(html_entity_decode($row['text']),120)?>
 <!--                                    </p>-->
 
-                                    <button class="tsr-btn tsr-btn-purple tsr-btn-100 btnDownload" id="subscribe_modal">
-                                        PLAY
-                                    </button>
+                                    <?php
+                                        $link = (subscribe_check($db)==true) ? SITE_PATH."/play-game/".slugGenerator($row['name']) . '-' . $row['auto_id'] : '';
+
+                                        if(subscribe_check($db)==true)
+                                        {
+                                            ?>
+                                            <span class="tsr-btn btnJoin" id="play_link" onclick="window.location = '<?=$link?>'">
+                                                Play
+                                            </span>
+                                            <?php
+                                        }
+                                        else
+                                        {
+                                            ?>
+                                            <span class="tsr-btn btnJoin" id="subscribe_modal" onclick="return false;">
+                                                Play
+                                            </span>
+                                            <?php
+                                        }
+                                    ?>
+<!--                                    <button class="tsr-btn tsr-btn-purple tsr-btn-100 btnDownload" id="subscribe_modal">-->
+<!--                                        PLAY-->
+<!--                                    </button>-->
                                 </div>
                             </a>
                             <?php

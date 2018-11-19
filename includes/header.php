@@ -3,20 +3,20 @@
         <section class="tsr-section-header">
             <div class="tsr-header-global">
                 <div class="tsr-container">
-                    <nav class="tsr-global-left">
-                        <menu class="" id="mobileLanguageSelectorDrop">
-                            <li style="width:100%;" class="">
-                                <a style="width:100%;" data-token="uz" class="mobileLanguageSelectorElement" href="http://play.ucell.uz/asosiy">Uzbek</a>
-                            </li>
-                            <li style="width:100%;" class="">
-                                <a style="width:100%;" data-token="ru" class="mobileLanguageSelectorElement" href="http://play.ucell.uz">Russian</a>
-                            </li>
-                            <li style="width:100%;" class="is-choosen">
-                                <a style="width:100%;" data-token="en" class="mobileLanguageSelectorElement" href="#">English</a>
-                            </li>
-                            <li class="tsr-btn-arrow-mobile"></li>
-                        </menu>
-                    </nav>
+<!--                    <nav class="tsr-global-left">-->
+<!--                        <menu class="" id="mobileLanguageSelectorDrop">-->
+<!--                            <li style="width:100%;" class="">-->
+<!--                                <a style="width:100%;" data-token="uz" class="mobileLanguageSelectorElement" href="http://play.ucell.uz/asosiy">Uzbek</a>-->
+<!--                            </li>-->
+<!--                            <li style="width:100%;" class="">-->
+<!--                                <a style="width:100%;" data-token="ru" class="mobileLanguageSelectorElement" href="http://play.ucell.uz">Russian</a>-->
+<!--                            </li>-->
+<!--                            <li style="width:100%;" class="is-choosen">-->
+<!--                                <a style="width:100%;" data-token="en" class="mobileLanguageSelectorElement" href="#">English</a>-->
+<!--                            </li>-->
+<!--                            <li class="tsr-btn-arrow-mobile"></li>-->
+<!--                        </menu>-->
+<!--                    </nav>-->
 
                     <nav class="tsr-global-right">
                         <menu>
@@ -39,16 +39,16 @@
                                     ?>
                                 </span>
                             </li>
-                            <li class="tsr-extra">
-                                <div class="select-container">
-                                    <select id="azercell_language_selector">
-                                        <option data-token="uz" value="http://play.ucell.uz/asosiy">UZ</option>
-                                        <option data-token="ru" value="http://play.ucell.uz">RU</option>
-                                        <option data-token="en" value="http://play.ucell.uz/homepage" selected>EN</option>
-                                    </select>
-                                    <span class="az_lang_arrow">▼</span>
-                                </div>
-                            </li>
+<!--                            <li class="tsr-extra">-->
+<!--                                <div class="select-container">-->
+<!--                                    <select id="azercell_language_selector">-->
+<!--                                        <option data-token="uz" value="http://play.ucell.uz/asosiy">UZ</option>-->
+<!--                                        <option data-token="ru" value="http://play.ucell.uz">RU</option>-->
+<!--                                        <option data-token="en" value="http://play.ucell.uz/homepage" selected>EN</option>-->
+<!--                                    </select>-->
+<!--                                    <span class="az_lang_arrow">▼</span>-->
+<!--                                </div>-->
+<!--                            </li>-->
                         </menu>
                     </nav>
                 </div>
