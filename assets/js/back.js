@@ -53,6 +53,11 @@ jQuery(document).ready(function(){
         }
     });
 
+    jQuery('#footer-to-top').click(function(){
+        jQuery("html, body").animate({ scrollTop: 0 }, 600);
+        return false;
+    });
+
 });
 
 // Get the modal

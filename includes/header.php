@@ -222,7 +222,6 @@
 
                                         $stmt_select->close();
                                     ?>
-
                                     <li class="tsr-btn-close"><a href="#"></a></li>
                                 </menu>
                             </li>
