@@ -23,92 +23,98 @@
             <div class="tsr-container">
                 <section class="selected-games">
                     <div class="tsr-row">
-                        <div class="col-5">
+                        <div class="col-3">
                             <div class="selected-games-slider">
 
-                                <script>
-                                    jQuery(document).ready(function ($) {
-
-                                        // console.log($JssorArrowNavigator$);
-
-                                        var slider_options = {
-                                            $AutoPlay: false,
-                                            $ArrowNavigatorOptions: {
-                                                $Class: $JssorArrowNavigator$
-                                            },
-                                            $ThumbnailNavigatorOptions: {
-                                                $Class: $JssorThumbnailNavigator$,
-                                                $Cols: 2,
-                                                $SpacingX: 0,
-                                                $SpacingY: 0,
-                                                $Orientation: 2,
-                                                $Align: 0
-                                            }
-                                        };
-
-                                        var slider_slider = new $JssorSlider$("slider", slider_options);
-
-                                        //responsive code begin
-                                        //you can remove responsive code if you don't want the slider scales while window resizing
-                                        function ScaleSlider() {
-                                            var refSize = slider_slider.$Elmt.parentNode.clientWidth;
-                                            if (refSize) {
-                                                refSize = Math.min(refSize, 465);
-                                                slider_slider.$ScaleWidth(refSize);
-                                            }
-                                            else {
-                                                window.setTimeout(ScaleSlider, 30);
-                                            }
-                                        }
-                                        ScaleSlider();
-                                        $(window).bind("load", ScaleSlider);
-                                        $(window).bind("resize", ScaleSlider);
-                                        $(window).bind("orientationchange", ScaleSlider);
-                                        //responsive code end
-                                    });
-                                </script>
-                                <div id="slider" style="width: 465px; height: 250px;">
+<!--                                <script>-->
+<!--                                    jQuery(document).ready(function ($) {-->
+<!---->
+<!--                                        // console.log($JssorArrowNavigator$);-->
+<!---->
+<!--                                        var slider_options = {-->
+<!--                                            $AutoPlay: false,-->
+<!--                                            $ArrowNavigatorOptions: {-->
+<!--                                                $Class: $JssorArrowNavigator$-->
+<!--                                            },-->
+<!--                                            $ThumbnailNavigatorOptions: {-->
+<!--                                                $Class: $JssorThumbnailNavigator$,-->
+<!--                                                $Cols: 2,-->
+<!--                                                $SpacingX: 0,-->
+<!--                                                $SpacingY: 0,-->
+<!--                                                $Orientation: 2,-->
+<!--                                                $Align: 0-->
+<!--                                            }-->
+<!--                                        };-->
+<!---->
+<!--                                        var slider_slider = new $JssorSlider$("slider", slider_options);-->
+<!---->
+<!--                                        //responsive code begin-->
+<!--                                        //you can remove responsive code if you don't want the slider scales while window resizing-->
+<!--                                        function ScaleSlider() {-->
+<!--                                            var refSize = slider_slider.$Elmt.parentNode.clientWidth;-->
+<!--                                            if (refSize) {-->
+<!--                                                refSize = Math.min(refSize, 465);-->
+<!--                                                slider_slider.$ScaleWidth(refSize);-->
+<!--                                            }-->
+<!--                                            else {-->
+<!--                                                window.setTimeout(ScaleSlider, 30);-->
+<!--                                            }-->
+<!--                                        }-->
+<!--                                        ScaleSlider();-->
+<!--                                        $(window).bind("load", ScaleSlider);-->
+<!--                                        $(window).bind("resize", ScaleSlider);-->
+<!--                                        $(window).bind("orientationchange", ScaleSlider);-->
+<!--                                        //responsive code end-->
+<!--                                    });-->
+<!--                                </script>-->
+                                <div style="/*width: 465px; height: 250px;*/">
                                     <!-- Loading Screen -->
                                     <div data-u="slides" class="slider-slides">
+                                        <div>
+                                            <img style="width: 250px; height: 200px;" data-u="image" src="<?=SITE_PATH.'/images/games/'.$current_game_image_name?>" />
+<!--                                            <div data-u="thumb">-->
+<!--                                                <img class="i" src="--><?//=SITE_PATH.'/images/games/'.$current_game_image_name?><!--" />-->
+<!--                                            </div>-->
+                                        </div>
                                         <?php
-                                            if($count_gallery>100000)
-                                            {
-                                                $i=1;
-                                                while($row=$result_game_gallery->fetch_assoc())
-                                                {
-                                                    if($i==1)
-                                                    {
-                                                        ?>
-                                                        <div>
-                                                            <img data-u="image" src="<?=SITE_PATH.'/images/games/'.$current_game_image_name?>" />
-                                                            <div data-u="thumb">
-                                                                <img class="i" src="<?=SITE_PATH.'/images/games/'.$current_game_image_name?>" />
-                                                            </div>
-                                                        </div>
-                                                        <?php
-                                                    }
-                                                    ?>
-                                                    <div>
-                                                        <img data-u="image" src="<?=SITE_PATH.'/images/game_gallery/'.$row['image_name']?>" />
-                                                        <div data-u="thumb">
-                                                            <img class="i" src="<?=SITE_PATH.'/images/game_gallery/'.$row['image_name']?>" />
-                                                        </div>
-                                                    </div>
-                                                    <?php
-                                                    $i++;
-                                                }
-                                            }
-                                            else
-                                            {
-                                                ?>
-                                                <div>
-                                                    <img data-u="image" src="<?=SITE_PATH.'/images/games/'.$current_game_image_name?>" />
-                                                    <div data-u="thumb">
-                                                        <img class="i" src="<?=SITE_PATH.'/images/games/'.$current_game_image_name?>" />
-                                                    </div>
-                                                </div>
-                                                <?php
-                                            }
+//                                            if($count_gallery>100000)
+//                                            {
+//                                                $i=1;
+//                                                while($row=$result_game_gallery->fetch_assoc())
+//                                                {
+//                                                    if($i==1)
+//                                                    {
+//                                                        ?>
+<!--                                                        <div>-->
+<!--                                                            <img data-u="image" src="--><?//=SITE_PATH.'/images/games/'.$current_game_image_name?><!--" />-->
+<!--                                                            <div data-u="thumb">-->
+<!--                                                                <img class="i" src="--><?//=SITE_PATH.'/images/games/'.$current_game_image_name?><!--" />-->
+<!--                                                            </div>-->
+<!--                                                        </div>-->
+<!--                                                        --><?php
+//                                                    }
+//                                                    ?>
+<!--                                                    <div>-->
+<!--                                                        <img data-u="image" src="--><?//=SITE_PATH.'/images/game_gallery/'.$row['image_name']?><!--" />-->
+<!--                                                        <div data-u="thumb">-->
+<!--                                                            <img class="i" src="--><?//=SITE_PATH.'/images/game_gallery/'.$row['image_name']?><!--" />-->
+<!--                                                        </div>-->
+<!--                                                    </div>-->
+<!--                                                    --><?php
+//                                                    $i++;
+//                                                }
+//                                            }
+//                                            else
+//                                            {
+//                                                ?>
+<!--                                                <div>-->
+<!--                                                    <img data-u="image" src="--><?//=SITE_PATH.'/images/games/'.$current_game_image_name?><!--" />-->
+<!--                                                    <div data-u="thumb">-->
+<!--                                                        <img class="i" src="--><?//=SITE_PATH.'/images/games/'.$current_game_image_name?><!--" />-->
+<!--                                                    </div>-->
+<!--                                                </div>-->
+<!--                                                --><?php
+//                                            }
                                         ?>
                                     </div>
                                     <!-- Thumbnail Navigator -->
@@ -122,20 +128,20 @@
                                         <!-- Thumbnail Item Skin End -->
 <!--                                    </div>-->
                                     <?php
-                                        if($count_gallery>10000)
-                                        {
-                                            ?>
-                                            <!-- Arrow Navigator -->
-                                            <span data-u="arrowleft" class="left-arrow" data-autocenter="2"></span>
-                                            <span data-u="arrowright" class="right-arrow" data-autocenter="2"></span>
-                                            <?php
-                                        }
+//                                        if($count_gallery>10000)
+//                                        {
+//                                            ?>
+<!--                                            <!-- Arrow Navigator -->
+<!--                                            <span data-u="arrowleft" class="left-arrow" data-autocenter="2"></span>-->
+<!--                                            <span data-u="arrowright" class="right-arrow" data-autocenter="2"></span>-->
+<!--                                            --><?php
+//                                        }
                                     ?>
                                 </div>
 
                             </div>
                         </div>
-                        <div class="col-7">
+                        <div class="col-9">
                             <div class="game-data">
                                 <div class="selected-type">
                                     <h5>Game</h5>

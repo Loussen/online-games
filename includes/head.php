@@ -147,16 +147,16 @@
         }
 
         // Get game's gallery
-        $stmt_select = mysqli_prepare($db,
-            "SELECT
-            `image_name`
-            FROM `gallery`
-            WHERE `game_id`=(?)");
-        $stmt_select->bind_param('i', $game_id);
-        $stmt_select->execute();
-        $result_game_gallery = $stmt_select->get_result();
-        $count_gallery = mysqli_num_rows($result_game_gallery);
-        $stmt_select->close();
+//        $stmt_select = mysqli_prepare($db,
+//            "SELECT
+//            `image_name`
+//            FROM `gallery`
+//            WHERE `game_id`=(?)");
+//        $stmt_select->bind_param('i', $game_id);
+//        $stmt_select->execute();
+//        $result_game_gallery = $stmt_select->get_result();
+//        $count_gallery = mysqli_num_rows($result_game_gallery);
+//        $stmt_select->close();
 
         // Get most played games without current game
         $stmt_select = mysqli_prepare($db,

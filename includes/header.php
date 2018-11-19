@@ -82,24 +82,31 @@
                                 <a style="font-weight: bold;" href="javascript:void(0);">Play<br><strong>ONLINE</strong></a>
                                 <menu class="tsr-nav-second-level">
                                     <li>
-                                        <a href="http://play.ucell.uz/java-games/new-year-games/937105">
+                                        <?php
+                                            $featuregame = 1;
+                                            $stmt_select = mysqli_prepare($db,
+                                                "SELECT 
+                                                                    `name`,
+                                                                    `image_name`,
+                                                                    `auto_id`
+                                                                    FROM `games`
+                                                                    WHERE `lang_id`=(?) and `active`=(?) and `featuregame`=(?)
+                                                                    LIMIT 1");
+                                            $stmt_select->bind_param('iii', $main_lang,$active_status,$featuregame);
+                                            $stmt_select->execute();
+                                            $stmt_select->bind_result($featured_game_name,$featured_game_image_name,$featured_game_id);
+                                            $stmt_select->fetch();
+                                            $stmt_select->close();
+                                        ?>
+                                        <a href="<?=SITE_PATH?>/online-games/<?=slugGenerator($featured_game_name) . '-' . $featured_game_id?>">
+
                                             <span>Featured Game</span>
                                             <article class="tsr-landing">
                                                 <figure>
-                                                    <img src="http://helm.tekmob.com/m3/cache/937105_55.jpg">
+                                                    <img src="<?=SITE_PATH?>/images/games/<?=$featured_game_image_name?>">
                                                 </figure>
-                                                <header>SNOW MANIA</header>
-                                                <button
-                                                        data-login="false"
-                                                        data-postid="5"
-                                                        data-club-id="75112"
-                                                        data-view=""
-                                                        data-media-id="937105"
-                                                        data-cat-id="410730"
-                                                        class="tsr-btn"
-                                                        data-gencoluserlogin="Genc OL tariff users subscribe with 50% special discount! 1.00 AZN/week for EA and Java Games and 0.60 AZN/week for Online Games (3 games download)."
-                                                        data-gencoluser=""
-                                                        id="featured_button">
+                                                <header><?=$featured_game_name?></header>
+                                                <button id="featured_button" class="tsr-btn">
                                                     Subscribe
                                                 </button>
                                             </article>
