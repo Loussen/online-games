@@ -75,7 +75,7 @@
                 <div>
                     <div>
                         <div class="col-xs-12 modal-height" id="loading">
-                            <img align="center" id="loading-image" src="<?=SITE_PATH?>/assets/img/load.gif   " alt="Loading..." style="display: none; position: fixed; z-index: 1; margin-left: 180px; margin-top: -30px;">
+                            <img align="center" id="loading-image" src="<?=SITE_PATH?>/assets/img/load.gif" alt="Loading..." style="display: none; position: fixed; z-index: 1; margin-left: 180px; margin-top: -30px;">
                             <form id="subscribe-form" method="POST">
                                 <div id="react-message">
                                     Please insert your Mobile Number (9989XXXXXXXX).
@@ -115,7 +115,7 @@
             <div>
                 <div>
                     <div class="col-xs-12 modal-height" id="loading">
-                        <img align="center" id="loading-image" src="<?=SITE_PATH?>/assets/img/load.gif   " alt="Loading..." style="display: none; position: fixed; z-index: 1; margin-left: 180px; margin-top: -30px;">
+                        <img align="center" id="loading-image" src="<?=SITE_PATH?>/assets/img/load.gif" alt="Loading..." style="display: none; position: fixed; z-index: 1; margin-left: 180px; margin-top: -30px;">
                         <form id="sms-form-subscribe" method="POST">
                             <div id="react-message">
                                 Please insert your Mobile Number (9989XXXXXXXX).
@@ -205,8 +205,8 @@
 
         e.preventDefault();
 
-        jQuery('#loading-image').show();
-        jQuery('#loading').css('opacity','0.3');
+        jQuery('img#loading-image').show();
+        jQuery('div#loading').css('opacity','0.3');
         jQuery('.has-error').removeClass('has-error');
 
         var formData = new FormData(this);
@@ -241,12 +241,12 @@
                     jQuery("div#sms-modal-subscribe").show('fast');
                 }
 
-                jQuery('#loading-image').hide();
-                jQuery('#loading').css('opacity','1');
+                jQuery('img#loading-image').hide();
+                jQuery('div#loading').css('opacity','1');
             },
             error: function (jqXHR, textStatus, errorThrown) {
-                jQuery('#loading-image').hide();
-                jQuery('#loading').css('opacity','1');
+                jQuery('img#loading-image').hide();
+                jQuery('div#loading').css('opacity','1');
             }
         });
     });
@@ -255,8 +255,8 @@
 
         e.preventDefault();
 
-        jQuery('#loading-image').show();
-        jQuery('#loading').css('opacity','0.3');
+        jQuery('img#loading-image').show();
+        jQuery('div#loading').css('opacity','0.3');
         jQuery('.has-error').removeClass('has-error');
 
         var formData = new FormData(this);
@@ -282,12 +282,12 @@
                     location.reload();
                 }
 
-                jQuery('#loading-image').hide();
-                jQuery('#loading').css('opacity','1');
+                jQuery('img#loading-image').hide();
+                jQuery('div#loading').css('opacity','1');
             },
             error: function (jqXHR, textStatus, errorThrown) {
-                jQuery('#loading-image').hide();
-                jQuery('#loading').css('opacity','1');
+                jQuery('img#loading-image').hide();
+                jQuery('div#loading').css('opacity','1');
             }
         });
     });
@@ -296,8 +296,8 @@
 
         e.preventDefault();
 
-        jQuery('#loading-image').show();
-        jQuery('#loading').css('opacity','0.3');
+        jQuery('img#loading-image').show();
+        jQuery('div#loading').css('opacity','0.3');
         jQuery('.has-error').removeClass('has-error');
 
         var formData = new FormData(this);
@@ -325,12 +325,12 @@
                     jQuery("div#sms-modal-login").show('fast');
                 }
 
-                jQuery('#loading-image').hide();
-                jQuery('#loading').css('opacity','1');
+                jQuery('img#loading-image').hide();
+                jQuery('div#loading').css('opacity','1');
             },
             error: function (jqXHR, textStatus, errorThrown) {
-                jQuery('#loading-image').hide();
-                jQuery('#loading').css('opacity','1');
+                jQuery('img#loading-image').hide();
+                jQuery('div#loading').css('opacity','1');
             }
         });
     });
@@ -339,8 +339,8 @@
 
         e.preventDefault();
 
-        jQuery('#loading-image').show();
-        jQuery('#loading').css('opacity','0.3');
+        jQuery('img#loading-image').show();
+        jQuery('div#loading').css('opacity','0.3');
         jQuery('.has-error').removeClass('has-error');
 
         var formData = new FormData(this);
@@ -366,12 +366,12 @@
                     location.reload();
                 }
 
-                jQuery('#loading-image').hide();
-                jQuery('#loading').css('opacity','1');
+                jQuery('img#loading-image').hide();
+                jQuery('div#loading').css('opacity','1');
             },
             error: function (jqXHR, textStatus, errorThrown) {
-                jQuery('#loading-image').hide();
-                jQuery('#loading').css('opacity','1');
+                jQuery('img#loading-image').hide();
+                jQuery('div#loading').css('opacity','1');
             }
         });
     });
