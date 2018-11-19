@@ -238,6 +238,35 @@
 
         $title = $title.' - Frequently Asked Questions';
     }
+    elseif($do=="search")
+    {
+        $search = mysqli_real_escape_string($db,$_GET['search']);
+
+        if(strlen($search)>=3)
+        {
+            $search_param = "%{$search}%";
+
+            // Get searched games
+            $stmt_select = mysqli_prepare($db,
+                "SELECT 
+                    `auto_id`,
+                    `name`,
+                    `image_name`
+                    FROM `games`
+                    WHERE `lang_id`=(?) and `active`=(?) and (`name` LIKE ? or `text` LIKE ?)");
+            $stmt_select->bind_param('iiss', $main_lang,$active_status,$search_param,$search_param);
+            $stmt_select->execute();
+            $result_search = $stmt_select->get_result();
+            $count_games = mysqli_num_rows($result_search);
+            $stmt_select->close();
+        }
+        else
+        {
+            $count_games = 0;
+        }
+
+        $title = $title.' - Search';
+    }
 //    elseif($do=="play_game")
 //    {
 //        if(subscribe_check($db)==true)

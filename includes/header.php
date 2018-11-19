@@ -226,13 +226,17 @@
                                     <li class="tsr-btn-close"><a href="#"></a></li>
                                 </menu>
                             </li>
+                            <li>
+                                <a style="font-weight: bold;" href="<?=SITE_PATH?>/frequently-asked-questions">Frequently Asked<br>
+                                    <strong>Questions</strong></a>
+                            </li>
                         </menu>
                     </nav>
 
                     <article class="tsr-header-search tsr-forms">
-                        <form action="http://play.ucell.uz/search/" id="search-form" method="GET">
+                        <form action="<?=SITE_PATH?>/search" id="search-form" method="GET">
                             <input type="text" placeholder="Search Term (minimum 3 characters)" id="NeoSearch"
-                                   name="Search" value="">
+                                   name="search" value="">
                             <input type="submit" id="NeoSearchButton" class="tsr-btn" value="Search">
                             <a data-parent="search" class="tsr-btn-close" href="#"></a>
                         </form>
