@@ -52,7 +52,7 @@
                         <section class="games-list">
                             <div class="tsr-container">
                                 <?php
-                                    while($row=$result_games_by_categories->fetch_assoc())
+                                    foreach ($result_games_by_categories_arr as $row)
                                     {
                                         ?>
                                         <div class="tsr-module-product listgames">

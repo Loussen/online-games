@@ -232,10 +232,10 @@
                                     <li class="tsr-btn-close"><a href="#"></a></li>
                                 </menu>
                             </li>
-                            <li>
-                                <a style="font-weight: bold;" href="<?=SITE_PATH?>/frequently-asked-questions">Frequently Asked<br>
-                                    <strong>Questions</strong></a>
-                            </li>
+<!--                            <li>-->
+<!--                                <a style="font-weight: bold;" href="--><?//=SITE_PATH?><!--/frequently-asked-questions">Frequently Asked<br>-->
+<!--                                    <strong>Questions</strong></a>-->
+<!--                            </li>-->
                         </menu>
                     </nav>
 

@@ -5,12 +5,15 @@
     <div class="tsr-footer-copyright">
         <div class="tsr-container">
             <div class="tsr-row">
-                <div class="col-6 alignRight">
+                <div class="col-4 alignRight">
                     Copy Ucell 2018
                 </div>
-                <div class="col-6 align-right">
+                <div class="col-3">
+                    <a href="<?=SITE_PATH?>/frequently-asked-questions" style="color: #000; text-decoration: none;">Frequently Asked Questions</a>
+                </div>
+                <div class="col-5 align-right">
                     <img src="<?=SITE_PATH.'/assets/img/GameEthio.png'?>"
-                         style="max-height: 40px; margin-right: 20px;">
+                         style="/*max-height: 40px; margin-right: 20px;*/">
                 </div>
             </div>
         </div>

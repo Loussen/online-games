@@ -51,9 +51,32 @@ if($_POST)
 
                     if($update==1)
                     {
-                        $_SESSION['msisdn_step2'] = $msisdn;
+                        // Send sms for login (activation code not charging)
+                        // INSERT sms_out_queue
+                        $now_datetime = date('Y-m-d H:i:s');
+                        $from_number = 4143; // number for login
+                        $req_id = -1;
+                        $mtype = 'SmsTest';
+                        $dcs = $udhi = 0;
 
-                        $response = json_encode(array("code"=>2, "content" => "You are already subscriber. Please log in", "err_param" => ''));
+                        $select_seq_id = mysqli_fetch_assoc(mysqli_query($db,"SELECT seq('general') as `seq_id`"));
+
+                        $g_id = $select_seq_id['seq_id'];
+
+                        $stmt_insert = mysqli_prepare($db, "INSERT INTO `sms_out_queue` (`id`,`request_id`,`mtype`,`dt`,`fromnumber`,`tonumber`,`smstext`,`dcs`,`udhi`) VALUES (?,?,?,?,?,?,?,?,?)");
+                        $stmt_insert->bind_param('iisssssii', $g_id,$req_id,$mtype,$now_datetime,$from_number,$msisdn,$sms_code_login,$dcs,$udhi);
+                        $insert = $stmt_insert->execute();
+
+                        if($insert==1)
+                        {
+                            $_SESSION['msisdn_step2'] = $msisdn;
+
+                            $response = json_encode(array("code"=>2, "content" => "You are already subscriber. Please log in", "err_param" => ''));
+                        }
+                        else
+                        {
+                            $response = json_encode(array("code"=>0, "content" => "Insert sms error", "err_param" => ''));
+                        }
                     }
                     else
                     {
@@ -68,27 +91,58 @@ if($_POST)
             }
             else
             {
-                $status = $sms_id = $null_code = 0;
+                $sms_id = $null_code = 0;
                 $created_at = date("Y-m-d H:i:s");
                 $null_date = '0000-00-00 00:00:00';
                 $null_param = '';
+                $status = 2; // Waiting...
 
                 $sms_code = mt_rand(100000, 999999);
 
-                $stmt_insert = mysqli_prepare($db, "INSERT INTO `subscriber` (`msisdn`,`created_at`,`updated_at`,`next_date`,`ends_date`,`sms_code`,`sms_code_login`,`last_login_date`,`last_login_ip`,`sms_id`,`status`) VALUES (?,?,?,?,?,?,?,?,?,?,?)");
-                $stmt_insert->bind_param('sssssiissii', $msisdn,$created_at,$null_date,$null_date,$null_date,$sms_code,$null_code,$null_date,$null_param,$sms_id,$status);
-                $insert = $stmt_insert->execute();
+                // Send sms for subscribe (activation code with charging)
+                $now_datetime = date('Y-m-d H:i:s');
+                $from_number = 4143; // number for login
+                $req_id = -1;
+                $mtype = 'SmsTest';
+                $dcs = $udhi = 0;
+                $amount = 1; // Charge balance
+                $channel = 2;
 
-                if($insert==1)
+                $select_seq_id = mysqli_fetch_assoc(mysqli_query($db,"SELECT seq('general') as `seq_id`"));
+
+                $g_id = $select_seq_id['seq_id'];
+
+                // INSERT sms_out_queue
+                $stmt_insert = mysqli_prepare($db, "INSERT INTO `sms_out_queue` (`id`,`request_id`,`mtype`,`dt`,`fromnumber`,`tonumber`,`smstext`,`dcs`,`udhi`) VALUES (?,?,?,?,?,?,?,?,?)");
+                $stmt_insert->bind_param('iisssssii', $g_id,$req_id,$mtype,$now_datetime,$from_number,$msisdn,$sms_code,$dcs,$udhi);
+                $insert_sms_out_queue = $stmt_insert->execute();
+
+                // INSERT charging_queue
+                $stmt_insert = mysqli_prepare($db, "INSERT INTO `charging_queue` (`g_id`,`dt`,`msisdn`,`amount`,`channel`) VALUES (?,?,?,?,?)");
+                $stmt_insert->bind_param('issii', $g_id,$now_datetime,$msisdn,$amount,$channel);
+                $insert_charging_queue = $stmt_insert->execute();
+
+                if($insert_sms_out_queue==1 && $insert_charging_queue==1)
                 {
-                    $_SESSION['msisdn_step1'] = $msisdn;
+                    $stmt_insert = mysqli_prepare($db, "INSERT INTO `subscriber` (`msisdn`,`created_at`,`updated_at`,`next_date`,`ends_date`,`sms_code`,`sms_code_login`,`last_login_date`,`last_login_ip`,`sms_id`,`status`) VALUES (?,?,?,?,?,?,?,?,?,?,?)");
+                    $stmt_insert->bind_param('sssssiissii', $msisdn,$created_at,$null_date,$null_date,$null_date,$sms_code,$null_code,$null_date,$null_param,$sms_id,$status);
+                    $insert = $stmt_insert->execute();
 
-                    $response = json_encode(array("code"=>1, "content" => "Success insert", "err_param" => ''));
-                    $stmt_insert->close();
+                    if($insert==1)
+                    {
+                        $_SESSION['msisdn_step1'] = $msisdn;
+
+                        $response = json_encode(array("code"=>1, "content" => "Success insert", "err_param" => ''));
+                        $stmt_insert->close();
+                    }
+                    else
+                    {
+                        $response = json_encode(array("code"=>0, "content" => "Insert error", "err_param" => ''));
+                    }
                 }
                 else
                 {
-                    $response = json_encode(array("code"=>0, "content" => "Insert error", "err_param" => ''));
+                    $response = json_encode(array("code"=>0, "content" => "Insert error sms or charging", "err_param" => ''));
                 }
             }
         }
@@ -104,33 +158,26 @@ if($_POST)
 
         if(login($sms_code, $_SESSION['msisdn_step1'], 'subscribe', $db) == 'success')
         {
-            // Send sms code for charging
+            $status = 2; // Waiting
+            $session_msisdn = $_SESSION['msisdn_step1'];
+            $last_login_date = date("Y-m-d H:i:s");
+            $last_login_ip = $_SERVER['REMOTE_ADDR'];
 
-            $select_seq_id = mysqli_fetch_assoc(mysqli_query($db,"SELECT seq('general') as `seq_id`"));
+            $stmt_update = mysqli_prepare($db, "UPDATE `subscriber` SET `status`=?, `last_login_date`=?, `last_login_ip`=? WHERE `msisdn`=?");
+            $stmt_update->bind_param('isss', $status,$last_login_date,$last_login_ip,$session_msisdn);
+            $update = $stmt_update->execute();
 
-            if(1==1)
+            if($update==1)
             {
-                $status = 1;
-                $session_msisdn = $_SESSION['msisdn_step1'];
-                $last_login_date = date("Y-m-d H:i:s");
-                $last_login_ip = $_SERVER['REMOTE_ADDR'];
-
-                $stmt_update = mysqli_prepare($db, "UPDATE `subscriber` SET `status`=?, `last_login_date`=?, `last_login_ip`=? WHERE `msisdn`=?");
-                $stmt_update->bind_param('isss', $status,$last_login_date,$last_login_ip,$session_msisdn);
-                $update = $stmt_update->execute();
-
-                if($update==1)
-                {
-                    $response = json_encode(array("code"=>1, "content" => "Success update", "err_param" => ''));
-                }
-                else
-                {
-                    $response = json_encode(array("code"=>0, "content" => "Update error", "err_param" => ''));
-                }
-
-                $stmt_update->close();
-                unset($_SESSION['msisdn_step1']);
+                $response = json_encode(array("code"=>1, "content" => "Success update", "err_param" => ''));
             }
+            else
+            {
+                $response = json_encode(array("code"=>0, "content" => "Update error", "err_param" => ''));
+            }
+
+            $stmt_update->close();
+            unset($_SESSION['msisdn_step1']);
         }
         elseif(login($sms_code, $_SESSION['msisdn_step1'],'subscribe', $db) == 'sms_code_empty')
         {
@@ -201,34 +248,26 @@ if($_POST)
 
         if(login($sms_code, $_SESSION['msisdn_step2'],'login', $db) == 'success')
         {
-            // Send sms code for login
+            $session_msisdn = $_SESSION['msisdn_step2'];
 
-            $select_seq_id = mysqli_fetch_assoc(mysqli_query($db,"SELECT seq('general') as `seq_id`"));
+            $last_login_date = date("Y-m-d H:i:s");
+            $last_login_ip = $_SERVER['REMOTE_ADDR'];
 
-            if(1==1)
+            $stmt_update = mysqli_prepare($db, "UPDATE `subscriber` SET `last_login_date`=?,`last_login_ip`=? WHERE `msisdn`=?");
+            $stmt_update->bind_param('sss', $last_login_date,$last_login_ip,$session_msisdn);
+            $update = $stmt_update->execute();
+
+            if($update==1)
             {
-                $status = 1;
-                $session_msisdn = $_SESSION['msisdn_step2'];
-
-                $last_login_date = date("Y-m-d H:i:s");
-                $last_login_ip = $_SERVER['REMOTE_ADDR'];
-
-                $stmt_update = mysqli_prepare($db, "UPDATE `subscriber` SET `last_login_date`=?,`last_login_ip`=? WHERE `msisdn`=?");
-                $stmt_update->bind_param('sss', $last_login_date,$last_login_ip,$session_msisdn);
-                $update = $stmt_update->execute();
-
-                if($update==1)
-                {
-                    $response = json_encode(array("code"=>1, "content" => "Success update", "err_param" => ''));
-                }
-                else
-                {
-                    $response = json_encode(array("code"=>0, "content" => "Update error", "err_param" => ''));
-                }
-
-                $stmt_update->close();
-                unset($_SESSION['msisdn_step2']);
+                $response = json_encode(array("code"=>1, "content" => "Success update", "err_param" => ''));
             }
+            else
+            {
+                $response = json_encode(array("code"=>0, "content" => "Update error", "err_param" => ''));
+            }
+
+            $stmt_update->close();
+            unset($_SESSION['msisdn_step2']);
         }
         elseif(login($sms_code, $_SESSION['msisdn_step2'],'login', $db) == 'sms_code_empty')
         {
