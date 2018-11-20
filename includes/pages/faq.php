@@ -26,7 +26,7 @@
                 <div class="col-full">
                     <p>&nbsp;</p>
                     <?php
-                        while($row=$result_faq->fetch_assoc())
+                        foreach($result_faq_arr as $row)
                         {
                             ?>
                             <p><strong><?=$row['question']?></strong></p>

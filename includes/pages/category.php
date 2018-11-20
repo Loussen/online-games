@@ -30,7 +30,7 @@
                                     <span class="title open">Genre</span>
                                     <ul>
                                         <?php
-                                            while($row=$result_all_categories->fetch_assoc())
+                                            foreach($result_all_categories_arr as $row)
                                             {
                                                 $class_active = ($category_id==$row['auto_id']) ? 'active' : '';
                                                 ?>
@@ -162,7 +162,7 @@
             <div class="tsr-container" style="width: 732px; height: 567px;">
                 <div class="tsr-slides">
                     <?php
-                        while($row=$result_games_reco->fetch_assoc())
+                        foreach($result_reco_games_arr as $row)
                         {
                             ?>
                             <a href="<?=SITE_PATH?>/online-games/<?=slugGenerator($row['name']) . '-' . $row['auto_id']?>" class="tsr-module-product">

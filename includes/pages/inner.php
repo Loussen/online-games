@@ -220,7 +220,7 @@
                                 <h3>Most Played Games</h3>
                                 <div class="tsr-row maximized">
                                     <?php
-                                        while($row=$result_most_played_game->fetch_assoc())
+                                        foreach($result_most_played_games_arr as $row)
                                         {
                                             ?>
                                             <div class="col-6 maximized mobilemax">
@@ -289,7 +289,7 @@
                                         <div class="tsr-container">
                                             <div class="tsr-slides">
                                                 <?php
-                                                    while($row=$result_similar_games->fetch_assoc())
+                                                    foreach($result_similar_games_arr as $row)
                                                     {
                                                         ?>
                                                         <div class="tsr-module-service ">

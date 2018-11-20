@@ -8,19 +8,39 @@
 ?>
 
 <?php
-    $stmt_select = mysqli_prepare($db,"SELECT `description_`,`title_`,`keywords_` FROM `seo` WHERE `lang_id`=(?) LIMIT 1");
-    $stmt_select->bind_param('i', $main_lang);
-    $stmt_select->execute();
-    $stmt_select->bind_result($site_description,$site_title,$site_keywords);
-    $stmt_select->fetch();
-    $stmt_select->close();
+    if(!$cache->isCached('seo'))
+    {
+        $stmt_select = mysqli_prepare($db,"SELECT `description_`,`title_`,`keywords_` FROM `seo` WHERE `lang_id`=(?) LIMIT 1");
+        $stmt_select->bind_param('i', $main_lang);
+        $stmt_select->execute();
+        $stmt_select->bind_result($site_description,$site_title,$site_keywords);
+        $stmt_select->fetch();
+        $stmt_select->close();
 
-//    $info_description=mysqli_fetch_assoc(mysqli_query($db,"select `description_`,`title_`,`keywords_` from `seo` where `lang_id`='$esas_dil' "));
-    $description=$site_description;
-    $title=$site_title;
-    $image=SITE_PATH.'/assets/img/GameEthio.png';
-    $keywords = $site_keywords;
-    $og_url ='http://'.$_SERVER["HTTP_HOST"].$_SERVER["REQUEST_URI"];
+        $description = $site_description;
+        $title = $site_title;
+        $image = SITE_PATH.'/assets/img/GameEthio.png';
+        $keywords = $site_keywords;
+        $og_url = 'http://'.$_SERVER["HTTP_HOST"].$_SERVER["REQUEST_URI"];
+
+        $cache->store('seo', [
+                'description'   => $site_description,
+                'title'         => $site_title,
+                'image'         => SITE_PATH.'/assets/img/GameEthio.png',
+                'keywords'      => $site_keywords,
+                'og_url'        => 'http://'.$_SERVER["HTTP_HOST"].$_SERVER["REQUEST_URI"]
+        ],60);
+    }
+    else
+    {
+        $cache_seo_result = $cache->retrieve('seo');
+
+        $description = $cache_seo_result['description'];
+        $title = $cache_seo_result['title'];
+        $image = $cache_seo_result['image'];
+        $keywords = $cache_seo_result['keywords'];
+        $og_url = $cache_seo_result['og_url'];
+    }
 
     if($do=="category")
     {
@@ -28,18 +48,32 @@
         $category_slug = mysqli_real_escape_string($db,$_GET['slug']);
 
         // Get current category
-        $stmt_select = mysqli_prepare($db,
-            "SELECT
+        if(!$cache->isCached('current_category_'.$category_id.$category_slug))
+        {
+            $stmt_select = mysqli_prepare($db,
+                "SELECT
             `name`,
             `auto_id`
             FROM `categories`
             WHERE `lang_id`=(?) and `active`=(?) and `auto_id`=(?)
             LIMIT 1");
-        $stmt_select->bind_param('iii', $main_lang,$active_status,$category_id);
-        $stmt_select->execute();
-        $stmt_select->bind_result($current_category_name,$current_category_id);
-        $stmt_select->fetch();
-        $stmt_select->close();
+            $stmt_select->bind_param('iii', $main_lang,$active_status,$category_id);
+            $stmt_select->execute();
+            $stmt_select->bind_result($current_category_name,$current_category_id);
+            $stmt_select->fetch();
+            $stmt_select->close();
+
+            $cache->store('current_category_'.$category_id.$category_slug,[
+                    'current_category_name' =>  $current_category_name,
+                    'current_category_id'   =>  $current_category_id
+            ],60);
+        }
+        else
+        {
+            $cache_current_category_result = $cache->retrieve('current_category_'.$category_id.$category_slug);
+            $current_category_name = $cache_current_category_result['current_category_name'];
+            $current_category_id = $cache_current_category_result['current_category_id'];
+        }
 
         if($category_slug!=slugGenerator($current_category_name) || $current_category_id!=$category_id)
         {
@@ -67,10 +101,7 @@
         $start=$page*$limit-$limit;
         $stmt_select->close();
 
-        $cacheFileName = 'categories_inner';
-        $cache->setCache($cacheFileName);
-
-        if(!$cache->isCached('result_games_by_categories_'.$category_id))
+        if(!$cache->isCached('result_games_by_categories_'.$category_id.$category_slug))
         {
             // Get games by category
             $stmt_select = mysqli_prepare($db,
@@ -93,30 +124,47 @@
                 $result_games_by_categories_arr[] = $row;
             }
 
-            $cache->store('result_games_by_categories_'.$category_id,$result_games_by_categories_arr, 10);
+            $cache->store('result_games_by_categories_'.$category_id.$category_slug,$result_games_by_categories_arr, 40);
         }
         else
         {
-            $result_games_by_categories_arr = $cache->retrieve('result_games_by_categories_'.$category_id);
+            $result_games_by_categories_arr = $cache->retrieve('result_games_by_categories_'.$category_id.$category_slug);
         }
 
         // Get all categories
-        $stmt_select = mysqli_prepare($db,
-            "SELECT
+        if(!$cache->isCached('all_categories'))
+        {
+            $stmt_select = mysqli_prepare($db,
+                "SELECT
             `name`,
             `auto_id`
             FROM `categories`
             WHERE `lang_id`=(?) and `active`=(?)");
-        $stmt_select->bind_param('ii', $main_lang,$active_status);
-        $stmt_select->execute();
-        $result_all_categories = $stmt_select->get_result();
-        $stmt_select->close();
+            $stmt_select->bind_param('ii', $main_lang,$active_status);
+            $stmt_select->execute();
+            $result_all_categories = $stmt_select->get_result();
+            $stmt_select->close();
+
+            $result_all_categories_arr = [];
+            while($row=$result_all_categories->fetch_assoc())
+            {
+                $result_all_categories_arr[] = $row;
+            }
+
+            $cache->store('all_categories',$result_all_categories_arr, 40);
+        }
+        else
+        {
+            $result_all_categories_arr = $cache->retrieve('all_categories');
+        }
 
         // Get recommandation games
         $recogame_status = 1;
 
-        $stmt_select = mysqli_prepare($db,
-            "SELECT 
+        if(!$cache->isCached('reco_games'))
+        {
+            $stmt_select = mysqli_prepare($db,
+                "SELECT 
                     `name`,
                     `image_name`,
                     `auto_id`,
@@ -125,10 +173,24 @@
                     WHERE `lang_id`=(?) and `active`=(?) and `recogame`=(?)
                     order by `order_number` asc LIMIT 3");
 
-        $stmt_select->bind_param('iii', $main_lang,$active_status,$recogame_status);
-        $stmt_select->execute();
-        $result_games_reco = $stmt_select->get_result();
-        $stmt_select->close();
+            $stmt_select->bind_param('iii', $main_lang,$active_status,$recogame_status);
+            $stmt_select->execute();
+            $result_games_reco = $stmt_select->get_result();
+            $stmt_select->close();
+
+            $result_reco_games_arr = [];
+            while($row=$result_games_reco->fetch_assoc())
+            {
+                $result_reco_games_arr[] = $row;
+            }
+
+            $cache->store('reco_games',$result_reco_games_arr, 40);
+        }
+        else
+        {
+            $result_reco_games_arr = $cache->retrieve('reco_games');
+        }
+
 
         $title = $title.' - '.$current_category_name.' games';
         $description = $current_category_name;
@@ -139,8 +201,10 @@
         $game_slug = mysqli_real_escape_string($db,$_GET['slug']);
 
         // Get game info
-        $stmt_select = mysqli_prepare($db,
-            "SELECT 
+        if(!$cache->isCached('game_inner_'.$game_id.$game_slug))
+        {
+            $stmt_select = mysqli_prepare($db,
+                "SELECT 
                     `games`.`auto_id` as `g_id`,
                     `games`.`name` as `g_name`,
                     `games`.`image_name` as `g_image_name`,
@@ -152,11 +216,35 @@
                     LEFT JOIN `categories` on `games`.`category_id`=`categories`.`auto_id`
                     WHERE `games`.`lang_id`=(?) and `games`.`active`=(?) and `games`.`auto_id`=(?)
                     LIMIT 1");
-        $stmt_select->bind_param('iii', $main_lang,$active_status,$game_id);
-        $stmt_select->execute();
-        $stmt_select->bind_result($current_game_id,$current_game_name,$current_game_image_name,$current_game_text,$current_game_star,$current_category_name,$current_category_id);
-        $stmt_select->fetch();
-        $stmt_select->close();
+            $stmt_select->bind_param('iii', $main_lang,$active_status,$game_id);
+            $stmt_select->execute();
+            $stmt_select->bind_result($current_game_id,$current_game_name,$current_game_image_name,$current_game_text,$current_game_star,$current_category_name,$current_category_id);
+            $stmt_select->fetch();
+            $stmt_select->close();
+
+            $cache->store('game_inner_'.$game_id.$game_slug,[
+                    'current_game_id'           => $current_game_id,
+                    'current_game_name'         => $current_game_name,
+                    'current_game_image_name'   => $current_game_image_name,
+                    'current_game_text'         => $current_game_text,
+                    'current_game_star'         => $current_game_star,
+                    'current_category_name'     => $current_category_name,
+                    'current_category_id'       => $current_category_id
+            ],5);
+        }
+        else
+        {
+            $cache_game_inner_result = $cache->retrieve('game_inner_'.$game_id.$game_slug);
+
+            $current_game_id = $cache_game_inner_result['current_game_id'];
+            $current_game_name = $cache_game_inner_result['current_game_name'];
+            $current_game_image_name = $cache_game_inner_result['current_game_image_name'];
+            $current_game_text = $cache_game_inner_result['current_game_text'];
+            $current_game_star = $cache_game_inner_result['current_game_star'];
+            $current_category_name = $cache_game_inner_result['current_category_name'];
+            $current_category_id = $cache_game_inner_result['current_category_id'];
+        }
+
 
         if($game_id!=$current_game_id || $game_slug!=slugGenerator($current_game_name))
         {
@@ -191,8 +279,10 @@
 
         if($count_games>0)
         {
-            $stmt_select = mysqli_prepare($db,
-                "SELECT 
+            if(!$cache->isCached('most_played_'.$game_id.$game_slug))
+            {
+                $stmt_select = mysqli_prepare($db,
+                    "SELECT 
                         `games`.`name` as `g_name`,
                         `games`.`image_name` as `g_image_name`,
                         `games`.`auto_id` as `g_id`,
@@ -201,39 +291,83 @@
                         LEFT JOIN `games` on `games`.`auto_id`=`play_game`.`games_id`
                         WHERE `games`.`lang_id`=(?) and `games`.`active`=(?) and `games`.`auto_id`!=(?)
                         GROUP BY `play_game`.`games_id` order by `play_count` desc");
-            $stmt_select->bind_param('iii', $main_lang,$active_status,$game_id);
-            $stmt_select->execute();
-            $result_most_played_game = $stmt_select->get_result();
+                $stmt_select->bind_param('iii', $main_lang,$active_status,$game_id);
+                $stmt_select->execute();
+                $result_most_played_game = $stmt_select->get_result();
+
+                $result_most_played_games_arr = [];
+                while($row=$result_most_played_game->fetch_assoc())
+                {
+                    $result_most_played_games_arr[] = $row;
+                }
+
+                $cache->store('most_played_'.$game_id.$game_slug,$result_most_played_games_arr, 40);
+            }
+            else
+            {
+                $result_most_played_games_arr = $cache->retrieve('most_played_'.$game_id.$game_slug);
+            }
         }
         else
         {
-            $stmt_select = mysqli_prepare($db,
-                "SELECT 
+            if(!$cache->isCached('most_played_'.$game_id.$game_slug))
+            {
+                $stmt_select = mysqli_prepare($db,
+                    "SELECT 
                         `games`.`name` as `g_name`,
                         `games`.`image_name` as `g_image_name`,
                         `games`.`auto_id` as `g_id`
                         FROM `games`
                         WHERE `games`.`lang_id`=(?) and `games`.`active`=(?) and `games`.`topgame`=0 and `games`.`recogame`=1 and `games`.`auto_id`!=(?)
                         order by `games`.`order_number` asc");
-            $stmt_select->bind_param('iii', $main_lang,$active_status,$game_id);
-            $stmt_select->execute();
-            $result_most_played_game = $stmt_select->get_result();
+                $stmt_select->bind_param('iii', $main_lang,$active_status,$game_id);
+                $stmt_select->execute();
+                $result_most_played_game = $stmt_select->get_result();
+
+                $result_most_played_games_arr = [];
+                while($row=$result_most_played_game->fetch_assoc())
+                {
+                    $result_most_played_games_arr[] = $row;
+                }
+
+                $cache->store('most_played_'.$game_id.$game_slug,$result_most_played_games_arr, 40);
+            }
+            else
+            {
+                $result_most_played_games_arr = $cache->retrieve('most_played_'.$game_id.$game_slug);
+            }
         }
         $stmt_select->close();
 
         // Get similar games
-        $stmt_select = mysqli_prepare($db,
-            "SELECT
+        if(!$cache->isCached('similar_game_'.$game_id.$game_slug))
+        {
+            $stmt_select = mysqli_prepare($db,
+                "SELECT
                     `auto_id`,
                     `name`,
                     `image_name`
                     FROM `games`
                     WHERE `lang_id`=(?) and `active`=(?) and `category_id`=(?) and `auto_id`!=(?)
                     order by `order_number` asc");
-        $stmt_select->bind_param('iiii', $main_lang,$active_status,$current_category_id,$game_id);
-        $stmt_select->execute();
-        $result_similar_games = $stmt_select->get_result();
-        $stmt_select->close();
+            $stmt_select->bind_param('iiii', $main_lang,$active_status,$current_category_id,$game_id);
+            $stmt_select->execute();
+            $result_similar_games = $stmt_select->get_result();
+            $stmt_select->close();
+
+            $result_similar_games_arr = [];
+            while($row=$result_similar_games->fetch_assoc())
+            {
+                $result_similar_games_arr[] = $row;
+            }
+
+            $cache->store('similar_game_'.$game_id.$game_slug,$result_similar_games_arr, 40);
+        }
+        else
+        {
+            $result_similar_games_arr = $cache->retrieve('similar_game_'.$game_id.$game_slug);
+        }
+
 
         $title = $title.' - '.$current_category_name.' - '.$current_game_name;
         $image = SITE_PATH."/images/games/".$current_game_image_name;
@@ -242,17 +376,32 @@
     elseif($do=="faq")
     {
         // Get f.a.q
-        $stmt_select = mysqli_prepare($db,
-            "SELECT 
+        if(!$cache->isCached('faq'))
+        {
+            $stmt_select = mysqli_prepare($db,
+                "SELECT 
                     `question`,
                     `answer`
                     FROM `faq`
                     WHERE `lang_id`=(?) and `active`=(?)
                     order by `order_number` asc");
-        $stmt_select->bind_param('ii', $main_lang,$active_status);
-        $stmt_select->execute();
-        $result_faq = $stmt_select->get_result();
-        $stmt_select->close();
+            $stmt_select->bind_param('ii', $main_lang,$active_status);
+            $stmt_select->execute();
+            $result_faq = $stmt_select->get_result();
+            $stmt_select->close();
+
+            $result_faq_arr = [];
+            while($row=$result_faq->fetch_assoc())
+            {
+                $result_faq_arr[] = $row;
+            }
+
+            $cache->store('faq',$result_faq_arr, 40);
+        }
+        else
+        {
+            $result_faq_arr = $cache->retrieve('faq');
+        }
 
         $title = $title.' - Frequently Asked Questions';
     }
