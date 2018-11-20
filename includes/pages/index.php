@@ -56,7 +56,7 @@
                         <?php
                     }
 
-                    $stmt_select->close();
+//                    $stmt_select->close();
                 ?>
             </div>
         </div>
@@ -145,7 +145,7 @@
                         <?php
                     }
 
-                    $stmt_select->close();
+//                    $stmt_select->close();
                 ?>
             </div>
         </div>

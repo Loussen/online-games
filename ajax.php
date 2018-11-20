@@ -41,7 +41,7 @@ if($_POST)
 
             if($stmt_select->num_rows==1)
             {
-                if($result_status==1)
+                if($result_status==1 || $result_status==2)
                 {
                     $sms_code_login = mt_rand(100000, 999999);
 
