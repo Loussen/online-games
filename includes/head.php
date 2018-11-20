@@ -67,9 +67,14 @@
         $start=$page*$limit-$limit;
         $stmt_select->close();
 
-        // Get games by category
-        $stmt_select = mysqli_prepare($db,
-            "SELECT 
+        $cacheFileName = 'categories_inner';
+        $cache->setCache($cacheFileName);
+
+        if(!$cache->isCached('result_games_by_categories_'.$category_id))
+        {
+            // Get games by category
+            $stmt_select = mysqli_prepare($db,
+                "SELECT 
                     `name`,
                     `image_name`,
                     `auto_id`
@@ -77,10 +82,23 @@
                     WHERE `lang_id`=(?) and `active`=(?) and `category_id`=(?)
                     order by `order_number` asc limit $start,$limit");
 
-        $stmt_select->bind_param('iii', $main_lang,$active_status,$category_id);
-        $stmt_select->execute();
-        $result_games_by_categories = $stmt_select->get_result();
-        $stmt_select->close();
+            $stmt_select->bind_param('iii', $main_lang,$active_status,$category_id);
+            $stmt_select->execute();
+            $result_games_by_categories = $stmt_select->get_result();
+            $stmt_select->close();
+
+            $result_games_by_categories_arr = [];
+            while($row=$result_games_by_categories->fetch_assoc())
+            {
+                $result_games_by_categories_arr[] = $row;
+            }
+
+            $cache->store('result_games_by_categories_'.$category_id,$result_games_by_categories_arr, 10);
+        }
+        else
+        {
+            $result_games_by_categories_arr = $cache->retrieve('result_games_by_categories_'.$category_id);
+        }
 
         // Get all categories
         $stmt_select = mysqli_prepare($db,
