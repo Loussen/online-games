@@ -18,17 +18,33 @@
                 <?php
                     $active = 1;
 
-                    $stmt_select = mysqli_prepare($db,"SELECT 
+                    if(!$cache->isCached('slider'))
+                    {
+                        $stmt_select = mysqli_prepare($db,"SELECT 
                                                               `image_name`,
                                                               `url` 
                                                               FROM `slider`
                                                               WHERE `lang_id`=(?) and `active`=(?) 
                                                               order by `order_number` asc");
-                    $stmt_select->bind_param('ii', $main_lang,$active_status);
-                    $stmt_select->execute();
-                    $result = $stmt_select->get_result();
+                        $stmt_select->bind_param('ii', $main_lang,$active_status);
+                        $stmt_select->execute();
+                        $result = $stmt_select->get_result();
 
-                    while($row = $result->fetch_assoc())
+                        $result_slider_arr = [];
+                        while($row=$result->fetch_assoc())
+                        {
+                            $result_slider_arr[] = $row;
+                        }
+
+                        $cache->store('slider',$result_slider_arr, 40);
+                    }
+                    else
+                    {
+                        $result_slider_arr = $cache->retrieve('slider');
+                    }
+
+
+                    foreach($result_slider_arr as $row)
                     {
                         ?>
                         <div class="ls-slide" data-ls=" transition2d: all;">
@@ -58,19 +74,34 @@
                 <?php
                     $topgame_status = 1;
 
-                    $stmt_select = mysqli_prepare($db,
-                        "SELECT 
+                    if(!$cache->isCached('top_games'))
+                    {
+                        $stmt_select = mysqli_prepare($db,
+                            "SELECT 
                                 `games`.`name` as `g_name`,
                                 `games`.`image_name` as `g_image_name`,
                                 `games`.`auto_id` as `g_id`
                                 FROM `games`
                                 WHERE `games`.`lang_id`=(?) and `games`.`active`=(?) and `games`.`topgame`=(?) and `games`.`recogame`=0
                                 order by `games`.`order_number` asc");
-                    $stmt_select->bind_param('iii', $main_lang,$active_status,$topgame_status);
-                    $stmt_select->execute();
-                    $result = $stmt_select->get_result();
+                        $stmt_select->bind_param('iii', $main_lang,$active_status,$topgame_status);
+                        $stmt_select->execute();
+                        $result = $stmt_select->get_result();
 
-                    while($row = $result->fetch_assoc())
+                        $result_top_games_arr = [];
+                        while($row=$result->fetch_assoc())
+                        {
+                            $result_top_games_arr[] = $row;
+                        }
+
+                        $cache->store('top_games',$result_top_games_arr, 40);
+                    }
+                    else
+                    {
+                        $result_top_games_arr = $cache->retrieve('top_games');
+                    }
+
+                    foreach($result_top_games_arr as $row)
                     {
                         ?>
                         <a href="<?=SITE_PATH?>/online-games/<?=slugGenerator($row['g_name']) . '-' . $row['g_id']?>" class="tsr-module-product">
@@ -144,8 +175,10 @@
 
                     if($count_games>0)
                     {
-                        $stmt_select = mysqli_prepare($db,
-                            "SELECT 
+                        if(!$cache->isCached('most_played_games_index'))
+                        {
+                            $stmt_select = mysqli_prepare($db,
+                                "SELECT 
                                 `games`.`name` as `g_name`,
                                 `games`.`image_name` as `g_image_name`,
                                 `games`.`auto_id` as `g_id`,
@@ -154,26 +187,54 @@
                                 LEFT JOIN `games` on `games`.`auto_id`=`play_game`.`games_id`
                                 WHERE `games`.`lang_id`=(?) and `games`.`active`=(?)
                                 GROUP BY `play_game`.`games_id` order by `play_count` desc");
-                        $stmt_select->bind_param('ii', $main_lang,$active_status);
-                        $stmt_select->execute();
-                        $result = $stmt_select->get_result();
+                            $stmt_select->bind_param('ii', $main_lang,$active_status);
+                            $stmt_select->execute();
+                            $result = $stmt_select->get_result();
+
+                            $result_most_played_games_index_arr = [];
+                            while($row=$result->fetch_assoc())
+                            {
+                                $result_most_played_games_index_arr[] = $row;
+                            }
+
+                            $cache->store('most_played_games_index',$result_most_played_games_index_arr, 40);
+                        }
+                        else
+                        {
+                            $result_most_played_games_index_arr = $cache->retrieve('most_played_games_index');
+                        }
                     }
                     else
                     {
-                        $stmt_select = mysqli_prepare($db,
-                            "SELECT 
+                        if(!$cache->isCached('most_played_games_index'))
+                        {
+                            $stmt_select = mysqli_prepare($db,
+                                "SELECT 
                                 `games`.`name` as `g_name`,
                                 `games`.`image_name` as `g_image_name`,
                                 `games`.`auto_id` as `g_id`
                                 FROM `games`
                                 WHERE `games`.`lang_id`=(?) and `games`.`active`=(?) and `games`.`topgame`=0 and `games`.`recogame`=1
                                 order by `games`.`order_number` asc");
-                        $stmt_select->bind_param('ii', $main_lang,$active_status);
-                        $stmt_select->execute();
-                        $result = $stmt_select->get_result();
+                            $stmt_select->bind_param('ii', $main_lang,$active_status);
+                            $stmt_select->execute();
+                            $result = $stmt_select->get_result();
+
+                            $result_most_played_games_index_arr = [];
+                            while($row=$result->fetch_assoc())
+                            {
+                                $result_most_played_games_index_arr[] = $row;
+                            }
+
+                            $cache->store('most_played_games_index',$result_most_played_games_index_arr, 40);
+                        }
+                        else
+                        {
+                            $result_most_played_games_index_arr = $cache->retrieve('most_played_games_index');
+                        }
                     }
 
-                    while($row = $result->fetch_assoc())
+                    foreach ($result_most_played_games_index_arr as $row)
                     {
                         ?>
                         <a href="<?=SITE_PATH?>/online-games/<?=slugGenerator($row['g_name']) . '-' . $row['g_id']?>" class="tsr-module-product">
