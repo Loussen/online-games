@@ -124,8 +124,8 @@ if($_POST)
 
                 if($insert_sms_out_queue==1 && $insert_charging_queue==1)
                 {
-                    $stmt_insert = mysqli_prepare($db, "INSERT INTO `subscriber` (`msisdn`,`created_at`,`updated_at`,`next_date`,`ends_date`,`sms_code`,`sms_code_login`,`last_login_date`,`last_login_ip`,`sms_id`,`status`) VALUES (?,?,?,?,?,?,?,?,?,?,?)");
-                    $stmt_insert->bind_param('sssssiissii', $msisdn,$created_at,$null_date,$null_date,$null_date,$sms_code,$null_code,$null_date,$null_param,$sms_id,$status);
+                    $stmt_insert = mysqli_prepare($db, "INSERT INTO `subscriber` (`msisdn`,`created_at`,`updated_at`,`next_date`,`ends_date`,`sms_code`,`sms_code_login`,`last_login_date`,`last_login_ip`,`sms_id`,`g_id`,`status`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)");
+                    $stmt_insert->bind_param('sssssiissiii', $msisdn,$created_at,$null_date,$null_date,$null_date,$sms_code,$null_code,$null_date,$null_param,$sms_id,$g_id,$status);
                     $insert = $stmt_insert->execute();
 
                     if($insert==1)

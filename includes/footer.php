@@ -9,7 +9,7 @@
                     Copy Ucell 2018
                 </div>
                 <div class="col-3">
-                    <a href="<?=SITE_PATH?>/frequently-asked-questions" style="color: #000; text-decoration: none;">Frequently Asked Questions</a>
+                    <a href="<?=SITE_PATH?>/frequently-asked-questions" style="color: #000; text-decoration: none;">FAQ</a>
                 </div>
                 <div class="col-5 align-right">
                     <img src="<?=SITE_PATH.'/assets/img/GameEthio.png'?>"
