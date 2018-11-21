@@ -290,6 +290,50 @@ if($_POST)
             $response = json_encode(array("code"=>0, "content" => "subscriber not found!", "err_param" => ''));
         }
     }
+    elseif(isset($_POST['type']) && !empty($_POST['type']) && $_POST['type']=='most_played')
+    {
+        $game_id = intval($_POST['game_id']);
+        $user_id = intval($_POST['user_id']);
+
+        $stmt_select = mysqli_prepare($db,"SELECT `id` FROM `play_game` WHERE `users_id`=(?) and `games_id`=(?)");
+        $stmt_select->bind_param('ii', $user_id,$game_id);
+        $stmt_select->execute();
+        $stmt_select->store_result();
+
+        if($stmt_select->num_rows>0)
+        {
+            $stmt_update = mysqli_prepare($db, "UPDATE `play_game` SET `count`=`count`+1 WHERE `users_id`=? and `games_id`=?");
+            $stmt_update->bind_param('ii', $user_id,$game_id);
+            $update = $stmt_update->execute();
+
+            if($update==1)
+            {
+                $response = json_encode(array("code"=>1, "content" => "Success update", "err_param" => ''));
+                $stmt_update->close();
+            }
+            else
+            {
+                $response = json_encode(array("code"=>0, "content" => "Update error", "err_param" => ''));
+            }
+        }
+        else
+        {
+            $count = 1;
+            $stmt_insert = mysqli_prepare($db, "INSERT INTO `play_game` (`users_id`,`games_id`,`count`) VALUES (?,?,?)");
+            $stmt_insert->bind_param('iii', $user_id,$game_id,$count);
+            $insert = $stmt_insert->execute();
+
+            if($insert==1)
+            {
+                $response = json_encode(array("code"=>1, "content" => "Success insert", "err_param" => ''));
+                $stmt_insert->close();
+            }
+            else
+            {
+                $response = json_encode(array("code"=>0, "content" => "Insert error", "err_param" => ''));
+            }
+        }
+    }
 }
 
 echo $response;

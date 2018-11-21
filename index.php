@@ -376,6 +376,28 @@
         });
     });
 
+    jQuery(document).on('click','span#play_link',function(){
+
+        var game_id = jQuery(this).attr('data-gameId');
+        var user_id = '<?=$_SESSION['user_id']?>';
+
+        jQuery.ajax({
+            url: base_url+'/ajax.php',
+            type: 'POST',
+            data: {game_id:game_id,user_id:user_id,type:'most_played'},
+            // contentType: false,
+            // cache: false,
+            // processData: false,
+            dataType: 'json',
+            success: function (data, textStatus, jqXHR) {
+                console.log('Success');
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.log('Error most played');
+            }
+        });
+    })
+
 </script>
 
 <!-- Flows Container -->

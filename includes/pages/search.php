@@ -49,7 +49,7 @@
                                                     if(subscribe_check($db)==true)
                                                     {
                                                         ?>
-                                                        <span class="tsr-btn btnJoin" id="play_link" onclick="window.location = '<?=$link?>'">
+                                                        <span class="tsr-btn btnJoin" data-gameid="<?=$row['auto_id']?>" id="play_link" onclick="window.location = '<?=$link?>'">
                                                             Play
                                                         </span>
                                                         <?php
