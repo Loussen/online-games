@@ -80,7 +80,8 @@
                             "SELECT 
                                 `games`.`name` as `g_name`,
                                 `games`.`image_name` as `g_image_name`,
-                                `games`.`auto_id` as `g_id`
+                                `games`.`auto_id` as `g_id`,
+                                `games`.`star` as `g_star`
                                 FROM `games`
                                 WHERE `games`.`lang_id`=(?) and `games`.`active`=(?) and `games`.`topgame`=(?) and `games`.`recogame`=0
                                 order by `games`.`order_number` asc");
@@ -111,6 +112,24 @@
                             </figure>
                             <div class="tsr-product-content">
                                 <header class="tsr-product-header"><?=$row['g_name']?></header>
+                                <p>
+                                    <?php
+                                        $stars = '';
+                                        for($i=1;$i<=5;$i++)
+                                        {
+                                            if($i<=$row['g_star'])
+                                            {
+                                                $stars .= '<img class="rating-star" src="'.SITE_PATH.'/assets/img/filled_star.png">';
+                                            }
+                                            else
+                                            {
+                                                $stars .= '<img class="rating-star" src="'.SITE_PATH.'/assets/img/star.png">';
+                                            }
+                                        }
+
+                                        echo $stars;
+                                    ?>
+                                </p>
                                 <!--                            <p class="tsr-product-pric" style="height: 20px;color: #0083be; font-weight:bold;">
                                                                                                      AZN                                                            </p>-->
                                 <!--Play Button-->
@@ -182,6 +201,7 @@
                                 `games`.`name` as `g_name`,
                                 `games`.`image_name` as `g_image_name`,
                                 `games`.`auto_id` as `g_id`,
+                                `games`.`star` as `g_star`,
                                 sum(`play_game`.`count`) as `play_count`
                                 FROM `play_game`
                                 LEFT JOIN `games` on `games`.`auto_id`=`play_game`.`games_id`
@@ -212,7 +232,8 @@
                                 "SELECT 
                                 `games`.`name` as `g_name`,
                                 `games`.`image_name` as `g_image_name`,
-                                `games`.`auto_id` as `g_id`
+                                `games`.`auto_id` as `g_id`,
+                                `games`.`star` as `g_star`
                                 FROM `games`
                                 WHERE `games`.`lang_id`=(?) and `games`.`active`=(?) and `games`.`topgame`=0 and `games`.`recogame`=1
                                 order by `games`.`order_number` asc");
@@ -243,6 +264,24 @@
                             </figure>
                             <div class="tsr-product-content">
                                 <header class="tsr-product-header"><?=$row['g_name']?></header>
+                                <p>
+                                    <?php
+                                        $stars = '';
+                                        for($i=1;$i<=5;$i++)
+                                        {
+                                            if($i<=$row['g_star'])
+                                            {
+                                                $stars .= '<img class="rating-star" src="'.SITE_PATH.'/assets/img/filled_star.png">';
+                                            }
+                                            else
+                                            {
+                                                $stars .= '<img class="rating-star" src="'.SITE_PATH.'/assets/img/star.png">';
+                                            }
+                                        }
+
+                                        echo $stars;
+                                    ?>
+                                </p>
                                 <!--Play Button-->
                                 <p class="tsr-product-small-print"><br/>
                                     <?php

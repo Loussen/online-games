@@ -108,7 +108,8 @@
                 "SELECT 
                     `name`,
                     `image_name`,
-                    `auto_id`
+                    `auto_id`,
+                    `star`
                     FROM `games`
                     WHERE `lang_id`=(?) and `active`=(?) and `category_id`=(?)
                     order by `order_number` asc limit $start,$limit");
@@ -168,7 +169,8 @@
                     `name`,
                     `image_name`,
                     `auto_id`,
-                    `text`
+                    `text`,
+                    `star`
                     FROM `games`
                     WHERE `lang_id`=(?) and `active`=(?) and `recogame`=(?)
                     order by `order_number` asc LIMIT 3");
@@ -286,6 +288,7 @@
                         `games`.`name` as `g_name`,
                         `games`.`image_name` as `g_image_name`,
                         `games`.`auto_id` as `g_id`,
+                        `games`.`star` as `g_star`,
                         sum(`play_game`.`count`) as `play_count`
                         FROM `play_game`
                         LEFT JOIN `games` on `games`.`auto_id`=`play_game`.`games_id`
@@ -316,7 +319,8 @@
                     "SELECT 
                         `games`.`name` as `g_name`,
                         `games`.`image_name` as `g_image_name`,
-                        `games`.`auto_id` as `g_id`
+                        `games`.`auto_id` as `g_id`,
+                        `games`.`star` as `g_star`
                         FROM `games`
                         WHERE `games`.`lang_id`=(?) and `games`.`active`=(?) and `games`.`topgame`=0 and `games`.`recogame`=1 and `games`.`auto_id`!=(?)
                         order by `games`.`order_number` asc");
@@ -346,7 +350,8 @@
                 "SELECT
                     `auto_id`,
                     `name`,
-                    `image_name`
+                    `image_name`,
+                    `star`
                     FROM `games`
                     WHERE `lang_id`=(?) and `active`=(?) and `category_id`=(?) and `auto_id`!=(?)
                     order by `order_number` asc");
@@ -418,7 +423,8 @@
                 "SELECT 
                     `auto_id`,
                     `name`,
-                    `image_name`
+                    `image_name`,
+                    `star`
                     FROM `games`
                     WHERE `lang_id`=(?) and `active`=(?) and (`name` LIKE ? or `text` LIKE ?)");
             $stmt_select->bind_param('iiss', $main_lang,$active_status,$search_param,$search_param);

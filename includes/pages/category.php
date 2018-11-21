@@ -64,6 +64,24 @@
                                                     <header class="tsr-product-header"><?=$row['name']?></header>
                                                 </div>
                                             </a>
+                                            <p>
+                                                <?php
+                                                    $stars = '';
+                                                    for($i=1;$i<=5;$i++)
+                                                    {
+                                                        if($i<=$row['star'])
+                                                        {
+                                                            $stars .= '<img class="rating-star" src="'.SITE_PATH.'/assets/img/filled_star.png">';
+                                                        }
+                                                        else
+                                                        {
+                                                            $stars .= '<img class="rating-star" src="'.SITE_PATH.'/assets/img/star.png">';
+                                                        }
+                                                    }
+
+                                                    echo $stars;
+                                                ?>
+                                            </p>
 
                                             <?php
                                                 $link = (subscribe_check($db)==true) ? SITE_PATH."/play-game/".slugGenerator($row['name']) . '-' . $row['auto_id'] : '';
@@ -173,6 +191,24 @@
                                     <header class="tsr-product-header" style="height: 40px;">
                                         <?=$row['name']?>
                                     </header>
+                                    <p>
+                                        <?php
+                                            $stars = '';
+                                            for($i=1;$i<=5;$i++)
+                                            {
+                                                if($i<=$row['star'])
+                                                {
+                                                    $stars .= '<img class="rating-star" src="'.SITE_PATH.'/assets/img/filled_star.png">';
+                                                }
+                                                else
+                                                {
+                                                    $stars .= '<img class="rating-star" src="'.SITE_PATH.'/assets/img/star.png">';
+                                                }
+                                            }
+
+                                            echo $stars;
+                                        ?>
+                                    </p>
 <!--                                    <p class="tsr-product-desc" style="height: 144px;">-->
 <!--                                        --><?//=more_string(html_entity_decode($row['text']),120)?>
 <!--                                    </p>-->

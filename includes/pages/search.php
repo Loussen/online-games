@@ -35,6 +35,24 @@
                                                 </figure>
                                                 <div class="tsr-product-content">
                                                     <header class="tsr-product-header"><?=$row['name']?></header>
+                                                    <p>
+                                                        <?php
+                                                            $stars = '';
+                                                            for($i=1;$i<=5;$i++)
+                                                            {
+                                                                if($i<=$row['star'])
+                                                                {
+                                                                    $stars .= '<img class="rating-star" src="'.SITE_PATH.'/assets/img/filled_star.png">';
+                                                                }
+                                                                else
+                                                                {
+                                                                    $stars .= '<img class="rating-star" src="'.SITE_PATH.'/assets/img/star.png">';
+                                                                }
+                                                            }
+
+                                                            echo $stars;
+                                                        ?>
+                                                    </p>
                                                 </div>
                                             </a>
 

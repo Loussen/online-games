@@ -237,6 +237,24 @@
                                                                     <?=$row['g_name']?>
                                                                 </div>
                                                             </a>
+                                                            <p>
+                                                                <?php
+                                                                    $stars = '';
+                                                                    for($i=1;$i<=5;$i++)
+                                                                    {
+                                                                        if($i<=$row['g_star'])
+                                                                        {
+                                                                            $stars .= '<img class="rating-star" src="'.SITE_PATH.'/assets/img/filled_star.png">';
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            $stars .= '<img class="rating-star" src="'.SITE_PATH.'/assets/img/star.png">';
+                                                                        }
+                                                                    }
+
+                                                                    echo $stars;
+                                                                ?>
+                                                            </p>
                                                             <?php
                                                                 $link = (subscribe_check($db)==true) ? SITE_PATH."/play-game/".slugGenerator($row['g_name']) . '-' . $row['g_id'] : '';
 
@@ -303,12 +321,22 @@
                                                             </a>
 
                                                             <p>
-                                                                <img class="rating-star" src="<?=SITE_PATH?>/assets/img/filled_star.png">
-                                                                <img class="rating-star" src="<?=SITE_PATH?>/assets/img/filled_star.png">
-                                                                <img class="rating-star" src="<?=SITE_PATH?>/assets/img/filled_star.png">
+                                                                <?php
+                                                                    $stars = '';
+                                                                    for($i=1;$i<=5;$i++)
+                                                                    {
+                                                                        if($i<=$row['star'])
+                                                                        {
+                                                                            $stars .= '<img class="rating-star" src="'.SITE_PATH.'/assets/img/filled_star.png">';
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            $stars .= '<img class="rating-star" src="'.SITE_PATH.'/assets/img/star.png">';
+                                                                        }
+                                                                    }
 
-                                                                <img class="rating-star" src="<?=SITE_PATH?>/assets/img/star.png">
-                                                                <img class="rating-star" src="<?=SITE_PATH?>/assets/img/star.png">
+                                                                    echo $stars;
+                                                                ?>
                                                             </p>
 
                                                             <?php

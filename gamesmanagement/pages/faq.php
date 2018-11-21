@@ -158,7 +158,7 @@ elseif($down>0 && mysqli_num_rows(mysqli_query($db,"select id from $do where aut
                 echo 'Question : <br />
                       <input type="text" name="question_'.$row["id"].'" value="'.$information["question"].'" style="width:250px" />
                       <br /><br />
-                      Text : <br />
+                      Answer : <br />
                         <textarea name="answer_'.$row["id"].'" rows="1" cols="1" id="editor'.$row["sira"].'">'.$information["answer"].'</textarea><br />
                       </div>
                       ';
