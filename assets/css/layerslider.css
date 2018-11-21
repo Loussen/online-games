@@ -642,6 +642,9 @@ body * .ls-wp-container .ls-slide > *,
     padding: 0;
     margin: 0;
     border: 0;
+    /*object-fit: contain !important;
+    height: 100% !important;
+    width: 100% !important;*/
 }
 
 html * .ls-wp-container .ls-slide > a > *,

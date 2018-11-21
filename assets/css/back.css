@@ -77,3 +77,30 @@ span.error_message
 {
     border: 1px solid red !important;
 }
+
+.mloh {
+    padding-top:25px !important;
+}
+
+.mloh.log {
+    padding-top: 0 !important;
+}
+
+@media (max-width: 540px) {
+    .mloh {
+        margin-top:20px;
+        float: left;
+        width: fit-content !important;
+        padding-top:0 !important;
+        font-size:12px;
+    }
+
+    .mloh.log {
+        float: right;
+        width: 120px !important;
+        margin-top:0;
+    }
+    .mloh.log img {
+        width: 100% !important;
+    }
+}
