@@ -107,7 +107,7 @@
                                                 </figure>
                                                 <header><?=$featured_game_name?></header>
                                                 <button id="featured_button" class="tsr-btn">
-                                                    Subscribe
+                                                    Play
                                                 </button>
                                             </article>
                                         </a>

@@ -69,13 +69,13 @@
                 <button type="button" class="close close-subscribe" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
-                <h4 class="modal-title">Subscribe moodal</h4>
+                <h4 class="modal-title">Subscribe modal</h4>
             </div>
             <div class="logmodal-container modal-body">
                 <div>
                     <div>
                         <div class="col-xs-12 modal-height" id="loading">
-                            <img align="center" id="loading-image" src="<?=SITE_PATH?>/assets/img/load.gif" alt="Loading..." style="display: none; position: fixed; z-index: 1; margin-left: 180px; margin-top: -30px;">
+                            <img align="center" id="loading-image" src="<?=SITE_PATH?>/assets/img/load.gif" alt="Loading...">
                             <form id="subscribe-form" method="POST">
                                 <div id="react-message">
                                     Please insert your Mobile Number (9989XXXXXXXX).
@@ -191,12 +191,12 @@
 <script type='text/javascript' src='<?=SITE_PATH?>/assets/js/tsr-carousel-listing.js?ver=1.0.0'></script>
 <!--<script type='text/javascript' src='--><?//=SITE_PATH?><!--/assets/js/all.min.js?ver=1.0.0'></script>-->
 <?php
-    if($do=="inner")
-    {
-        ?>
-        <script type='text/javascript' src='<?=SITE_PATH?>/assets/js/jssor.slider.min.js'></script>
-        <?php
-    }
+//    if($do=="inner")
+//    {
+//        ?>
+<!--        <script type='text/javascript' src='--><?//=SITE_PATH?><!--/assets/js/jssor.slider.min.js'></script>-->
+<!--        --><?php
+//    }
 ?>
 <script type='text/javascript' src='<?=SITE_PATH?>/assets/js/back.js'></script>
 

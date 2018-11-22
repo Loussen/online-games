@@ -13,6 +13,16 @@ span.btnJoin
     background: #007FFF;
 }
 
+img#loading-image
+{
+    left: calc(50% - 100px);
+    display: none;
+    position: absolute;
+    z-index: 1;
+    /*margin-left: 180px;*/
+    margin-top: -30px;
+}
+
 button#featured_button, form#search-form .tsr-btn
 {
     background: #007FA0 !important;
