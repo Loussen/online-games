@@ -35,7 +35,7 @@
                 <div>
                     <div>
                         <div class="col-xs-12 modal-height" id="loading">
-                            <img align="center" id="loading-image" src="<?=SITE_PATH?>/assets/img/load.gif   " alt="Loading..." style="display: none; position: fixed; z-index: 1; margin-left: 180px; margin-top: -30px;">
+                            <img align="center" id="loading-image" src="<?=SITE_PATH?>/assets/img/load.gif   " alt="Loading...">
                             <form id="login-form" method="POST">
                                 <div id="react-message">
                                     Please insert your Mobile Number (9989XXXXXXXX).
@@ -115,7 +115,7 @@
             <div>
                 <div>
                     <div class="col-xs-12 modal-height" id="loading">
-                        <img align="center" id="loading-image" src="<?=SITE_PATH?>/assets/img/load.gif" alt="Loading..." style="display: none; position: fixed; z-index: 1; margin-left: 180px; margin-top: -30px;">
+                        <img align="center" id="loading-image" src="<?=SITE_PATH?>/assets/img/load.gif" alt="Loading...">
                         <form id="sms-form-subscribe" method="POST">
                             <div id="react-message">
                                 Please insert your Mobile Number (9989XXXXXXXX).
@@ -155,7 +155,7 @@
             <div>
                 <div>
                     <div class="col-xs-12 modal-height" id="loading">
-                        <img align="center" id="loading-image" src="<?=SITE_PATH?>/assets/img/load.gif" alt="Loading..." style="display: none; position: fixed; z-index: 1; margin-left: 180px; margin-top: -30px;">
+                        <img align="center" id="loading-image" src="<?=SITE_PATH?>/assets/img/load.gif" alt="Loading...">
                         <form id="sms-form-login" method="POST">
                             <div id="react-message">
                                 Please insert your Mobile Number (9989XXXXXXXX).
