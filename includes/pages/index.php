@@ -8,7 +8,7 @@
                     responsive: false,
                     responsiveUnder: 940,
                     skin: 'lightskin',
-                    skinsPath: 'assets/skins/'
+                    skinsPath: base_url+'/assets/skins/'
                 })
             }
         }); </script>

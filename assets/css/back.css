@@ -78,6 +78,11 @@ figure.tsr-product-image img
     color: #ddd;
 }
 
+div.game-data div.selected-description
+{
+    word-break: break-all;
+}
+
 span.error_message
 {
     color: red;
