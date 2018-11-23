@@ -48,16 +48,12 @@ if($checkboxes!=''){
 		<div class="inner">
 			<?php
 			if(is_file("pages/".$do.".php")) include "pages/".$do.".php";
-			else echo '<center><strong id="basliq1">LOVATO<br>
-                    LET THE BLUE DRIVE</strong></center>
+			else echo '<center><strong id="basliq1"><h1>GamEthio</h1>
+for game lovers...
+</strong></center>
             <br>
             <div class="page">
-<p style="text-align: right;"><i>«Только веря в будущее, мы смогли добиться стабильности и уверенности, вдохновленные свободой и легкостью»</i><br>
-<span style="font-weight: 600;">Отторино Ловато</span></p><p>
-</p><p>Первые мастерские «Ловато», названные в честь Отторино Ловато, появились в Винченце (Италия) в 1958 году. Они с самого начала зарекомендовали себя, как опытные центры инноваций. С момента производства первого <a href="/oborudovanie/multiklapany/" target="_blank">мультиклапана для ГБО</a>, «Ловато» сосредоточилась на производственной деятельности, постоянно и очень гибко отвечая на запросы рынка и технологические вызовы.</p>
-<p>В 2007 году мастерские Lovato стали называться «Ловато Газ», а уже в 2008 году <a href="/" target="_blank">«Ловато Газ»</a> вошла в состав Группы компаний «Landi Renzo Group», мирового лидера в области альтернативных автомобильных топливных систем для рынков Сжатого Природного газа (Метан) и Сжиженного Нефтяного Газа (Пропан). «Landi Renzo Group» представлена на фондовой бирже «Borsa Italia» и имеет несколько филиалов по всему миру.</p>
-<p>На сегодняшний день Компания в состоянии предложить полный спектр систем и компонентов для использования пропана и метана, как альтернативу бензину и дизелю.  Все компоненты разрабатываются самостоятельно, путем использования собственного центра исследований, систем качества и развития. Продукты компании поставляются по всему миру, в виде готовых <a href="/oborudovanie/komplekty/" target="_blank">комплектов ГБО</a> под все существующие виды автомобилей, а также устанавливаются автопроизводителями с завода в виде оригинальной OEM продукции. Хочется отметить, что всё оборудование проходит европейскую проверку и отвечает жестким стандартам качества ISO/TS 16949, ISO 9001:2008, OHSAS 18001.</p>
-<p>Постоянное присутствие компании «Ловато Газ» на всех рынках дало возможность получать 90% общего оборота за пределами страны. Более чем 8 миллионов автомобилей по всему миру, оборудованных системами «Ловато газ», являются живым доказательством успеха продукта и характеризуются надежностью, простотой <a href="/gbo/ustanovka/" target="_blank">установки</a> и отличной ремонтопригодностью.</p>
+<p style="text-align: right;"><i>GamEthio is a brand new game portal with a wide variety of games. It gives an opportunity to the subscribers of Ethio Telecom to connect and play games online instead of making one-shot downloads. The subscribers can get an unlimited access to the all games on the portal only by paying fix amount: playing each new game or continuing or moving to the next level is completely free of charge.
 </div>';
 			?>
 		</div>

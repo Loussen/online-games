@@ -27,6 +27,7 @@
                                         if(login_check($db))
                                         {
                                             ?>
+                                            <a style="text-decoration: none;"><?=$_SESSION['msisdn']?></a>
                                             <a href="<?=SITE_PATH."/logout.php"?>">Logout</a>
                                             <?php
                                         }
@@ -257,6 +258,7 @@
                                 if(login_check($db))
                                 {
                                     ?>
+                                    <a style="text-decoration: none;"><?=$_SESSION['msisdn']?></a>
                                     <a href="<?=SITE_PATH."/logout.php"?>">Logout</a>
                                     <?php
                                 }
