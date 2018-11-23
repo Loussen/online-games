@@ -193,7 +193,7 @@ function subscribe_check($db)
     {
         if ($stmt = mysqli_prepare($db,"SELECT `msisdn`
                                       FROM `subscriber` 
-                                      WHERE `id` = ? and (`status` = ? or (`status`=? and `created_at`<=DATE_SUB(`created_at`, INTERVAL -12 HOUR)))  LIMIT 1"))
+                                      WHERE `id` = ? and (`status` = ? or (`status`=? and DATE_SUB(`created_at`, INTERVAL -12 HOUR)>=now()))  LIMIT 1"))
         {
             $status = 1;
             $status_waiting = 2;

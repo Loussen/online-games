@@ -41,7 +41,7 @@ if($_POST)
 
             if($stmt_select->num_rows==1)
             {
-                if($result_status==1 || $result_status==2)
+                if($result_status==1)
                 {
                     $sms_code_login = mt_rand(100000, 999999);
 
@@ -83,9 +83,61 @@ if($_POST)
                         $response = json_encode(array("code"=>0, "content" => "Update sms code error", "err_param" => ''));
                     }
                 }
+                elseif($status=2)
+                {
+                    $sms_id = $null_code = 0;
+                    $created_at = date("Y-m-d H:i:s");
+                    $null_date = '0000-00-00 00:00:00';
+                    $null_param = '';
+                    $status = 2; // Waiting...
+
+                    $sms_code = mt_rand(100000, 999999);
+
+                    // Send sms for subscribe (activation code with charging)
+                    $now_datetime = date('Y-m-d H:i:s');
+                    $from_number = 4143; // number for login
+                    $req_id = -1;
+                    $mtype = 'SmsTest';
+                    $dcs = $udhi = 0;
+                    $amount = 1; // Charge balance
+                    $channel = 2;
+
+                    $select_seq_id = mysqli_fetch_assoc(mysqli_query($db,"SELECT seq('general') as `seq_id`"));
+
+                    $g_id = $select_seq_id['seq_id'];
+
+                    // INSERT sms_out_queue
+                    $stmt_insert = mysqli_prepare($db, "INSERT INTO `sms_out_queue` (`id`,`request_id`,`mtype`,`dt`,`fromnumber`,`tonumber`,`smstext`,`dcs`,`udhi`) VALUES (?,?,?,?,?,?,?,?,?)");
+                    $stmt_insert->bind_param('iisssssii', $g_id,$req_id,$mtype,$now_datetime,$from_number,$msisdn,$sms_code,$dcs,$udhi);
+                    $insert_sms_out_queue = $stmt_insert->execute();
+
+                    // INSERT charging_queue
+                    $stmt_insert = mysqli_prepare($db, "INSERT INTO `charging_queue` (`g_id`,`dt`,`msisdn`,`amount`,`channel`) VALUES (?,?,?,?,?)");
+                    $stmt_insert->bind_param('issii', $g_id,$now_datetime,$msisdn,$amount,$channel);
+                    $insert_charging_queue = $stmt_insert->execute();
+
+                    if($insert_sms_out_queue==1 && $insert_charging_queue==1)
+                    {
+                        $stmt_update = mysqli_prepare($db, "UPDATE `subscriber` SET `sms_code`=? WHERE `msisdn`=?");
+                        $stmt_update->bind_param('ss', $sms_code,$msisdn);
+                        $update = $stmt_update->execute();
+
+                        if($update==1)
+                        {
+                            $_SESSION['msisdn_step1'] = $msisdn;
+
+                            $response = json_encode(array("code"=>1, "content" => "Success update", "err_param" => ''));
+                            $stmt_insert->close();
+                        }
+                        else
+                        {
+                            $response = json_encode(array("code"=>0, "content" => "Insert error", "err_param" => ''));
+                        }
+                    }
+                }
                 else
                 {
-                    $response = json_encode(array("code"=>0, "content" => "You are already subscriber. Please check balance", "err_param" => ''));
+                    $response = json_encode(array("code"=>0, "content" => "Error", "err_param" => ''));
                 }
                 $stmt_select->close();
             }
@@ -95,7 +147,7 @@ if($_POST)
                 $created_at = date("Y-m-d H:i:s");
                 $null_date = '0000-00-00 00:00:00';
                 $null_param = '';
-                $status = 2; // Waiting...
+                $status = 0;
 
                 $sms_code = mt_rand(100000, 999999);
 
