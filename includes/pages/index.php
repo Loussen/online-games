@@ -36,7 +36,7 @@
                             $result_slider_arr[] = $row;
                         }
 
-                        $cache->store('slider',$result_slider_arr, 40);
+                        $cache->store('slider',$result_slider_arr, 100);
                     }
                     else
                     {
@@ -95,7 +95,7 @@
                             $result_top_games_arr[] = $row;
                         }
 
-                        $cache->store('top_games',$result_top_games_arr, 40);
+                        $cache->store('top_games',$result_top_games_arr, 100);
                     }
                     else
                     {
@@ -217,7 +217,7 @@
                                 $result_most_played_games_index_arr[] = $row;
                             }
 
-                            $cache->store('most_played_games_index',$result_most_played_games_index_arr, 40);
+                            $cache->store('most_played_games_index',$result_most_played_games_index_arr, 100);
                         }
                         else
                         {
@@ -247,7 +247,7 @@
                                 $result_most_played_games_index_arr[] = $row;
                             }
 
-                            $cache->store('most_played_games_index',$result_most_played_games_index_arr, 40);
+                            $cache->store('most_played_games_index',$result_most_played_games_index_arr, 100);
                         }
                         else
                         {

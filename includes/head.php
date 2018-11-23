@@ -29,7 +29,7 @@
                 'image'         => SITE_PATH.'/assets/img/GameEthio.png',
                 'keywords'      => $site_keywords,
                 'og_url'        => 'http://'.$_SERVER["HTTP_HOST"].$_SERVER["REQUEST_URI"]
-        ],60);
+        ],100);
     }
     else
     {
@@ -66,7 +66,7 @@
             $cache->store('current_category_'.$category_id.$category_slug,[
                     'current_category_name' =>  $current_category_name,
                     'current_category_id'   =>  $current_category_id
-            ],60);
+            ],100);
         }
         else
         {
@@ -125,7 +125,7 @@
                 $result_games_by_categories_arr[] = $row;
             }
 
-            $cache->store('result_games_by_categories_'.$category_id.$category_slug,$result_games_by_categories_arr, 40);
+            $cache->store('result_games_by_categories_'.$category_id.$category_slug,$result_games_by_categories_arr, 100);
         }
         else
         {
@@ -152,7 +152,7 @@
                 $result_all_categories_arr[] = $row;
             }
 
-            $cache->store('all_categories',$result_all_categories_arr, 40);
+            $cache->store('all_categories',$result_all_categories_arr, 100);
         }
         else
         {
@@ -186,7 +186,7 @@
                 $result_reco_games_arr[] = $row;
             }
 
-            $cache->store('reco_games',$result_reco_games_arr, 40);
+            $cache->store('reco_games',$result_reco_games_arr, 100);
         }
         else
         {
@@ -232,7 +232,7 @@
                     'current_game_star'         => $current_game_star,
                     'current_category_name'     => $current_category_name,
                     'current_category_id'       => $current_category_id
-            ],5);
+            ],100);
         }
         else
         {
@@ -304,7 +304,7 @@
                     $result_most_played_games_arr[] = $row;
                 }
 
-                $cache->store('most_played_'.$game_id.$game_slug,$result_most_played_games_arr, 40);
+                $cache->store('most_played_'.$game_id.$game_slug,$result_most_played_games_arr, 100);
             }
             else
             {
@@ -334,7 +334,7 @@
                     $result_most_played_games_arr[] = $row;
                 }
 
-                $cache->store('most_played_'.$game_id.$game_slug,$result_most_played_games_arr, 40);
+                $cache->store('most_played_'.$game_id.$game_slug,$result_most_played_games_arr, 100);
             }
             else
             {
@@ -366,7 +366,7 @@
                 $result_similar_games_arr[] = $row;
             }
 
-            $cache->store('similar_game_'.$game_id.$game_slug,$result_similar_games_arr, 40);
+            $cache->store('similar_game_'.$game_id.$game_slug,$result_similar_games_arr, 100);
         }
         else
         {
@@ -401,7 +401,7 @@
                 $result_faq_arr[] = $row;
             }
 
-            $cache->store('faq',$result_faq_arr, 40);
+            $cache->store('faq',$result_faq_arr, 100);
         }
         else
         {
