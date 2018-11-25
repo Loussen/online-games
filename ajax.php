@@ -25,7 +25,7 @@ if($_POST)
 
             if(!preg_match('/^[1-9]\d{6}$/', substr($msisdn,2)))
             {
-                $response = json_encode(array("code"=>0, "content" => "Msisdn is invalid", "err_param" => 'msisdn'));
+                $response = json_encode(array("code"=>0, "content" => "Your number is not valid. Please try again.", "err_param" => 'msisdn'));
                 echo $response;
                 exit;
             }
@@ -201,7 +201,7 @@ if($_POST)
         else
         {
             // The correct POST variables were not sent to this page.
-            $response = json_encode(array("code"=>0, "content" => "Msisdn is empty!", "err_param" => 'msisdn'));
+            $response = json_encode(array("code"=>0, "content" => "Your number is not valid. Please try again.", "err_param" => 'msisdn'));
         }
     }
     elseif($_POST['check_sms_form_for_subscribe'] && isset($_SESSION['msisdn_step1']) && !empty($_SESSION['msisdn_step1']))
@@ -233,7 +233,7 @@ if($_POST)
         }
         elseif(login($sms_code, $_SESSION['msisdn_step1'],'subscribe', $db) == 'sms_code_empty')
         {
-            $response = json_encode(array("code"=>0, "content" => "Sms code is empty!", "err_param" => 'sms_code'));
+            $response = json_encode(array("code"=>0, "content" => "Your PIN code is not correct. Please check and try again.", "err_param" => 'sms_code'));
         }
         elseif(login($sms_code, $_SESSION['msisdn_step1'],'subscribe', $db) == 'user_not_exists')
         {
@@ -241,7 +241,7 @@ if($_POST)
         }
         elseif(login($sms_code, $_SESSION['msisdn_step1'],'subscribe', $db) == 'sms_code_incorrect')
         {
-            $response = json_encode(array("code"=>0, "content" => "Sms code is incorrect!", "err_param" => 'sms_code'));
+            $response = json_encode(array("code"=>0, "content" => "Your PIN code is not correct. Please check and try again.", "err_param" => 'sms_code'));
         }
         elseif(login($sms_code, $_SESSION['msisdn_step1'],'subscribe', $db) == 'account_locked')
         {
@@ -323,7 +323,7 @@ if($_POST)
         }
         elseif(login($sms_code, $_SESSION['msisdn_step2'],'login', $db) == 'sms_code_empty')
         {
-            $response = json_encode(array("code"=>0, "content" => "Sms code is empty!", "err_param" => 'sms_code'));
+            $response = json_encode(array("code"=>0, "content" => "Your PIN code is not correct. Please check and try again.", "err_param" => 'sms_code'));
         }
         elseif(login($sms_code, $_SESSION['msisdn_step2'],'login', $db) == 'user_not_exists')
         {
@@ -331,7 +331,7 @@ if($_POST)
         }
         elseif(login($sms_code, $_SESSION['msisdn_step2'],'login', $db) == 'sms_code_incorrect')
         {
-            $response = json_encode(array("code"=>0, "content" => "Sms code is incorrect!", "err_param" => 'sms_code'));
+            $response = json_encode(array("code"=>0, "content" => "Your PIN code is not correct. Please check and try again.", "err_param" => 'sms_code'));
         }
         elseif(login($sms_code, $_SESSION['msisdn_step2'],'login', $db) == 'account_locked')
         {

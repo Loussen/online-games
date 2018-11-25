@@ -71,6 +71,13 @@ figure.tsr-product-image img
     padding: 9px;
 }
 
+div.modal p.notePopup
+{
+    background-color: #e7f3fe;
+    border-left: 6px solid #2196F3;
+    padding: 2px;
+}
+
 .breadcrumbs .col-12 a,
 .breadcrumbs .col-12 .bread-item-name,
 .breadcrumbs .col-12 a:last-of-type

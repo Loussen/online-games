@@ -22,45 +22,45 @@
     <?php include "includes/pages/".$do.".php"; ?>
     <?php include "includes/footer.php"; ?>
 
-<div class="fade in modal" role="dialog" id="login-modal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true"">
-    <div class="modal-dialog">
-        <div class="modal-content" role="document">
-            <div class="modal-header">
-                <button type="button" class="close close-login" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
-                <h4 class="modal-title">Login modal</h4>
-            </div>
-            <div class="logmodal-container modal-body">
-                <div>
-                    <div>
-                        <div class="col-xs-12 modal-height" id="loading">
-                            <img align="center" id="loading-image" src="<?=SITE_PATH?>/assets/img/load.gif   " alt="Loading...">
-                            <form id="login-form" method="POST">
-                                <div id="react-message">
-                                    Please insert your Mobile Number (9989XXXXXXXX).
-                                    You can download or play unlimited games.
-                                    The service has a cost of 631.5 UZS/daily subscription.
-                                </div>
-                                <div>
-                                    <div class="form-group">
-                                        <label class="control-label" for="id_msisdn"></label>
-                                        <input type="text" placeholder="" maxlength="9" name="msisdn" class="form-control" id="id_msisdn">
-                                        <span class="help-block">
-                                            <span class="error_message"></span>
-                                        </span>
-                                    </div>
-                                </div>
-                                <input type="hidden" name="login_form" value="login_form" />
-                                <input type="submit" class="logmodal-submit" value="Next">
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+<!--<div class="fade in modal" role="dialog" id="login-modal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true"">-->
+<!--    <div class="modal-dialog">-->
+<!--        <div class="modal-content" role="document">-->
+<!--            <div class="modal-header">-->
+<!--                <button type="button" class="close close-login" aria-label="Close">-->
+<!--                    <span aria-hidden="true">×</span>-->
+<!--                </button>-->
+<!--                <h4 class="modal-title">Login modal</h4>-->
+<!--            </div>-->
+<!--            <div class="logmodal-container modal-body">-->
+<!--                <div>-->
+<!--                    <div>-->
+<!--                        <div class="col-xs-12 modal-height" id="loading">-->
+<!--                            <img align="center" id="loading-image" src="--><?//=SITE_PATH?><!--/assets/img/load.gif   " alt="Loading...">-->
+<!--                            <form id="login-form" method="POST">-->
+<!--                                <div id="react-message">-->
+<!--                                    Please insert your Mobile Number (9989XXXXXXXX).-->
+<!--                                    You can download or play unlimited games.-->
+<!--                                    The service has a cost of 631.5 UZS/daily subscription.-->
+<!--                                </div>-->
+<!--                                <div>-->
+<!--                                    <div class="form-group">-->
+<!--                                        <label class="control-label" for="id_msisdn"></label>-->
+<!--                                        <input type="text" placeholder="" maxlength="9" name="msisdn" class="form-control" id="id_msisdn">-->
+<!--                                        <span class="help-block">-->
+<!--                                            <span class="error_message"></span>-->
+<!--                                        </span>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                                <input type="hidden" name="login_form" value="login_form" />-->
+<!--                                <input type="submit" class="logmodal-submit" value="Next">-->
+<!--                            </form>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
 
 <div class="fade in modal" role="dialog" id="subscribe-modal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true"">
     <div class="modal-dialog">
@@ -69,7 +69,7 @@
                 <button type="button" class="close close-subscribe" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
-                <h4 class="modal-title">Subscribe modal</h4>
+                <h4 class="modal-title">Register for GamEthio Membership!</h4>
             </div>
             <div class="logmodal-container modal-body">
                 <div>
@@ -78,9 +78,7 @@
                             <img align="center" id="loading-image" src="<?=SITE_PATH?>/assets/img/load.gif" alt="Loading...">
                             <form id="subscribe-form" method="POST">
                                 <div id="react-message">
-                                    Please insert your Mobile Number (9989XXXXXXXX).
-                                    You can download or play unlimited games.
-                                    The service has a cost of 631.5 UZS/daily subscription.
+                                    Please insert your mobile number to sign in. After registration you will get an access to play games unlimitedly. <br/>Mobile number example without +251 : XXXXXXXXX
                                 </div>
                                 <div>
                                     <div class="form-group">
@@ -93,6 +91,7 @@
                                 </div>
                                 <input type="hidden" name="subscribe_form" value="subscribe_form" />
                                 <input type="submit" class="logmodal-submit" value="Next">
+                                <p class="notePopup">Note: This service is subscriber based. Subscription fee will cost 1 birr/per day.</p>
                             </form>
                         </div>
                     </div>
@@ -109,7 +108,7 @@
             <button type="button" class="close close-sms-subscribe" aria-label="Close">
                 <span aria-hidden="true">×</span>
             </button>
-            <h4 class="modal-title">Sms code for subscribe</h4>
+            <h4 class="modal-title">Register for GamEthio Membership!</h4>
         </div>
         <div class="logmodal-container modal-body">
             <div>
@@ -118,9 +117,7 @@
                         <img align="center" id="loading-image" src="<?=SITE_PATH?>/assets/img/load.gif" alt="Loading...">
                         <form id="sms-form-subscribe" method="POST">
                             <div id="react-message">
-                                Please insert your Mobile Number (9989XXXXXXXX).
-                                You can download or play unlimited games.
-                                The service has a cost of 631.5 UZS/daily subscription.
+                                Please enter the PIN code which is sent to your phone to complete the registration.
                             </div>
                             <div>
                                 <div class="form-group">
@@ -149,7 +146,7 @@
                 <button type="button" class="close close-sms-login" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
-                <h4 class="modal-title">Sms code for login</h4>
+                <h4 class="modal-title">Are you a GamEthio Member?</h4>
             </div>
             <div class="logmodal-container modal-body">
             <div>
@@ -158,9 +155,7 @@
                         <img align="center" id="loading-image" src="<?=SITE_PATH?>/assets/img/load.gif" alt="Loading...">
                         <form id="sms-form-login" method="POST">
                             <div id="react-message">
-                                Please insert your Mobile Number (9989XXXXXXXX).
-                                You can download or play unlimited games.
-                                The service has a cost of 631.5 UZS/daily subscription.
+                                Please enter the PIN code which is sent to your phone and start playing!
                             </div>
                             <div>
                                 <div class="form-group">
@@ -292,48 +287,48 @@
         });
     });
 
-    jQuery(document).on('submit','form#login-form',function(e){
-
-        e.preventDefault();
-
-        jQuery('img#loading-image').show();
-        jQuery('div#loading').css('opacity','0.3');
-        jQuery('.has-error').removeClass('has-error');
-
-        var formData = new FormData(this);
-
-        jQuery.ajax({
-            url: base_url+'/ajax.php',
-            type: 'POST',
-            data: formData,
-            contentType: false,
-            cache: false,
-            processData: false,
-            dataType: 'json',
-            success: function (data, textStatus, jqXHR) {
-                if(data.code==0)
-                {
-                    jQuery('[name="'+data.err_param+'"]').addClass('has-error');
-                    jQuery('form#login-form span.help-block').show();
-                    jQuery('form#login-form span.help-block span.error_message').html(data.content);
-                }
-                else
-                {
-                    jQuery('form#login-form span.help-block').hide();
-                    jQuery('form#login-form span.help-block span.error_message').html('');
-                    jQuery("div#login-modal").hide('fast');
-                    jQuery("div#sms-modal-login").show('fast');
-                }
-
-                jQuery('img#loading-image').hide();
-                jQuery('div#loading').css('opacity','1');
-            },
-            error: function (jqXHR, textStatus, errorThrown) {
-                jQuery('img#loading-image').hide();
-                jQuery('div#loading').css('opacity','1');
-            }
-        });
-    });
+    // jQuery(document).on('submit','form#login-form',function(e){
+    //
+    //     e.preventDefault();
+    //
+    //     jQuery('img#loading-image').show();
+    //     jQuery('div#loading').css('opacity','0.3');
+    //     jQuery('.has-error').removeClass('has-error');
+    //
+    //     var formData = new FormData(this);
+    //
+    //     jQuery.ajax({
+    //         url: base_url+'/ajax.php',
+    //         type: 'POST',
+    //         data: formData,
+    //         contentType: false,
+    //         cache: false,
+    //         processData: false,
+    //         dataType: 'json',
+    //         success: function (data, textStatus, jqXHR) {
+    //             if(data.code==0)
+    //             {
+    //                 jQuery('[name="'+data.err_param+'"]').addClass('has-error');
+    //                 jQuery('form#login-form span.help-block').show();
+    //                 jQuery('form#login-form span.help-block span.error_message').html(data.content);
+    //             }
+    //             else
+    //             {
+    //                 jQuery('form#login-form span.help-block').hide();
+    //                 jQuery('form#login-form span.help-block span.error_message').html('');
+    //                 jQuery("div#login-modal").hide('fast');
+    //                 jQuery("div#sms-modal-login").show('fast');
+    //             }
+    //
+    //             jQuery('img#loading-image').hide();
+    //             jQuery('div#loading').css('opacity','1');
+    //         },
+    //         error: function (jqXHR, textStatus, errorThrown) {
+    //             jQuery('img#loading-image').hide();
+    //             jQuery('div#loading').css('opacity','1');
+    //         }
+    //     });
+    // });
 
     jQuery(document).on('submit','form#sms-form-login',function(e){
 
