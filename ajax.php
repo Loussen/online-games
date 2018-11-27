@@ -347,6 +347,8 @@ if($_POST)
         $game_id = intval($_POST['game_id']);
         $user_id = intval($_POST['user_id']);
 
+        $datetime = date("Y-m-d H:i:s");
+
         $stmt_select = mysqli_prepare($db,"SELECT `id` FROM `play_game` WHERE `users_id`=(?) and `games_id`=(?)");
         $stmt_select->bind_param('ii', $user_id,$game_id);
         $stmt_select->execute();
@@ -354,8 +356,8 @@ if($_POST)
 
         if($stmt_select->num_rows>0)
         {
-            $stmt_update = mysqli_prepare($db, "UPDATE `play_game` SET `count`=`count`+1 WHERE `users_id`=? and `games_id`=?");
-            $stmt_update->bind_param('ii', $user_id,$game_id);
+            $stmt_update = mysqli_prepare($db, "UPDATE `play_game` SET `count`=`count`+1,`datetime`=? WHERE `users_id`=? and `games_id`=?");
+            $stmt_update->bind_param('sii', $datetime,$user_id,$game_id);
             $update = $stmt_update->execute();
 
             if($update==1)
@@ -371,8 +373,8 @@ if($_POST)
         else
         {
             $count = 1;
-            $stmt_insert = mysqli_prepare($db, "INSERT INTO `play_game` (`users_id`,`games_id`,`count`) VALUES (?,?,?)");
-            $stmt_insert->bind_param('iii', $user_id,$game_id,$count);
+            $stmt_insert = mysqli_prepare($db, "INSERT INTO `play_game` (`users_id`,`games_id`,`count`,`datetime`) VALUES (?,?,?,?)");
+            $stmt_insert->bind_param('iiis', $user_id,$game_id,$count,$datetime);
             $insert = $stmt_insert->execute();
 
             if($insert==1)
