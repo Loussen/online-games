@@ -206,7 +206,7 @@
                                 FROM `play_game`
                                 LEFT JOIN `games` on `games`.`auto_id`=`play_game`.`games_id`
                                 WHERE `games`.`lang_id`=(?) and `games`.`active`=(?)
-                                GROUP BY `play_game`.`games_id` order by `play_count` desc");
+                                GROUP BY `play_game`.`games_id` order by `play_count` desc LIMIT 20");
                             $stmt_select->bind_param('ii', $main_lang,$active_status);
                             $stmt_select->execute();
                             $result = $stmt_select->get_result();
@@ -236,7 +236,7 @@
                                 `games`.`star` as `g_star`
                                 FROM `games`
                                 WHERE `games`.`lang_id`=(?) and `games`.`active`=(?) and `games`.`topgame`=0 and `games`.`recogame`=1
-                                order by `games`.`order_number` asc");
+                                order by `games`.`order_number` asc LIMIT 20");
                             $stmt_select->bind_param('ii', $main_lang,$active_status);
                             $stmt_select->execute();
                             $result = $stmt_select->get_result();
