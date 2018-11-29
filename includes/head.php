@@ -426,8 +426,8 @@
                     `image_name`,
                     `star`
                     FROM `games`
-                    WHERE `lang_id`=(?) and `active`=(?) and (`name` LIKE ? or `text` LIKE ?)");
-            $stmt_select->bind_param('iiss', $main_lang,$active_status,$search_param,$search_param);
+                    WHERE `lang_id`=(?) and `active`=(?) and `name` LIKE ?");
+            $stmt_select->bind_param('iis', $main_lang,$active_status,$search_param);
             $stmt_select->execute();
             $result_search = $stmt_select->get_result();
             $count_games = mysqli_num_rows($result_search);

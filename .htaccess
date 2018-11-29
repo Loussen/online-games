@@ -30,9 +30,14 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(en|ru)(/?)$ index.php?lang_name=$1 [L,QSA]
 
 #Pages
-RewriteRule ^pages/(.*)-([0-9]+)(/?)$ index.php?do=pages&slug=$1&id=$2 [L,QSA]
-RewriteRule ^inner(/?)$ index.php?do=inner [L,QSA]
-RewriteRule ^category(/?)$ index.php?do=category [L,QSA]
+RewriteRule ^category/(.*)-([0-9]+)(/?)$ index.php?do=category&slug=$1&id=$2 [L,QSA]
+RewriteRule ^category/(.*)-([0-9]+)/([0-9]+)(/?)$ index.php?do=category&slug=$1&id=$2&page=$3 [L,QSA]
+RewriteRule ^online-games/(.*)-([0-9]+)(/?)$ index.php?do=inner&slug=$1&id=$2 [L,QSA]
+#RewriteRule ^play-game/(.*)-([0-9]+)(/?)$ index.php?do=play_game&slug=$1&id=$2 [L,QSA]
+RewriteRule ^play-game/(.*)-([0-9]+)(/?)$ play-game.php?slug=$1&id=$2 [L,QSA]
+#RewriteRule ^game-url/(.*)$ game-url?token=$1 [L,QSA]
+RewriteRule ^frequently-asked-questions(/?)$ index.php?do=faq [L,QSA]
+RewriteRule ^search(/?)$ index.php?do=search [L,QSA]
 
 RewriteRule ^404(/?)$ index.php?do=404 [L,QSA]
 

@@ -101,10 +101,10 @@ function checkbrute($user_id, $db) {
     // Get timestamp of current time
     $now = time();
 
-    // All login attempts are counted from the past 1 hours.
-    $valid_attempts = $now - (1 * 60 * 60);
+    // All login attempts are counted from the past per hours.
+    $valid_attempts = $now - (0.5 * 60 * 60);
 
-    if ($stmt = mysqli_prepare($db,"SELECT time 
+    if ($stmt = mysqli_prepare($db,"SELECT `time` 
                              FROM `login_attempts` 
                              WHERE `user_id` = ? 
                             AND `time` > '$valid_attempts'"))
@@ -115,8 +115,8 @@ function checkbrute($user_id, $db) {
         $stmt->execute();
         $stmt->store_result();
 
-        // If there have been more than 6 failed logins
-        if ($stmt->num_rows > 6)
+        // If there have been more than 10 failed logins
+        if ($stmt->num_rows > 10)
         {
             return true;
         }
